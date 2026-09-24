@@ -22,6 +22,10 @@
                     <li>
                         <Link className="link" to="/about">About</Link>
                     </li>
+
+                    <li>
+                        <Link className="link" to="/collage">Collage</Link>
+                    </li>
                 </ul>
             </div>
 
