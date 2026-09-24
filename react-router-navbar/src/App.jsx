@@ -8,6 +8,8 @@ import CollagePage from "./CollagePage"
 import Student from "./Student"
 import Department from "./Department"
 import Details from "./Details"
+import UserList from "./UserList"
+import UserDetails from "./UserDetails"
 
 export default function App() {
   return (
@@ -17,6 +19,9 @@ export default function App() {
         <Route>
           <Route element={<NavBar/>}/>
           <Route path="/" element={<Home />} />
+          <Route path="/users" element={<UserList/>}/>
+          <Route path="/users/:id" element={<UserDetails/>}/>
+
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
         </Route>
