@@ -1,9 +1,10 @@
- import {Link} from "react-router"
+ import {Link,Outlet} from "react-router"
  import "./header.css"
  
  export default function NavBar(){
     return(
-        <div className="header">
+        <div>
+            <div className="header">
 
             <div>
                 <Link className="link"><h2>Logo</h2></Link>
@@ -29,6 +30,8 @@
                 </ul>
             </div>
 
+        </div>
+        <Outlet/>
         </div>
     )
  }
