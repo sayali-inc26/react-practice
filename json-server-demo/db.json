@@ -1,0 +1,53 @@
+{
+  "users": [
+    {
+      "id": "3",
+      "name": "Aarya",
+      "age": 25,
+      "email": "alo@gmail.com"
+    },
+    {
+      "id": "4",
+      "name": "Anjali",
+      "age": 25,
+      "email": "anjali@gmail.com"
+    },
+    {
+      "id": "5",
+      "name": "Sanika",
+      "age": 24,
+      "email": "sanika@gmail.com"
+    },
+    {
+      "id": "6",
+      "name": "Jaju",
+      "age": 24,
+      "email": "jaju@gmail.com"
+    },
+    {
+      "name": "Bhavika",
+      "age": 25,
+      "email": "bhavika@gmail.com",
+      "id": "q0EA-uybo54"
+    },
+    {
+      "name": "Punam",
+      "email": "punam@gmail.com",
+      "age": "22",
+      "id": "VQbpRBECZaM"
+    },
+    {
+      "name": "Monika",
+      "email": "mon@gmail.com",
+      "age": "22",
+      "id": "WMvASFAU-YY"
+    },
+    {
+      "name": "Sayali",
+      "email": "say@gmail.com",
+      "age": "24",
+      "id": "VYSlrpjXeW4"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
