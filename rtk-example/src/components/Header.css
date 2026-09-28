@@ -1,0 +1,51 @@
+.header {
+  height: 50px;
+  background-color: #1e365d;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 30px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+nav {
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.cart {
+  position: relative;
+  font-size: 22px;
+}
+
+.cart span {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+
+  background-color: #e76b5b;
+  color: white;
+
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+
+  font-size: 11px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
