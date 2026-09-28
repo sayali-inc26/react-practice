@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import "./ProductCard.css";
-import { addItem } from "../redux/slice";
+import { addItem,removeItem } from "../redux/slice";
 
 function ProductCard() {
   const dispatch = useDispatch();
@@ -30,12 +30,8 @@ function ProductCard() {
           Add to Cart
         </button>
 
-        <button className="removeBtn" onClick={()=>dispatch(addItem(1))}>
+        <button className="removeBtn" onClick={()=>dispatch(removeItem(1))}>
           Remove from Cart
-        </button>
-
-        <button onClick={()=>dispatch(addItem(1))}>
-          Clear Cart
         </button>
 
       </div>
