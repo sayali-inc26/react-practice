@@ -1,50 +1,37 @@
+import { Routes, Route } from "react-router";
 
-import { useState,useEffect } from "react";
 import HomePage from "./pages/HomePage";
-import Sidebar from "./pages/components/Sidebar";
 
-// import SplashScreen from "./pages/SplashScreen";
-// import LoginPage from "./pages/LoginPage";
+import HomeScreen from "./pages/HomeScreen";
+import MyHabbitScreen from "./pages/MyHabbitScreen";
+import CalendarScreen from "./pages/CalendarScreen";
+import AchievementScreen from "./pages/AchievementScreen";
+import ProfileScreen from "./pages/ProfileScreen";
+import AddHabbitScreen from "./pages/AddHabbitScreen";
 
 function App() {
-    const [currentPage, setCurrentPage] = useState("home");
-
-    // const [expenses,setExpenses] = useState(()=>{
-    //   const savedExpenses = localStorage.getItem("expenses");
-
-    //   return savedExpenses?JSON.parse(savedExpenses):[];
-
-    // });
-
-    // useEffect(()=>{
-    //   localStorage.setItem(
-    //     "expenses",
-    //     JSON.stringify(expenses)
-    //   );
-    // },[expenses]);
-
     return (
-        <>
-            {/* {currentPage === "splash" && (
-                <SplashScreen setCurrentPage={setCurrentPage} />
-            )} */}
+        <Routes>
 
-            {/* {currentPage === "login" && (
-                <LoginPage setCurrentPage={setCurrentPage} />
-            )} */}
+            {/* Common layout */}
+            <Route path="/" element={<HomePage />}>
 
-              {/* <Onboarding/> */}
+                {/* Middle content */}
+                <Route index element={<HomeScreen />} />
 
-              {/* {currentPage === "home" && (
+                <Route path="habits" element={<MyHabbitScreen />} />
 
-                <HomePage  currentPage={currentPage} setCurrentPage={setCurrentPage} />
-            )} */}
+                <Route path="calendar" element={<CalendarScreen />} />
 
-            <HomePage/>
+                <Route path="achievements" element={<AchievementScreen />} />
 
-              {/* <Sidebar/> */}
-              
-        </>
+                <Route path="profile" element={<ProfileScreen />} />
+
+                <Route path="add-habit" element={<AddHabbitScreen />} />
+
+            </Route>
+
+        </Routes>
     );
 }
 

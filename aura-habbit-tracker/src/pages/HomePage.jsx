@@ -1,17 +1,27 @@
-import HeadBar from "./components/Headbar";
-import Sidebar from "./components/Sidebar";
+import { Outlet } from "react-router";
 
-import MyHabbitScreen from "./MyHabbitScreen";
-import AddHabbitScreen from "./AddHabbitScreen";
-import ProfileScreen from "./ProfileScreen";
+import HeadBar from "../pages/components/Headbar";
+import Sidebar from "../pages/components/Sidebar";
 
-export default function HomePage(){
+import "./HomePage.css";
+
+export default function HomePage() {
+
     return (
-        <>
-             <HeadBar/>
-            <Sidebar/>
-           
-            
-        </>
-    )
+        <div className="homePage">
+
+            <HeadBar />
+
+            <div className="mainArea">
+
+                <Sidebar />
+
+                <div className="middleContent">
+                    <Outlet />
+                </div>
+
+            </div>
+
+        </div>
+    );
 }

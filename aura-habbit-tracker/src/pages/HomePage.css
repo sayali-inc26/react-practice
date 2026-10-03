@@ -1,3 +1,75 @@
 .streakButton{
     width: 150px;
 }
+
+/* ---------------- GENERAL ---------------- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ---------------- HOME PAGE ---------------- */
+
+.homePage {
+    width: 100%;
+    min-height: 100vh;
+
+    background-color: #080f13;
+
+    color: white;
+}
+
+
+/* ---------------- SIDEBAR + CONTENT ---------------- */
+
+.mainArea {
+    width: 100%;
+
+    display: flex;
+    align-items: stretch;
+
+    min-height: calc(100vh - 90px);
+}
+
+
+/* ---------------- MIDDLE CONTENT ---------------- */
+
+.middleContent {
+    flex: 1;
+
+    min-width: 0;
+    min-height: calc(100vh - 90px);
+
+    padding: 30px 45px;
+
+    background-color: #080f13;
+
+    color: white;
+
+    overflow-y: auto;
+}
+
+
+/* ---------------- PAGE CONTENT ---------------- */
+
+.middleContent h1 {
+    margin-top: 0;
+
+    color: #b9e9f5;
+
+    font-size: 32px;
+}
+
+.middleContent h2 {
+    color: #ffffff;
+}
+
+.middleContent p {
+    color: #bbc9cf;
+}

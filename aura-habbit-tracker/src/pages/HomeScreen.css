@@ -1,0 +1,248 @@
+.homeScreenContent {
+    height: 568px;
+    width: 1056px;
+    margin: 20px 30px 20px 30px;
+
+    display: flex;
+    flex-direction: column;
+
+    /* background-color: aqua; */
+}
+
+.homeScreenTopHead {
+    display: flex;
+    justify-content: space-between;
+}
+
+.homeScreenGreat h1 {
+    font-size: 40px;
+    font-weight: 700;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin-bottom: 0px;
+}
+
+.homeScreenGreat p {
+    width: 416px;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin-top: 0px;
+
+}
+
+.dailyProgress {
+    height: 100px;
+    width: 296px;
+    display: flex;
+    line-height: 0;
+
+}
+
+.progressCircle {
+    height: 85px;
+    width: 85px;
+    margin: 5px 20px;
+    border-radius: 50%;
+    border: 7px solid #00D4FF;
+
+    align-content: center;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #A8E8FF;
+
+
+}
+
+.dailyProgress div h3 {
+    font-size: 14px;
+    font-weight: 500;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color:#BBC9CF;
+    letter-spacing: 1px;
+
+}
+
+.dailyProgress div h4 {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+.todayTasks{
+    margin-right: 20px;
+}
+.habitCard {
+    width: 700px;
+    height: 112px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 20px 22px;
+
+    background-color: #101a24;
+
+    border: 1px solid #1b3342;
+    border-radius: 12px;
+
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+
+/* Icon */
+
+.habitIcon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #182b38;
+
+    border: 1px solid #416275;
+    border-radius: 12px;
+
+    margin-right: 24px;
+}
+
+.habitIcon img {
+    width: 28px;
+    height: 28px;
+}
+
+
+/* Text */
+
+.habitInfo {
+    flex: 1;
+}
+
+.habitInfo h3 {
+    margin: 0 0 8px 0;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    color: #dce5e9;
+}
+
+
+/* Focus + Time */
+
+.habitDetails {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.habitTag {
+    padding: 5px 9px;
+
+    border: 1px solid #315467;
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    color: #8ddcf2;
+}
+
+.habitTime {
+    font-size: 13px;
+
+    color: #bbc9cf;
+}
+
+
+/* Check Button */
+
+.completeButton {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border: 1px solid #344854;
+
+    background-color: transparent;
+
+    color: #52646d;
+
+    font-size: 23px;
+
+    cursor: pointer;
+}
+
+.homeMain{
+    display: flex;
+}
+
+.reminderCard {
+    width: 100%;
+    min-height: 84px;
+    background: #101a26;
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    position: relative;
+    overflow: hidden;
+}
+
+/* Cyan line on left */
+.reminderCard::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background: #00d9ff;
+    border-radius: 0 4px 4px 0;
+}
+
+.reminderIcon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 16px;
+}
+
+.reminderIcon i {
+    font-size: 23px;
+    color: #00d9ff;
+}
+
+.reminderInfo h3 {
+    margin: 0;
+    color: #d8dee5;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.reminderInfo p {
+    margin: 3px 0 0;
+    color: #a5b0bb;
+    font-size: 14px;
+}
