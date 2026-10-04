@@ -3,11 +3,11 @@ import { Routes, Route } from "react-router";
 import HomePage from "./pages/HomePage";
 
 import HomeScreen from "./pages/HomeScreen";
-import MyHabbitScreen from "./pages/MyHabbitScreen";
+import MyHabbitScreen from "./pages/MyHabitScreen";
 import CalendarScreen from "./pages/CalendarScreen";
 import AchievementScreen from "./pages/AchievementScreen";
 import ProfileScreen from "./pages/ProfileScreen";
-import AddHabbitScreen from "./pages/AddHabbitScreen";
+import AddHabitScreen from "./pages/AddHabitScreen";
 
 function App() {
     return (
@@ -27,7 +27,7 @@ function App() {
 
                 <Route path="profile" element={<ProfileScreen />} />
 
-                <Route path="add-habit" element={<AddHabbitScreen />} />
+                <Route path="add-habit" element={<AddHabitScreen />} />
 
             </Route>
 

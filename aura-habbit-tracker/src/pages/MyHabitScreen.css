@@ -1,0 +1,607 @@
+/* =========================================================
+   MAIN AREA
+========================================================= */
+
+/* .my-habits-main {
+  width: 100%;
+  min-height: calc(100vh - 70px);
+
+  padding: 42px 45px 60px;
+
+  background: #0b1216;
+  color: #e7edf1;
+
+  font-family: Arial, Helvetica, sans-serif;
+} */
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.habits-heading {
+  width: 100%;
+  max-width: 1050px;
+
+  margin: 0 auto 25px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+.habits-heading h1 {
+  margin: 0;
+
+  font-size: 30px;
+  line-height: 1.2;
+
+  font-weight: 700;
+
+  color: #e7edf1;
+
+  letter-spacing: -0.5px;
+}
+
+.habits-heading p {
+  margin: 10px 0 0;
+
+  font-size: 13px;
+
+  color: #9ca9af;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   CATEGORY FILTER
+========================================================= */
+
+.category-filter {
+  min-width: 125px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 0 14px;
+
+  margin-top: 7px;
+
+  border: 1px solid #1f4262;
+
+  border-radius: 18px;
+
+  background: #101b2b;
+
+  color: #bdcbd2;
+
+  font-size: 11px;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.category-filter:hover {
+  border-color: #3f8bb2;
+
+  color: #e2f7ff;
+
+  background: #142536;
+}
+
+.filter-icon {
+  font-size: 11px;
+
+  transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   HABIT GRID
+========================================================= */
+
+.habits-grid {
+  width: 100%;
+  max-width: 1050px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+
+/* =========================================================
+   HABIT CARD
+========================================================= */
+
+.habit-card {
+  min-height: 205px;
+
+  padding: 18px 17px 17px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #101b2c;
+
+  border: 1px solid #1c3854;
+
+  border-radius: 10px;
+
+  position: relative;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.habit-card:hover {
+  transform: translateY(-2px);
+
+  border-color: #2a5274;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.habit-card-top {
+  width: 100%;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  margin-bottom: 17px;
+}
+
+
+/* =========================================================
+   HABIT ICON
+========================================================= */
+
+.habit-icon {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: #1b3348;
+
+  color: #9edfff;
+
+  font-size: 17px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   EDIT BUTTON
+========================================================= */
+
+.edit-habit {
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  background: transparent;
+
+  color: #aebbc1;
+
+  font-size: 18px;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.edit-habit:hover {
+  color: #5fdcff;
+
+  transform: scale(1.1);
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+.habit-category {
+  width: fit-content;
+
+  padding: 3px 7px;
+
+  margin-bottom: 8px;
+
+  border-radius: 7px;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.8px;
+
+  border: 1px solid;
+}
+
+
+/* Health */
+
+.habit-category.health {
+  color: #8edcff;
+
+  background: rgba(48, 154, 194, 0.08);
+
+  border-color: rgba(48, 154, 194, 0.25);
+}
+
+
+/* Mindset */
+
+.habit-category.mindset {
+  color: #e3b738;
+
+  background: rgba(227, 183, 56, 0.08);
+
+  border-color: rgba(227, 183, 56, 0.25);
+}
+
+
+/* Fitness */
+
+.habit-category.fitness {
+  color: #a9d6e9;
+
+  background: rgba(89, 158, 188, 0.08);
+
+  border-color: rgba(89, 158, 188, 0.25);
+}
+
+
+/* Wellness */
+
+.habit-category.wellness {
+  color: #e3b738;
+
+  background: rgba(227, 183, 56, 0.08);
+
+  border-color: rgba(227, 183, 56, 0.25);
+}
+
+
+/* Productivity */
+
+.habit-category.productivity {
+  color: #7ed9f7;
+
+  background: rgba(70, 160, 198, 0.08);
+
+  border-color: rgba(70, 160, 198, 0.25);
+}
+
+
+/* =========================================================
+   HABIT NAME
+========================================================= */
+
+.habit-card h2 {
+  margin: 0;
+
+  color: #dfe6ea;
+
+  font-size: 19px;
+
+  line-height: 1.25;
+
+  font-weight: 600;
+
+  letter-spacing: -0.2px;
+}
+
+
+/* =========================================================
+   STREAK
+========================================================= */
+
+.habit-streak {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  margin-top: 7px;
+
+  margin-bottom: auto;
+
+  color: #b4c0c5;
+
+  font-size: 10px;
+}
+
+.fire-icon {
+  color: #8edfff;
+
+  font-size: 12px;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   COMPLETE BUTTON
+========================================================= */
+
+.complete-button {
+  width: 100%;
+
+  height: 40px;
+
+  margin-top: 16px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  border: 1px solid #2c4a62;
+
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #9ddbf0;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.complete-button:hover {
+  background: #142c3a;
+
+  border-color: #42b8e3;
+
+  color: #c9f4ff;
+}
+
+.check-circle {
+  width: 14px;
+  height: 14px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #8edfff;
+
+  border-radius: 50%;
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   COMPLETED HABIT
+========================================================= */
+
+.completed-button {
+  border-color: #05d1f8;
+
+  background: #05c9ee;
+
+  color: #06202a;
+
+  box-shadow:
+    0 5px 15px rgba(0, 207, 244, 0.18);
+}
+
+.completed-button:hover {
+  background: #13d5f7;
+
+  border-color: #13d5f7;
+
+  color: #06202a;
+
+  box-shadow:
+    0 6px 18px rgba(0, 207, 244, 0.3);
+}
+
+.completed-check {
+  font-size: 13px;
+
+  color: #06202a;
+}
+
+
+/* =========================================================
+   ADD HABIT CARD
+========================================================= */
+
+.add-habit-card {
+  min-height: 205px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px dashed #1d2c35;
+
+  border-radius: 10px;
+
+  background: rgba(12, 19, 23, 0.35);
+
+  color: #a7b4b9;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.add-habit-card:hover {
+  border-color: #39748c;
+
+  background: #101b23;
+
+  transform: translateY(-2px);
+}
+
+
+/* Add icon */
+
+.add-habit-icon {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 12px;
+
+  border-radius: 50%;
+
+  background: #10191f;
+
+  color: #aab9bf;
+
+  font-size: 27px;
+
+  font-weight: 300;
+}
+
+
+/* Add title */
+
+.add-habit-card h2 {
+  margin: 0;
+
+  font-size: 18px;
+
+  font-weight: 600;
+
+  color: #aebbc0;
+}
+
+
+/* Add subtitle */
+
+.add-habit-card p {
+  margin: 5px 0 0;
+
+  font-size: 9px;
+
+  color: #68777e;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+  .my-habits-main {
+    padding: 35px 30px 50px;
+  }
+
+  .habits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .my-habits-main {
+    padding: 28px 18px 40px;
+  }
+
+  .habits-heading {
+    flex-direction: column;
+
+    gap: 15px;
+  }
+
+  .category-filter {
+    margin-top: 0;
+  }
+
+  .habits-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 450px) {
+
+  .my-habits-main {
+    padding: 22px 14px 35px;
+  }
+
+  .habits-heading h1 {
+    font-size: 25px;
+  }
+
+  .habits-heading p {
+    font-size: 11px;
+  }
+
+  .habit-card,
+  .add-habit-card {
+    min-height: 195px;
+  }
+
+}

@@ -1,0 +1,504 @@
+* {
+  box-sizing: border-box;
+}
+/* 
+.habit-page {
+  min-height: 100vh;
+  width: 100%;
+
+  background: #0b1216;
+  color: #e7edf1;
+
+  padding: 28px 35px 50px;
+
+  font-family: Arial, Helvetica, sans-serif;
+} */
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.habit-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.habit-header h1 {
+  margin: 0;
+
+  font-size: 34px;
+  line-height: 1.2;
+  font-weight: 700;
+
+  letter-spacing: -0.8px;
+
+  color: #e9edf0;
+}
+
+.habit-header p {
+  margin: 10px 0 0;
+
+  color: #9ba7ae;
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.habit-card {
+  width: min(850px, 90%);
+
+  margin: 0 auto;
+
+  background: #101b2c;
+
+  border: 1px solid #1c3854;
+  border-radius: 10px;
+
+  padding: 38px 30px 30px;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  column-gap: 28px;
+  row-gap: 26px;
+
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =====================================================
+   FULL WIDTH
+===================================================== */
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+
+/* =====================================================
+   LABELS
+===================================================== */
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #8edcff;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 1.2px;
+}
+
+
+/* =====================================================
+   INPUTS
+===================================================== */
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+
+  border: 1px solid #263747;
+  border-radius: 6px;
+
+  background: #151f29;
+
+  color: #dce4e8;
+
+  outline: none;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+
+/* Normal input */
+
+.form-group input,
+.form-group select {
+  height: 42px;
+
+  padding: 0 13px;
+}
+
+
+/* Description */
+
+.form-group textarea {
+  height: 72px;
+
+  padding: 12px 13px;
+
+  resize: none;
+
+  line-height: 1.5;
+}
+
+
+/* Placeholder */
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #4c5962;
+}
+
+
+/* Focus */
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #35cfff;
+
+  background: #17222d;
+
+  box-shadow:
+    0 0 0 2px rgba(53, 207, 255, 0.08),
+    0 0 12px rgba(53, 207, 255, 0.05);
+}
+
+
+/* =====================================================
+   SELECT
+===================================================== */
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+
+  cursor: pointer;
+}
+
+.select-arrow {
+  position: absolute;
+
+  right: 14px;
+  top: 50%;
+
+  transform: translateY(-55%);
+
+  color: #8b969c;
+
+  font-size: 16px;
+
+  pointer-events: none;
+}
+
+
+/* =====================================================
+   FREQUENCY
+===================================================== */
+
+.frequency-options {
+  min-height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.frequency-btn {
+  height: 30px;
+
+  padding: 0 14px;
+
+  border: 1px solid #2b3c4d;
+
+  border-radius: 18px;
+
+  background: #101923;
+
+  color: #9ca9b0;
+
+  font-size: 11px;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.frequency-btn:hover {
+  border-color: #3e7087;
+
+  color: #d2e3e9;
+
+  background: #16242e;
+}
+
+.frequency-btn.active {
+  border-color: #4dd4ff;
+
+  background: #17303e;
+
+  color: #d9f8ff;
+
+  box-shadow:
+    0 0 10px rgba(52, 204, 255, 0.18),
+    inset 0 0 8px rgba(52, 204, 255, 0.04);
+}
+
+
+/* =====================================================
+   TIME / DATE
+===================================================== */
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon input {
+  padding-right: 40px;
+}
+
+.input-with-icon span {
+  position: absolute;
+
+  right: 13px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #c0cbd0;
+
+  font-size: 15px;
+
+  pointer-events: none;
+}
+
+
+/* =====================================================
+   ICON SELECTOR
+===================================================== */
+
+.icon-selector {
+  min-height: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 10px 12px;
+
+  border: 1px solid #263747;
+
+  border-radius: 7px;
+
+  background: #151f29;
+}
+
+.icon-btn {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid transparent;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #82939d;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.icon-btn:hover {
+  color: #d1e0e6;
+
+  background: #1b2b37;
+}
+
+.icon-btn.selected {
+  border-color: #51d6ff;
+
+  background: #1c3948;
+
+  color: #d2f7ff;
+
+  box-shadow:
+    0 0 12px rgba(45, 205, 255, 0.2),
+    inset 0 0 8px rgba(45, 205, 255, 0.05);
+}
+
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+
+.form-actions {
+  display: flex;
+
+  justify-content: flex-end;
+  align-items: center;
+
+  gap: 35px;
+
+  margin-top: 16px;
+}
+
+.cancel-btn {
+  border: none;
+
+  background: transparent;
+
+  color: #a5afb4;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  padding: 8px 4px;
+
+  transition: color 0.2s ease;
+}
+
+.cancel-btn:hover {
+  color: #e0e7ea;
+}
+
+.save-btn {
+  height: 42px;
+
+  min-width: 125px;
+
+  padding: 0 24px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: #08c9f4;
+
+  color: #06202a;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 15px rgba(0, 201, 244, 0.2);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.save-btn:hover {
+  background: #21d4fa;
+
+  box-shadow:
+    0 6px 20px rgba(0, 201, 244, 0.32);
+
+  transform: translateY(-1px);
+}
+
+.save-btn:active {
+  transform: translateY(0);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+  .habit-card {
+    width: 94%;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .habit-page {
+    padding: 25px 15px 40px;
+  }
+
+  .habit-header h1 {
+    font-size: 28px;
+  }
+
+  .habit-header p {
+    font-size: 12px;
+  }
+
+  .habit-card {
+    width: 100%;
+
+    grid-template-columns: 1fr;
+
+    padding: 30px 22px 25px;
+
+    row-gap: 22px;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+
+  .form-actions {
+    margin-top: 8px;
+  }
+}
+
+
+@media (max-width: 450px) {
+  .habit-header h1 {
+    font-size: 24px;
+  }
+
+  .habit-card {
+    padding: 24px 18px;
+  }
+
+  .frequency-btn {
+    padding: 0 11px;
+  }
+
+  .icon-selector {
+    overflow-x: auto;
+  }
+
+  .icon-btn {
+    flex-shrink: 0;
+  }
+}
