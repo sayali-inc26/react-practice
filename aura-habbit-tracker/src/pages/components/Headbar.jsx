@@ -1,27 +1,39 @@
-import streak from "../../assets/headbar/streak.png"
-import notification from "../../assets/headbar/notification.png"
-import settings from "../../assets/headbar/settings.png"
-import profile from "../../assets//headbar/profile.jpg"
+import "./Headbar.css";
 
-import "../components/Headbar.css";
-
-
+import streak from "../../assets/headbar/streak.png";
+import notification from "../../assets/headbar/notification.png";
+import profileImg from "../../assets/headbar/profileImg.jpg";
 
 function HeadBar() {
-
     return (
-        <>
-            <div className="headBar">
-               <h3>AURA</h3>
-                <div className="headBarIcons">
-                    <img className=" streakButton" src={streak} alt="streak" />
-                    <img className="headerIcons" src={notification} alt="notification" />
-                    <img className="headerIcons" src={settings} alt="settings" />
-                    <img className="headerIcons profile" src={profile} alt="profilePic" />
-                </div>
+        <header className="headBar">
+
+            <h3>AURA</h3>
+
+            <div className="headBarIcons">
+
+                <img
+                    src={streak}
+                    alt="Notifications"
+                    className="streakButton"
+                />
+
+                <img
+                    src={notification}
+                    alt="Notifications"
+                    className="headerIcons"
+                />
+
+                <img
+                    src={profileImg}
+                    alt="Profile"
+                    className="profileIcon"
+                />
+
             </div>
-        </>
-    )
+
+        </header>
+    );
 }
 
 export default HeadBar;

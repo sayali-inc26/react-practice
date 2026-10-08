@@ -31,13 +31,14 @@
 
 .headBarIcons .headerIcons{
     width: 20px;
-    height: 20px;
-    border-radius: 20px;
+    height: 25px;
+    
 }
 
-.searchBarIcons .profile{
+.headBarIcons .profileIcon{
     height: 32px;
     width: 32px;
+    border-radius: 20px;
 
 }
 

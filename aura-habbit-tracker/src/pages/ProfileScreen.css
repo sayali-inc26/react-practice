@@ -1,0 +1,640 @@
+.profile {
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    padding: 25px;
+    box-sizing: border-box;
+
+    background: #0b1216;
+    color: #dce5e9;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.profileBox {
+    width: 100%;
+    min-height: 155px;
+
+    box-sizing: border-box;
+
+    padding: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #111c28;
+
+    border: 1px solid #20364d;
+    border-radius: 16px;
+}
+
+
+.profileLeft {
+    display: flex;
+    align-items: center;
+
+    gap: 25px;
+}
+
+
+.avatar {
+    width: 100px;
+    height: 100px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border: 2px solid #8ce8ff;
+
+    background: #172431;
+
+    box-shadow:
+        0 0 15px rgba(0, 212, 255, 0.5);
+}
+
+
+.avatar img{
+    height: 98px;
+    width: 98px;
+    border-radius: 50%;
+}
+
+
+.camera {
+    position: absolute;
+
+    right: -3px;
+    bottom: -3px;
+
+    width: 30px;
+    height: 30px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #8ce8ff;
+
+    cursor: pointer;
+}
+
+
+.profileInfo h1 {
+    margin: 0 0 5px;
+
+    font-size: 34px;
+
+    color: #e8eef2;
+}
+
+
+.profileInfo p {
+    margin: 0 0 12px;
+
+    font-size: 15px;
+
+    color: #aab9c2;
+}
+
+
+.badges {
+    display: flex;
+    gap: 8px;
+}
+
+
+.badges span {
+    padding: 5px 12px;
+
+    font-size: 11px;
+
+    border-radius: 15px;
+
+    color: #9deaff;
+
+    background: #172c3b;
+
+    border: 1px solid #31536b;
+}
+
+
+.editButton {
+    padding: 10px 22px;
+
+    border-radius: 10px;
+
+    border: 1px solid #9deaff;
+
+    background: transparent;
+
+    color: #9deaff;
+
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+
+.editButton:hover {
+    background: #123242;
+}
+
+
+/* =========================
+   EDIT BOX
+========================= */
+
+.editBox {
+    margin-top: 15px;
+
+    padding: 15px;
+
+    background: #111c28;
+
+    border: 1px solid #20364d;
+
+    border-radius: 12px;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.settingsGrid {
+    margin-top: 38px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 28px;
+}
+
+
+.settingsGrid section h2 {
+    margin: 0 0 18px;
+
+    font-size: 22px;
+
+    color: #dce5e9;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+    background: #111c28;
+
+    border: 1px solid #20364d;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   NOTIFICATIONS
+========================= */
+
+.setting {
+    min-height: 75px;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid #1b2b39;
+}
+
+
+.setting:last-child {
+    border-bottom: none;
+}
+
+
+.setting h3 {
+    margin: 0 0 5px;
+
+    font-size: 14px;
+
+    font-weight: normal;
+}
+
+
+.setting p {
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #aebbc3;
+}
+
+
+/* =========================
+   TOGGLE
+========================= */
+
+.toggle {
+    width: 36px;
+    height: 20px;
+
+    padding: 2px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: #364149;
+
+    cursor: pointer;
+}
+
+
+.toggle span {
+    display: block;
+
+    width: 16px;
+    height: 16px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    transition: 0.2s;
+}
+
+
+.toggle.active {
+    background: #00cdf4;
+}
+
+
+.toggle.active span {
+    transform: translateX(16px);
+}
+
+
+/* =========================
+   REMINDERS
+========================= */
+
+.card label {
+    display: block;
+
+    margin: 20px 20px 8px;
+
+    font-size: 13px;
+
+    color: #bac6cd;
+}
+
+
+.card select {
+    width: calc(100% - 40px);
+
+    margin: 0 20px;
+
+    padding: 12px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #263b4b;
+
+    border-radius: 10px;
+
+    background: #19242a;
+
+    color: #dce5e9;
+
+    outline: none;
+}
+
+
+.reminderButtons {
+    display: flex;
+
+    gap: 10px;
+
+    padding: 0 20px 20px;
+}
+
+
+.reminder {
+    flex: 1;
+
+    min-height: 68px;
+
+    border: 1px solid #233747;
+
+    border-radius: 10px;
+
+    background: #19242a;
+
+    color: #b6c2c9;
+
+    cursor: pointer;
+}
+
+
+.reminder span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 20px;
+}
+
+
+.reminder.active {
+    border: 2px solid #9deaff;
+
+    color: #9deaff;
+
+    background: #132331;
+}
+
+
+/* =========================
+   APPEARANCE
+========================= */
+
+.appearance {
+    padding: 20px;
+}
+
+
+.themeTitle {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    font-size: 13px;
+}
+
+
+.locked {
+    padding: 3px 7px;
+
+    border-radius: 4px;
+
+    background: #203746;
+
+    color: #a9c2ce;
+
+    font-size: 10px;
+}
+
+
+.themes {
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 14px;
+}
+
+
+.theme {
+    width: 145px;
+    height: 65px;
+
+    padding: 12px;
+
+    box-sizing: border-box;
+
+    border-radius: 10px;
+
+    border: 1px solid #273c4c;
+
+    position: relative;
+
+    background: #18232e;
+}
+
+
+.theme.selected {
+    border: 2px solid #9deaff;
+}
+
+
+.theme.disabled {
+    opacity: 0.45;
+}
+
+
+.themeLines span {
+    display: block;
+
+    width: 30px;
+    height: 6px;
+
+    margin-bottom: 5px;
+
+    border-radius: 5px;
+
+    background: #91e8ff;
+}
+
+
+.themeLines span:nth-child(2) {
+    width: 40px;
+
+    background: #4c5c66;
+}
+
+
+.theme small {
+    position: absolute;
+
+    right: 8px;
+    top: 8px;
+
+    color: #9deaff;
+}
+
+
+.theme strong {
+    position: absolute;
+
+    bottom: 8px;
+    left: 12px;
+
+    font-size: 8px;
+}
+
+
+.themeNote {
+    margin: 15px 0 0;
+
+    font-size: 11px;
+
+    font-style: italic;
+
+    line-height: 1.5;
+
+    color: #aebbc3;
+}
+
+
+/* =========================
+   ACCOUNT
+========================= */
+
+.accountRow {
+    min-height: 75px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border-bottom: 1px solid #1b2b39;
+}
+
+
+.accountIcon {
+    font-size: 18px;
+
+    width: 25px;
+}
+
+
+.accountRow h3 {
+    margin: 0 0 5px;
+
+    font-size: 14px;
+
+    font-weight: normal;
+}
+
+
+.accountRow p {
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #aebbc3;
+}
+
+
+.arrow {
+    margin-left: auto;
+
+    font-size: 25px;
+
+    color: #aab9c2;
+}
+
+
+.logout {
+    width: 100%;
+
+    min-height: 75px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #ff9d9d;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+
+.logout:hover {
+    background: #241b1d;
+}
+
+
+.logout > span {
+    font-size: 22px;
+}
+
+
+.logout h3 {
+    margin: 0 0 5px;
+
+    font-size: 14px;
+
+    font-weight: normal;
+}
+
+
+.logout p {
+    margin: 0;
+
+    color: #b98c8c;
+
+    font-size: 13px;
+}
+
+
+@media (max-width: 900px) {
+
+    .settingsGrid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .profile {
+        padding: 15px;
+    }
+
+
+    .profileBox {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+
+    .profileInfo h1 {
+        font-size: 26px;
+    }
+
+
+    .settingsGrid {
+        margin-top: 25px;
+    }
+
+
+    .themes {
+        flex-direction: column;
+    }
+
+}

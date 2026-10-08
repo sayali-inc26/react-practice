@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 import home from "../../assets/sidebar/home.png";
 import habbits from "../../assets/sidebar/habbits.png";
@@ -14,34 +14,34 @@ function Sidebar() {
         {
             icon: home,
             name: "Home",
-            path: "/"
+            path: "/home"
         },
         {
             icon: habbits,
             name: "My Habits",
-            path: "/habits"
+            path: "/home/habits"
         },
         {
             icon: calender,
             name: "Calendar",
-            path: "/calendar"
+            path: "/home/calendar"
         },
         {
             icon: acheivements,
             name: "Achievements",
-            path: "/achievements"
+            path: "/home/achievements"
         },
         {
             icon: profile,
             name: "Profile",
-            path: "/profile"
+            path: "/home/profile"
         }
     ];
 
     return (
         <div className="mainSidebar">
 
-            <Link to="/add-habit">
+            <Link to="/home/add-habit">
                 <button className="newHabbit">
                     + New Habit
                 </button>

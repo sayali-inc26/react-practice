@@ -1,10 +1,17 @@
 import React from "react";
+
+import health_icon from "../assets/myhabits_screen/health_icon.png"
+import mindset from "../assets/myhabits_screen/mindset_icon.png"
+import fitness from "../assets/myhabits_screen/fitness_icon.png"
+import wellness from "../assets/myhabits_screen/wellness_icon.png"
+import productivity from "../assets/myhabits_screen/productivity_icon.png"
+
 import "./MyHabitScreen.css";
 
 const habits = [
   {
     id: 1,
-    icon: "💧",
+    icon:health_icon ,
     category: "HEALTH",
     categoryType: "health",
     name: "Hydrate",
@@ -13,7 +20,7 @@ const habits = [
   },
   {
     id: 2,
-    icon: "▣",
+    icon: mindset,
     category: "MINDSET",
     categoryType: "mindset",
     name: "Read 20 Pages",
@@ -22,7 +29,7 @@ const habits = [
   },
   {
     id: 3,
-    icon: "🏃",
+    icon:  fitness ,
     category: "FITNESS",
     categoryType: "fitness",
     name: "Morning Gym",
@@ -31,7 +38,7 @@ const habits = [
   },
   {
     id: 4,
-    icon: "🧘",
+    icon:  wellness ,
     category: "WELLNESS",
     categoryType: "wellness",
     name: "Meditation",
@@ -40,7 +47,7 @@ const habits = [
   },
   {
     id: 5,
-    icon: "</>",
+    icon:  productivity ,
     category: "PRODUCTIVITY",
     categoryType: "productivity",
     name: "Daily Coding",
@@ -65,7 +72,7 @@ function MyHabitScreen() {
   return (
     <main className="my-habits-main">
 
-      {/* Page Heading */}
+
       <div className="habits-heading">
         <div>
           <h1>My Habits</h1>
@@ -76,7 +83,7 @@ function MyHabitScreen() {
           </p>
         </div>
 
-        {/* Category Filter */}
+
         <button className="category-filter">
           <span className="filter-icon">☰</span>
           <span>All Categories</span>
@@ -84,80 +91,70 @@ function MyHabitScreen() {
       </div>
 
 
-      {/* Habit Grid */}
+
       <div className="habits-grid">
+        {
+          habits.map((habit) => (
+            <div
+              className="main-card"
+              key={habit.id}
+            >
 
-        {habits.map((habit) => (
-          <div
-            className={`habit-card ${
-              habit.completed ? "habit-completed" : ""
-            }`}
-            key={habit.id}
-          >
 
-            {/* Top Row */}
-            <div className="habit-card-top">
+              <div className="habit-card-top">
 
-              <div className="habit-icon">
-                {habit.icon}
+                <div className="habit-icon">
+                  <img src={habit.icon} alt="" />
+                </div>
+
+                <button
+                  className="edit-habit"
+                  onClick={() => handleEdit(habit)}
+                  aria-label={`Edit ${habit.name}`}
+                >
+                  ✎
+                </button>
+
+              </div>
+
+
+
+              <div className={`habit-category ${habit.categoryType}`}>
+                {habit.category}
+              </div>
+
+              <h2>{habit.name}</h2>
+
+              <div className="habit-streak">
+                <span className="fire-icon">🔥</span>
+
+                <span>
+                  {habit.streak} day{habit.streak !== 1 ? "s" : ""} streak
+                </span>
               </div>
 
               <button
-                className="edit-habit"
-                onClick={() => handleEdit(habit)}
-                aria-label={`Edit ${habit.name}`}
+                className={`complete-button ${habit.completed ? "completed-button" : ""
+                  }`}
+                onClick={() => handleComplete(habit)}
               >
-                ✎
+                {
+                habit.completed ? (
+                  <>
+                    <span className="completed-check">✹</span>
+                    Done for Today
+                  </>
+                ) : (
+                  <>
+                    <span className="check-circle">✓</span>
+                    Complete
+                  </>
+                )}
               </button>
 
             </div>
+          ))}
 
-
-            {/* Category */}
-            <div className={`habit-category ${habit.categoryType}`}>
-              {habit.category}
-            </div>
-
-
-            {/* Habit Name */}
-            <h2>{habit.name}</h2>
-
-
-            {/* Streak */}
-            <div className="habit-streak">
-              <span className="fire-icon">♨</span>
-
-              <span>
-                {habit.streak} day{habit.streak !== 1 ? "s" : ""} streak
-              </span>
-            </div>
-
-
-            {/* Complete Button */}
-            <button
-              className={`complete-button ${
-                habit.completed ? "completed-button" : ""
-              }`}
-              onClick={() => handleComplete(habit)}
-            >
-              {habit.completed ? (
-                <>
-                  <span className="completed-check">✹</span>
-                  Done for Today
-                </>
-              ) : (
-                <>
-                  <span className="check-circle">✓</span>
-                  Complete
-                </>
-              )}
-            </button>
-
-          </div>
-        ))}
-
-
-        {/* Add Habit Card */}
         <button
           className="add-habit-card"
           onClick={handleAddHabit}

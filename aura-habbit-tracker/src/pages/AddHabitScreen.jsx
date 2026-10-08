@@ -1,31 +1,96 @@
 import { useState } from "react";
+
+import { useDispatch } from "react-redux";
+import { addHabit } from "../redux/habitSlice";
+import { createHabit } from "../services/habbit";
+
+import focus from "../assets/add_habbit_screen/focus.png";
+import growth from "../assets/add_habbit_screen/growth.png";
+import code from "../assets/add_habbit_screen/code.png";
+import water from "../assets/add_habbit_screen/water.png";
+import exercise from "../assets/add_habbit_screen/exercise.png";
+import book from "../assets/add_habbit_screen/book.png";
+import dumbbell from "../assets/add_habbit_screen/dumbbell.png";
+import lightning from "../assets/add_habbit_screen/lightning.png";
+
 import "./AddHabitScreen.css";
 
 function AddHabitScreen() {
   const [habitName, setHabitName] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("Health");
+  const [category, setCategory] = useState("HEALTH");
   const [frequency, setFrequency] = useState("Daily");
   const [reminderTime, setReminderTime] = useState("08:00");
   const [startDate, setStartDate] = useState("2023-10-24");
   const [selectedIcon, setSelectedIcon] = useState(0);
 
-  const icons = ["⚡", "🏃", "📖", "♟", "◉", "</>", "✣", "♙"];
+  const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const icons = [
+    { display: lightning, value: "PERFORMANCE" },
+    { display: dumbbell, value: "FITNESS" },
+    { display: book, value: "BOOK" },
+    { display: exercise, value: "WELLNESS" },
+    { display: water, value: "HEALTH" },
+    { display: code, value: "PRODUCTIVITY" },
+    { display: growth, value: "PERSONAL_GROWTH" },
+    { display: focus, value: "FOCUS" }
+  ];
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const habit = {
-      habitName,
-      description,
-      category,
-      frequency,
-      reminderTime,
-      startDate,
-      icon: icons[selectedIcon],
+    if (!habitName.trim()) {
+      alert("Please enter habit name");
+      return;
+    }
+
+    const [hour, minute] = reminderTime.split(":");
+
+    const habitData = {
+      name: habitName,
+      description: description,
+
+      category: category,
+
+      frequency: frequency.toUpperCase(),
+
+      reminderTime: {
+        hour: Number(hour),
+        minute: Number(minute),
+        second: 0,
+        nano: 0
+      },
+
+      startDate: startDate,
+
+      icon: icons[selectedIcon].value,
+
+      targetValue: 0,
+
+      unit: "string"
     };
 
-    console.log("New Habit:", habit);
+    console.log("Sending habit:", habitData);
+
+    try {
+
+      const response = await createHabit(habitData);
+
+      console.log("Habit API response:", response);
+
+      // Store created habit in Redux
+      dispatch(addHabit(response.data));
+
+      alert("Habit created successfully!");
+
+      window.history.back();
+
+    } catch (error) {
+
+      console.error("Habit creation failed:", error);
+
+      alert(error.message);
+    }
   };
 
   return (
@@ -74,12 +139,15 @@ function AddHabitScreen() {
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
-              <option>Health</option>
-              <option>Fitness</option>
-              <option>Work</option>
-              <option>Learning</option>
-              <option>Personal</option>
-              <option>Finance</option>
+              <option value="HEALTH">Health</option>
+              <option value="MINDSET">Mindset</option>
+              <option value="FITNESS">Fitness</option>
+              <option value="WELLNESS">Wellness</option>
+              <option value="PRODUCTIVITY">Productivity</option>
+              <option value="FOCUS">Focus</option>
+              <option value="PERFORMANCE">Performance</option>
+              <option value="PERSONAL_GROWTH">Personal Growth</option>
+              <option value="STUDY">Study</option>
             </select>
 
             <span className="select-arrow">⌄</span>
@@ -95,9 +163,8 @@ function AddHabitScreen() {
               <button
                 type="button"
                 key={item}
-                className={`frequency-btn ${
-                  frequency === item ? "active" : ""
-                }`}
+                className={`frequency-btn ${frequency === item ? "active" : ""
+                  }`}
                 onClick={() => setFrequency(item)}
               >
                 {item}
@@ -147,12 +214,15 @@ function AddHabitScreen() {
               <button
                 type="button"
                 key={index}
-                className={`icon-btn ${
-                  selectedIcon === index ? "selected" : ""
-                }`}
+                className={`icon-btn ${selectedIcon === index ? "selected" : ""
+                  }`}
                 onClick={() => setSelectedIcon(index)}
               >
-                {icon}
+                <img
+                  src={icon.display}
+                  alt={icon.value}
+                  className="icon-image"
+                />
               </button>
             ))}
           </div>

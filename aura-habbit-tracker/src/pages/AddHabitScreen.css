@@ -1,23 +1,7 @@
 * {
   box-sizing: border-box;
 }
-/* 
-.habit-page {
-  min-height: 100vh;
-  width: 100%;
 
-  background: #0b1216;
-  color: #e7edf1;
-
-  padding: 28px 35px 50px;
-
-  font-family: Arial, Helvetica, sans-serif;
-} */
-
-
-/* =====================================================
-   HEADER
-===================================================== */
 
 .habit-header {
   text-align: center;
@@ -45,11 +29,6 @@
   line-height: 1.5;
 }
 
-
-/* =====================================================
-   MAIN CARD
-===================================================== */
-
 .habit-card {
   width: min(850px, 90%);
 
@@ -72,19 +51,9 @@
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
 }
 
-
-/* =====================================================
-   FULL WIDTH
-===================================================== */
-
 .full-width {
   grid-column: 1 / -1;
 }
-
-
-/* =====================================================
-   LABELS
-===================================================== */
 
 .form-group label {
   display: block;
@@ -98,11 +67,6 @@
 
   letter-spacing: 1.2px;
 }
-
-
-/* =====================================================
-   INPUTS
-===================================================== */
 
 .form-group input,
 .form-group textarea,
@@ -129,8 +93,6 @@
 }
 
 
-/* Normal input */
-
 .form-group input,
 .form-group select {
   height: 42px;
@@ -138,8 +100,6 @@
   padding: 0 13px;
 }
 
-
-/* Description */
 
 .form-group textarea {
   height: 72px;
@@ -152,15 +112,11 @@
 }
 
 
-/* Placeholder */
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
   color: #4c5962;
 }
-
-
-/* Focus */
 
 .form-group input:focus,
 .form-group textarea:focus,
@@ -173,11 +129,6 @@
     0 0 0 2px rgba(53, 207, 255, 0.08),
     0 0 12px rgba(53, 207, 255, 0.05);
 }
-
-
-/* =====================================================
-   SELECT
-===================================================== */
 
 .select-wrapper {
   position: relative;
@@ -204,11 +155,6 @@
 
   pointer-events: none;
 }
-
-
-/* =====================================================
-   FREQUENCY
-===================================================== */
 
 .frequency-options {
   min-height: 42px;
@@ -260,11 +206,6 @@
     inset 0 0 8px rgba(52, 204, 255, 0.04);
 }
 
-
-/* =====================================================
-   TIME / DATE
-===================================================== */
-
 .input-with-icon {
   position: relative;
 }
@@ -288,80 +229,86 @@
   pointer-events: none;
 }
 
-
-/* =====================================================
-   ICON SELECTOR
-===================================================== */
-
 .icon-selector {
-  min-height: 58px;
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
 
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-  padding: 10px 12px;
-
-  border: 1px solid #263747;
-
-  border-radius: 7px;
-
-  background: #151f29;
+    border: 1px solid #263747;
+    border-radius: 7px;
+    background: #151f29;
 }
+
 
 .icon-btn {
-  width: 38px;
-  height: 38px;
+    width: 50px;
+    height: 50px;
 
-  display: flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  align-items: center;
-  justify-content: center;
+    padding: 0;
 
-  border: 1px solid transparent;
+    border: 1px solid #263747;
+    border-radius: 9px;
 
-  border-radius: 7px;
+    background: #151f29;
 
-  background: transparent;
+    cursor: pointer;
 
-  color: #82939d;
-
-  font-size: 16px;
-
-  cursor: pointer;
-
-  transition:
-    border-color 0.2s ease,
-    background 0.2s ease,
-    color 0.2s ease,
-    box-shadow 0.2s ease;
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
 }
+
+
+.icon-image {
+    width: 20px;
+    height: 20px;
+
+    object-fit: contain;
+
+    display: block;
+
+    opacity: 0.8;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
 
 .icon-btn:hover {
-  color: #d1e0e6;
+    border-color: #3e7087;
+    background: #16242e;
 
-  background: #1b2b37;
+    box-shadow: 0 0 8px rgba(52, 204, 255, 0.08);
 }
+
+.icon-btn:hover .icon-image {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
 
 .icon-btn.selected {
-  border-color: #51d6ff;
+    border-color: #4dd4ff;
+    background: #17303e;
 
-  background: #1c3948;
-
-  color: #d2f7ff;
-
-  box-shadow:
-    0 0 12px rgba(45, 205, 255, 0.2),
-    inset 0 0 8px rgba(45, 205, 255, 0.05);
+    box-shadow:
+        0 0 10px rgba(52, 204, 255, 0.18),
+        inset 0 0 8px rgba(52, 204, 255, 0.04);
 }
 
-
-/* =====================================================
-   ACTION BUTTONS
-===================================================== */
-
+.icon-btn.selected .icon-image {
+    opacity: 1;
+    transform: scale(1.05);
+}
 .form-actions {
   display: flex;
 
@@ -435,11 +382,6 @@
 .save-btn:active {
   transform: translateY(0);
 }
-
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
 
 @media (max-width: 900px) {
   .habit-card {

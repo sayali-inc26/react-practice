@@ -52,7 +52,7 @@
 
 .mainSidebar {
     width: 300px;
-    height: calc(100vh - 90px);
+    height: 120vh;
 
     box-sizing: border-box;
 
