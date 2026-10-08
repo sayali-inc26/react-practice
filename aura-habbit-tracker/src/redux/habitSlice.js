@@ -12,6 +12,7 @@ const habitSlice = createSlice({
     initialState,
 
     reducers: {
+
         setHabits: (state, action) => {
             state.habits = action.payload;
         },
@@ -20,10 +21,17 @@ const habitSlice = createSlice({
             state.habits.push(action.payload);
         },
 
-        removeHabit: (state, action) => {
-            state.habits = state.habits.filter(
-                (habit) => habit.id !== action.payload
+        updateHabit: (state, action) => {
+
+            const updatedHabit = action.payload;
+
+            const index = state.habits.findIndex(
+                (habit) => habit.id === updatedHabit.id
             );
+
+            if (index !== -1) {
+                state.habits[index] = updatedHabit;
+            }
         },
 
         setLoading: (state, action) => {
@@ -39,7 +47,7 @@ const habitSlice = createSlice({
 export const {
     setHabits,
     addHabit,
-    removeHabit,
+    updateHabit,
     setLoading,
     setError
 } = habitSlice.actions;
