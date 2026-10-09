@@ -1,0 +1,256 @@
+.loginPage {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 30px;
+
+    box-sizing: border-box;
+
+    background:
+        radial-gradient(
+            circle at 2% 1%,
+            #08435f93 0.1%,
+            transparent 30%
+        ),
+        linear-gradient(
+            110deg,
+            #08283b 0%,
+            #071f30 15%,
+            #080f20 100%
+        );
+}
+
+.loginHeader {
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    line-height: 1;
+}
+
+.loginHeader h1 {
+    margin: 0;
+
+    color: #CAF300;;
+
+    font-size: 34px;
+
+    font-weight: 700;
+}
+
+.loginHeader p {
+    margin-top: 10px;
+
+    font-size: 15px;
+
+    font-weight: 400;
+
+    color: #596780;
+}
+
+
+.loginCard {
+    width: 440px;
+
+    box-sizing: border-box;
+
+    padding: 24px;
+
+    background-color: #FFFFFF0F;
+
+    border: 1px solid #FFFFFF1A;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.toggleButtons {
+    display: flex;
+
+    margin-bottom: 25px;
+}
+
+.toggleButtons button {
+    width: 50%;
+
+    height: 46px;
+
+    background-color: transparent;
+
+    border: none;
+
+    border-bottom: 1px solid transparent;
+
+    color: #A8E8FF;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.toggleButtons button:hover {
+    color: #CAF300;;
+}
+
+
+.loginButton.active,
+.signupButton.active {
+    border-bottom: 3px solid #CAF300;;
+
+    color: #CAF300;;
+}
+
+
+.inputGroup {
+    margin-bottom: 20px;
+}
+
+.inputGroup label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #BBC9CF;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+.inputGroup input {
+    width: 100%;
+
+    height: 49px;
+
+    box-sizing: border-box;
+
+    padding: 14px;
+
+    background-color: #111D34;
+
+    border: 1px solid #203454;
+
+    border-radius: 6px;
+
+    color: white;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+
+.inputGroup input::placeholder {
+    color: #68798f;
+}
+
+
+.inputGroup input:focus {
+    border-color: #CAF300;;
+
+    box-shadow:
+        0 0 0 2px rgba(0, 212, 255, 0.1);
+}
+
+.passwordLabel {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+.forgotPassword {
+    border: none;
+
+    background: none;
+
+    color: #A4E6F3;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    padding: 0;
+}
+
+
+.forgotPassword:hover {
+    color: #CAF300;;
+}
+
+.signInButton {
+    width: 100%;
+
+    height: 52px;
+
+    margin-top: 10px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background-color: #CAF300;;
+
+    color: #003642;
+
+    font-size: 16px;
+
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    font-weight: 400;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.signInButton:hover {
+    background-color: #19d9ff;
+
+    box-shadow:
+        0 5px 20px rgba(0, 212, 255, 0.2);
+}
+
+
+.signInButton:active {
+    transform: scale(0.98);
+}

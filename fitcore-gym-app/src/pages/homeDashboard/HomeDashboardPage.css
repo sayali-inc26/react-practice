@@ -1,0 +1,21 @@
+.dashboardHeader div{
+    line-height: 1;
+}
+
+.dashboardHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.dashboardHeader button{
+    height: 44px;
+    width: 159px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--primary-color);
+    font-size: 14px;
+    font-weight: 600;
+    
+
+    /* color: var(--text-primary-color); */
+}

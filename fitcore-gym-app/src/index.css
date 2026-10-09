@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+
+  font-family: Arial, sans-serif;
+}
+
+:root{
+  /* Theme */
+
+  --primary-color:#CAF300;
+  
+
+
+
+  /* Text Color*/
+
+  --text-primary-color:#C5C9AC;
+  --text-secondary-color: #ffffff;
+
+}
