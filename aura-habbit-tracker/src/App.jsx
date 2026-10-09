@@ -25,20 +25,46 @@ function App() {
 
     useEffect(() => {
 
-        const timer = setTimeout(() => {
+        const token = localStorage.getItem("habitToken");
 
-            setNotification({
-                id: 1,
-                title: "Habit Reminder",
-                message: "Time to complete your coding habit!"
-            });
+        if (!token) {
+            return;
+        }
 
-        }, 3000);
+        const controller = new AbortController();
+        connectNotificationStream(
+            (newNotification) => {
+                setNotification(newNotification);
+                // Also show a system notification when permitted. 
+                if ("Notification" in window && Notification.permission === "granted") {
+                    new Notification(newNotification.title || "Aura Habit Tracker",
+                        {
+                            body: newNotification.message,
+                            icon: "/favicon.ico"
+                        });
 
-        return () => clearTimeout(timer);
+                }
+            },
+            controller.signal
+        ).catch((error) => {
+            if (error.name !== "AbortError") {
+                console.error("Notification connection failed:", error);
+            }
+        }
+        );
+        return () => {
+            controller.abort();
+        };
     }, []);
+    const enableNotifications = async () => {
+        if ("Notification" in window && Notification.permission === "default") {
+            await Notification.requestPermission();
+        }
+    };
     return (
         <>
+
+            <button type="button" onClick={enableNotifications} className="enable-notifications-btn" > Enable Notifications </button>
             <Routes>
 
                 <Route path="/" element={<Navigate to="/splash" replace />} />
@@ -56,8 +82,8 @@ function App() {
                     <Route path="achievements" element={<AchievementScreen />} />
                     <Route path="profile" element={<ProfileScreen />} />
                     <Route path="add-habit" element={<AddHabitScreen />} />
-                    <Route path="/home/notifications" element={<Notifications />}
-                />
+                    <Route path="notifications" element={<Notifications />}
+                    />
                 </Route>
 
                 <Route path="*" element={<Navigate to="/splash" replace />} />

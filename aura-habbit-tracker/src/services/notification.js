@@ -1,18 +1,35 @@
 const API_URL = "http://192.168.1.81:8085/api";
 
 const getToken = () => {
-    return localStorage.getItem("habitToken");
+    return localStorage.getItem("authToken");
 };
 
 
+// export const getNotifications = async () => {
+
+//     const token = getToken();
+
+//     const response = await fetch(`${API_URL}/notifications`, {
+//         method: "GET",
+//         headers: {
+//             "Authorization": `Bearer ${token}`,
+//             "Content-Type": "application/json"
+//         }
+//     });
+
+//     if (!response.ok) {
+//         throw new Error("Failed to fetch notifications");
+//     }
+
+//     return await response.json();
+// };
+
+
 export const getNotifications = async () => {
-
-    const token = getToken();
-
     const response = await fetch(`${API_URL}/notifications`, {
         method: "GET",
         headers: {
-            "Authorization": `Bearer ${token}`,
+            Authorization: `Bearer ${getToken()}`,
             "Content-Type": "application/json"
         }
     });
@@ -21,8 +38,26 @@ export const getNotifications = async () => {
         throw new Error("Failed to fetch notifications");
     }
 
-    return await response.json();
+    const data = await response.json();
+
+    console.log("Notifications API response:", data);
+
+    // Handle an array returned directly or wrapped in an object
+    if (Array.isArray(data)) {
+        return data;
+    }
+
+    if (Array.isArray(data.data)) {
+        return data.data;
+    }
+
+    if (Array.isArray(data.notifications)) {
+        return data.notifications;
+    }
+
+    return [];
 };
+
 
 
 export const getUnreadCount = async () => {
@@ -92,7 +127,7 @@ export const markAllNotificationsAsRead = async () => {
     return await response.json();
 };
 
-export const connectNotificationStream = async (onNotification) => {
+export const connectNotificationStream = async (onNotification, signal) => {
 
     const token = getToken();
 
@@ -105,7 +140,7 @@ export const connectNotificationStream = async (onNotification) => {
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Accept": "text/event-stream"
-                }
+                },signal
             }
         );
 
