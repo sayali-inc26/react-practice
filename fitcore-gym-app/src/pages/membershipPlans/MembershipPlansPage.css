@@ -1,0 +1,381 @@
+.plans {
+    width: 100%;
+    padding: 10px 0;
+    color: #dedede;
+    box-sizing: border-box;
+}
+
+.plans * {
+    box-sizing: border-box;
+}
+
+/* Header */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.header h1 {
+    margin: 0 0 5px;
+    font-size: 48px;
+    font-weight: 800;
+}
+
+.header p {
+    margin: 0;
+    color: #bdbda9;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.create {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 11px 14px;
+    border: none;
+    border-radius: 5px;
+    background: #d7ff00;
+    color: #111;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Billing */
+
+.billing {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 32px;
+    padding: 4px;
+    border: 1px solid #292929;
+    border-radius: 7px;
+    background: #1c1c1c;
+}
+
+.billing button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    color: #d4d4d4;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.billing button.selected {
+    background: #303030;
+}
+
+.save {
+    padding: 3px 5px;
+    border-radius: 4px;
+    background: #343c00;
+    color: #d7ff00;
+    font-size: 8px;
+}
+
+/* Plan cards */
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 26px;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid #2b2b2b;
+    border-radius: 10px;
+    background: #1d1d1d;
+}
+
+.card.popular {
+    border-color: #bde900;
+}
+
+.badge {
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    padding: 4px 10px;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    background: #d7ff00;
+    color: #111;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    background: #2b2b2b;
+    color: #d7ff00;
+}
+
+.popular .icon {
+    border: 1px solid #4b5900;
+    background: #292e16;
+}
+
+.status {
+    padding: 4px 8px;
+    border-radius: 10px;
+    background: #303030;
+    color: #c4c4a8;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.card h3 {
+    margin: 0 0 3px;
+    font-size: 24px;
+}
+
+.price {
+    margin-bottom: 15px;
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.price small {
+    margin-left: 4px;
+    color: #bdbda9;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.popular .price {
+    color: #d7ff00;
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-bottom: 20px;
+}
+
+.feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    color: #d0d0d0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.feature svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.yes {
+    color: #d7ff00;
+}
+
+.no {
+    color: #66695d;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) 24px 24px;
+    /* gap: 6px; */
+    margin-top: auto;
+}
+
+.actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    min-width: 0;
+    height: 42px;
+    border: 1px solid #303030;
+    border-radius: 5px;
+    background: transparent;
+    color: #dedede;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.actions .profile {
+    border: none;
+    background: #303030;
+    width: 40px;
+    /* margin-right: 10px; */
+}
+
+.actions .menu{
+    border: none;
+    background: #303030;
+    width: 40px;
+    margin-left: 15px;
+}
+
+.actions .edit.active {
+    border-color: #d7ff00;
+    background: #d7ff00;
+    color: #111;
+}
+
+/* Comparison */
+
+.compare {
+    overflow: hidden;
+    border: 1px solid #2b2b2b;
+    border-radius: 10px;
+    background: #1d1d1d;
+}
+
+.comparehead {
+    padding: 28px 14px 13px;
+}
+
+.comparehead h3 {
+    margin: 0 0 5px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.comparehead p {
+    margin: 0;
+    color: #bdbda9;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.scroll {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.compare table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 9px;
+}
+
+.compare th,
+.compare td {
+    padding: 11px 9px;
+    border-top: 1px solid #2b2b2b;
+}
+
+.compare th {
+    background: #1b1b1b;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.compare th:first-child,
+.compare td:first-child {
+    width: 34%;
+    text-align: left;
+}
+
+.compare .highlight {
+    background: #282b1b;
+    color: #d7ff00;
+}
+
+.compare td {
+    color: #c9c9b8;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.compare td .yes {
+    font-size: 12px;
+}
+
+.compare td .no {
+    color: #66695d;
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+    .header h1 {
+        font-size: 23px;
+    }
+
+
+    .list {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .features {
+        gap: 12px;
+    }
+
+    .billing {
+        margin-bottom: 25px;
+    }
+
+    .compare table {
+        min-width: 440px;
+    }
+
+
+}
+
+@media (max-width: 450px) {
+    .header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .create {
+        align-self: flex-start;
+    }
+
+    .billing button {
+        padding: 8px;
+        font-size: 9px;
+    }
+
+}

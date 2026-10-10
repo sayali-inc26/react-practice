@@ -1,0 +1,383 @@
+.dashboardMainContent {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(220px, 0.95fr);
+    gap: 16px;
+    width: 100%;
+    color: #dedede;
+    font-family: inherit;
+    align-items: stretch;
+}
+
+.dashboardMainLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 0;
+}
+
+.dashboardMainRight {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 0;
+}
+
+
+
+.checkInStats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.checkInStatCard {
+    min-width: 0;
+    min-height: 60px;
+    padding: 10px 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    background: #202020;
+    border: 1px solid #292929;
+    border-radius: 6px;
+}
+
+.checkInStatCard h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.checkInStatCard span {
+    color: #b5b5a5;
+    font-size: 8px;
+    letter-spacing: 0.5px;
+}
+
+.checkInStatCard .lime {
+    color: #d7ff00;
+}
+
+.checkInStatCard .white {
+    color: #eeeeee;
+}
+
+.checkInStatCard .red {
+    color: #ff7777;
+}
+
+
+.recentCheckInsCard,
+.membershipOverviewCard,
+.expiringSoonCard {
+    background: #202020;
+    border: 1px solid #292929;
+    border-radius: 9px;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.recentCheckInsCard {
+    flex: 1;
+    min-height: 300px;
+}
+
+.recentCheckInsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.recentCheckInsHeader h2,
+.membershipOverviewCard h2,
+.expiringSoonCard h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #e0e0e0;
+}
+
+.viewAllButton {
+    padding: 4px 0;
+    border: none;
+    background: transparent;
+    color: #d7ff00;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.checkInsTableWrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.checkInsTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.checkInsTable th {
+    padding: 0 8px 10px;
+    color: #b8b8a5;
+    font-size: 12px;
+    font-weight: 500;
+    border-bottom: 1px solid #292929;
+}
+
+.checkInsTable th:first-child,
+.checkInsTable td:first-child {
+    padding-left: 0;
+}
+
+.checkInsTable td {
+    padding: 11px 8px;
+    color: #c8c8bb;
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: 1px solid #2b2b2b;
+}
+
+.checkInsTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.checkInMember {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #eeeeee;
+}
+
+.memberAvatar,
+.expiringMemberAvatar {
+    flex-shrink: 0;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #292b25;
+    color: #c3c9a7;
+    font-size: 9px;
+}
+
+.avatarBlue {
+    border: 1px solid #385568;
+}
+
+.avatarGreen {
+    border: 1px solid #42684b;
+}
+
+.avatarOrange {
+    border: 1px solid #735b3c;
+}
+
+.planBadge {
+    display: inline-block;
+    padding: 3px 5px;
+    border-radius: 3px;
+    font-size: 9px;
+}
+
+.planBadge.premium {
+    color: #d7ff00;
+    background: #30351a;
+    border: 1px solid #414a15;
+}
+
+.planBadge.standard {
+    color: #d0d0c4;
+    background: #393a30;
+}
+
+/* Membership overview */
+
+.membershipOverviewCard {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.membershipDonut {
+    width: min(100%, 122px);
+    aspect-ratio: 1;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: conic-gradient(#d7ff00 0deg 148deg,
+            #888888 148deg 275.8deg,
+            #414535 275.8deg 360deg);
+    position: relative;
+}
+
+.membershipDonut::before {
+    content: "";
+    position: absolute;
+    inset: 11px;
+    border-radius: 50%;
+    background: #202020;
+}
+
+.membershipDonutCenter {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.membershipDonutCenter h3 {
+    margin: 0;
+    color: #eeeeee;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.membershipDonutCenter span {
+    color: #b8b8a5;
+    font-size: 9px;
+}
+
+.membershipLegend {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.membershipLegendItem {
+    display: grid;
+    grid-template-columns: 8px 1fr auto;
+    align-items: center;
+    gap: 6px;
+    color: #deded5;
+    font-size: 10px;
+}
+
+.legendDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.standardColor {
+    background: #d7ff00;
+}
+
+.premiumColor {
+    background: #888888;
+}
+
+.basicColor {
+    background: #414535;
+}
+
+.legendCount {
+    color: #c9c9b8;
+}
+
+/* Expiring soon */
+
+.expiringSoonCard {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.expiringMembersList {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.expiringMember {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    padding: 9px;
+    background: #262626;
+    border: 1px solid #2b2b2b;
+    border-radius: 7px;
+}
+
+.expiringMemberAvatar {
+    width: 26px;
+    height: 26px;
+}
+
+.expiringMemberInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+    min-width: 0;
+}
+
+.expiringMemberInfo span {
+    color: #dddddd;
+    font-size: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.expiringMemberInfo small {
+    color: #c3bca5;
+    font-size: 9px;
+}
+
+.expiringMember:first-child .expiringMemberInfo small {
+    color: #ff9999;
+}
+
+.expiringMenuButton {
+    border: none;
+    padding: 0 2px;
+    background: transparent;
+    color: #d4d4b7;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .dashboardMainContent {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+
+    .dashboardMainRight {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media (max-width: 560px) {
+    .dashboardMainRight {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .checkInStats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .recentCheckInsCard,
+    .membershipOverviewCard,
+    .expiringSoonCard {
+        padding: 12px;
+    }
+
+
+}

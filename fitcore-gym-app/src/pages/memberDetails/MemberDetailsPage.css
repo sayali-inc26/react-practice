@@ -1,0 +1,432 @@
+.memberDetails {
+    width: 100%;
+    color: #dedede;
+    box-sizing: border-box;
+}
+
+/* Profile header */
+
+.detailsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 0 0 24px;
+}
+
+.detailsProfile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.detailsAvatar {
+    width: 76px;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 2px solid #d7ff00;
+    border-radius: 50%;
+    background: #242720;
+    color: #d7ff00;
+}
+
+.detailsInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detailsName {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.detailsName h1 {
+    margin: 0;
+    color: #f1f1f1;
+    font-size: 38px;
+    font-weight: 700;
+}
+
+.detailsPlan {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 9px;
+    border: 1px solid #454f0c;
+    border-radius: 20px;
+    background: #252a15;
+    color: #d7ff00;
+    font-size: 11px;
+}
+
+.detailsMeta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    color: #c7c9b2;
+    font-size: 14px;
+}
+
+.detailsDot {
+    color: #c7c9b2;
+}
+
+.detailsStatus {
+    color: #d7ff00;
+}
+
+/* Action buttons */
+
+.detailsActions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.detailsActions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 9px 13px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.editButton,
+.progressButton {
+    border: 1px solid #303030;
+    background: #151716;
+    color: #dedede;
+}
+
+.renewButton {
+    border: 1px solid #d7ff00;
+    background: #d7ff00;
+    color: #171717;
+    font-weight: 600;
+}
+
+/* Navigation tabs */
+
+.detailsTabs {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    border-bottom: 1px solid #292929;
+}
+
+.detailsTab {
+    padding: 17px 20px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: #c7c9b2;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.detailsTab:hover {
+    color: #d7ff00;
+}
+
+.detailsTab.activeTab {
+    border-bottom-color: #d7ff00;
+    color: #d7ff00;
+}
+
+/* Main overview layout */
+
+.detailsContent {
+    display: grid;
+    grid-template-columns: minmax(0, 2.1fr) minmax(220px, 1fr);
+    gap: 20px;
+    padding-top: 32px;
+}
+
+.detailsMain {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+}
+
+/* Fitness stat cards */
+
+.detailsStats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.detailsStatCard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: 112px;
+    overflow: hidden;
+    padding: 12px 5px;
+    border: 1px solid #292929;
+    border-radius: 4px;
+    background: #202020;
+}
+
+.statLabel {
+    color: #c7c9b2;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+}
+
+.detailsStatCard h2 {
+    z-index: 1;
+    margin: 6px 0 0;
+    color: #eeeeee;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.statUnit {
+    z-index: 1;
+    margin-top: 2px;
+    color: #c7c9b2;
+    font-size: 10px;
+}
+
+.bmiStatus {
+    z-index: 1;
+    margin-top: 3px;
+    color: #d7ff00;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.statIcon {
+    position: absolute;
+    right: -5px;
+    bottom: -7px;
+    color: #d7ff00;
+    opacity: 0.18;
+}
+
+/* Primary goal */
+
+.detailsGoal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    min-height: 116px;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #292929;
+    border-radius: 4px;
+    background: #202020;
+}
+
+.detailsGoal h2 {
+    margin: 6px 0 0;
+    color: #dedede;
+    font-size: 20px;
+}
+
+.goalIcon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid #454f0c;
+    border-radius: 50%;
+    background: #202510;
+    color: #d7ff00;
+}
+
+/* Membership card */
+
+.detailsMembership {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+    min-height: 238px;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #5b6800;
+    border-radius: 11px;
+    background: radial-gradient(circle at top right,
+            #292d19 0%,
+            #191a18 55%,
+            #151615 100%);
+    box-shadow: 0 0 15px #d7ff0010;
+}
+
+.membershipTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    color: #d7ff00;
+}
+
+.membershipBadge {
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: #d7ff00;
+    color: #171717;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.membershipDates {
+    margin-top: 20px;
+}
+
+.membershipDates span {
+    color: #c7c9b2;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+}
+
+.membershipDates p {
+    margin: 8px 0 0;
+    color: #dedede;
+    font-size: 14px;
+}
+
+.membershipRemaining {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 24px;
+}
+
+.membershipRemaining h2 {
+    margin: 0;
+    color: #d7ff00;
+    font-size: 38px;
+    line-height: 1;
+}
+
+.membershipRemaining>span {
+    margin-top: 4px;
+    color: #c7c9b2;
+    font-size: 11px;
+}
+
+.membershipProgress {
+    width: 100%;
+    height: 6px;
+    overflow: hidden;
+    margin-top: 9px;
+    border-radius: 10px;
+    background: #343434;
+}
+
+.membershipProgressFill {
+    width: 65%;
+    height: 100%;
+    border-radius: 10px;
+    background: #d7ff00;
+}
+
+/* Other tab content */
+
+.detailsTabContent {
+    min-height: 180px;
+    margin-top: 24px;
+    padding: 24px;
+    border: 1px solid #292929;
+    border-radius: 6px;
+    background: #202020;
+}
+
+.detailsTabContent h2 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.detailsTabContent p {
+    color: #a5a59a;
+    font-size: 14px;
+}
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+    .detailsContent {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .detailsMembership {
+        min-height: 220px;
+    }
+
+
+}
+
+@media (max-width: 650px) {
+    .detailsHeader {
+        align-items: flex-start;
+    }
+
+    .detailsProfile {
+        gap: 12px;
+    }
+
+    .detailsAvatar {
+        width: 58px;
+        height: 58px;
+    }
+
+    .detailsName h1 {
+        font-size: 28px;
+    }
+
+    .detailsActions {
+        width: 100%;
+        gap: 8px;
+    }
+
+    .detailsActions button {
+        flex: 1;
+        padding: 10px 8px;
+        font-size: 11px;
+    }
+
+    .detailsTab {
+        padding: 14px 16px;
+    }
+
+    .detailsContent {
+        padding-top: 20px;
+        gap: 16px;
+    }
+
+    .detailsStats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .detailsStatCard {
+        min-height: 110px;
+    }
+
+
+}

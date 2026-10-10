@@ -30,27 +30,27 @@ function Sidebar() {
         {
             icon: CalendarCheck,
             name: "Attendance",
-            path: ""
+            path: "/home/attendance"
         },
         {
             icon: ContactRound,
             name: "Trainers",
-            path: ""
+            path: "/home/trainers"
         },
         {
             icon: Monitor,
             name: "Membership Plans",
-            path: ""
+            path: "/home/membershipplans"
         },
         {
             icon: Banknote,
             name: "Payments",
-            path: ""
+            path: "/home/payments"
         },
         {
             icon: TrendingUp,
             name: "Progress",
-            path: ""
+            path: "/home/progress"
         }
     ];
     return (

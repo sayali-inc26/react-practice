@@ -16,7 +16,6 @@ body {
     color: white;
 }
 
-/* Right side of sidebar */
 .mainContent {
     flex: 1;
     min-width: 0;
@@ -25,13 +24,10 @@ body {
     min-height: 100vh;
 }
 
-/* Search bar at the top */
 .mainContent > :first-child {
     width: 100%;
     flex-shrink: 0;
 }
-
-/* Page content below search bar */
 .middleContent {
     flex: 1;
     min-width: 0;
