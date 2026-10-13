@@ -1,0 +1,177 @@
+
+.recentPayments {
+    width: 100%;
+    margin-top: 24px;
+    overflow: hidden;
+    border: 1px solid #292929;
+    border-radius: 10px;
+    background: #202020;
+    color: #dedede;
+    box-sizing: border-box;
+}
+
+.recentPayments * {
+    box-sizing: border-box;
+}
+
+/* Header */
+
+.recentHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 18px;
+}
+
+.recentHeader h2 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.recentHeader button {
+    border: none;
+    background: transparent;
+    color: #d7ff00;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.recentHeader button:hover {
+    text-decoration: underline;
+}
+
+/* Table */
+
+.recentScroll {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.recentTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.recentTable thead {
+    background: #353535;
+}
+
+.recentTable th {
+    padding: 14px 12px;
+    color: #c7c9b2;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.recentTable td {
+    padding: 13px 12px;
+    border-bottom: 1px solid #303030;
+    color: #c7c7c7;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.recentTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.recentTable tbody tr:hover {
+    background: #252525;
+}
+
+/* Member */
+
+.recentMember {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #eeeeee;
+}
+
+.recentAvatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #353535;
+    color: #dedede;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+/* Amount */
+
+.recentTable td.recentAmount {
+    color: #eeeeee;
+    font-weight: 600;
+}
+
+/* Status */
+
+.recentStatus {
+    display: inline-block;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.recentStatus.success {
+    background: #303a17;
+    color: #d7ff00;
+}
+
+.recentStatus.pending {
+    background: #393939;
+    color: #c7c7c7;
+}
+
+.recentStatus.failed {
+    background: #3b2020;
+    color: #ff8989;
+}
+
+/* Action */
+
+.recentAction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: #c7c7c7;
+    cursor: pointer;
+}
+
+.recentAction:hover {
+    background: #353535;
+    color: #d7ff00;
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+
+    .recentHeader {
+        padding: 16px;
+    }
+
+    .recentHeader h2 {
+        font-size: 17px;
+    }
+
+    .recentTable {
+        min-width: 650px;
+    }
+
+}

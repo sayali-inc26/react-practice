@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 import { useState } from "react";
 
+import { useDispatch } from "react-redux";
+
+import { addMember } from "../../redux/slices/memberSlice";
+
 import {
     MonitorCheck,
     ClipboardPlus,
@@ -13,6 +17,7 @@ import {
 export default function AddMemberPage() {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [formData, setFormData] = useState({
         fullName: "",
@@ -100,6 +105,20 @@ export default function AddMemberPage() {
 
         console.log("New Member:", formData);
         console.log("Profile Photo:", photo);
+
+        const newMember = {
+            ...formData,
+            id: Date.now().toString(),
+            status: "Active",
+            bmi:bmi,
+            photo: photo
+        };
+
+        dispatch(addMember(newMember));
+
+        alert("Member added successfully")
+
+        navigate("/home/members")
 
         // Connect your create-member API here.
     };

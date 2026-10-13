@@ -1,0 +1,287 @@
+.payments {
+    width: 100%;
+    color: #dedede;
+    box-sizing: border-box;
+}
+
+.payments * {
+    box-sizing: border-box;
+}
+
+/* Statistics */
+
+.payments .stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.payments .card {
+    position: relative;
+    min-width: 0;
+    min-height: 125px;
+    padding: 18px;
+    border: 1px solid #292929;
+    border-radius: 9px;
+    background: #1e1e1e;
+}
+
+.payments .cardTop {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.payments .cardTop span {
+    color: #c7c9b2;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.payments .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    background: #303030;
+    color: #d7ff00;
+}
+
+.payments .card h2 {
+    margin: 5px 0 18px;
+    font-size: 25px;
+    line-height: 1.2;
+}
+
+.payments .card p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+    color: #c7c7c7;
+    font-size: 10px;
+}
+
+.payments .card p.green {
+    color: #d7ff00;
+}
+
+/* Main layout */
+
+.payments .content {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(200px, 0.98fr);
+    align-items: stretch;
+    gap: 16px;
+}
+
+/* Revenue chart */
+
+.payments .chartBox {
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid #292929;
+    border-radius: 9px;
+    background: #1e1e1e;
+}
+
+.payments .chartHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.payments .chartHead h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.payments .chartHead select {
+    max-width: 120px;
+    padding: 6px 9px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    background: #353535;
+    color: #dedede;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.payments .chart {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+    height: 220px;
+}
+
+.payments .column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    height: 100%;
+}
+
+.payments .barArea {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #353535;
+}
+
+.payments .bar {
+    width: 80%;
+    max-width: 60px;
+    background: #d7ff00;
+    border-radius: 2px 2px 0 0;
+}
+
+.payments .column:nth-child(4) .bar {
+    background: #a9cf00;
+}
+
+.payments .column span {
+    margin-top: 8px;
+    color: #c7c7c7;
+    font-size: 10px;
+}
+
+/* Transaction filter */
+
+.payments .filter {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid #292929;
+    border-radius: 9px;
+    background: #1e1e1e;
+}
+
+.payments .filter h2 {
+    margin: 0 0 20px;
+    font-size: 18px;
+}
+
+.payments .filter label {
+    margin-bottom: 8px;
+    color: #c7c9b2;
+    font-size: 11px;
+}
+
+.payments .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 18px;
+}
+
+.payments .options button {
+    padding: 8px 13px;
+    border: none;
+    border-radius: 20px;
+    background: #353535;
+    color: #dedede;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.payments .options button.selected {
+    background: #d7ff00;
+    color: #111;
+}
+
+.payments .date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 5px;
+    background: #353535;
+    color: #dedede;
+    font-size: 11px;
+}
+
+.payments .date svg {
+    flex-shrink: 0;
+    color: #c7c9b2;
+}
+
+.payments .export {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: auto;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background: #353535;
+    color: #dedede;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.payments .export:hover {
+    background: #444;
+}
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+    .payments .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .payments .content {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .payments .filter {
+        gap: 10px;
+    }
+
+    .payments .export {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .payments .stats {
+        gap: 10px;
+    }
+
+    .payments .card {
+        padding: 12px;
+    }
+
+    .payments .card h2 {
+        font-size: 21px;
+    }
+
+    .payments .chartBox,
+    .payments .filter {
+        padding: 14px;
+    }
+
+    .payments .chartHead h2 {
+        font-size: 16px;
+    }
+
+    .payments .chart {
+        gap: 4px;
+    }
+}

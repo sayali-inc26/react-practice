@@ -1,6 +1,9 @@
 import "./NewPlan.css"
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addPlan } from "../../redux/slices/planSlice";
 
 import {
     Info,
@@ -21,23 +24,43 @@ import {
 import "./NewPlan.css";
 
 export default function NewPlan() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [icon, setIcon] = useState("star");
+    const [planFormData, setPlanFormData] = useState({
+        name: "",
+        description: "",
+        icon: "star",
 
-    const [monthly, setMonthly] = useState("");
-    const [annual, setAnnual] = useState("");
-    const [annualBilling, setAnnualBilling] = useState(true);
-    const [status, setStatus] = useState(true);
+        monthly: "",
+        annual: "",
+        annualBilling: true,
+        status: true,
+        feature: "",
+        features: [
+            "24/7 Gym Access",
+            "Unlimited Group Classes",
+            "1 Personal Training Session / M"
+        ]
 
-    const [feature, setFeature] = useState("");
+    })
 
-    const [features, setFeatures] = useState([
-        "24/7 Gym Access",
-        "Unlimited Group Classes",
-        "1 Personal Training Session / M"
-    ]);
+    // const [name, setName] = useState("");
+    // const [description, setDescription] = useState("");
+    // const [icon, setIcon] = useState("star");
+
+    // const [monthly, setMonthly] = useState("");
+    // const [annual, setAnnual] = useState("");
+    // const [annualBilling, setAnnualBilling] = useState(true);
+    // const [status, setStatus] = useState(true);
+
+    // const [feature, setFeature] = useState("");
+
+    // const [features, setFeatures] = useState([
+    //     "24/7 Gym Access",
+    //     "Unlimited Group Classes",
+    //     "1 Personal Training Session / M"
+    // ]);
 
     const icons = [
         { name: "star", Icon: Star },
@@ -50,36 +73,89 @@ export default function NewPlan() {
         { name: "plus", Icon: Plus }
     ];
 
+    const updateForm = (field, value) => {
+        setPlanFormData((previous) => ({
+            ...previous,
+            [field]: value
+        }));
+    };
+
     const addFeature = () => {
-        if (feature.trim() !== "") {
-            setFeatures([...features, feature.trim()]);
-            setFeature("");
-        }
+        const newFeature = planFormData.feature.trim();
+
+        if (newFeature === "") return;
+
+        setPlanFormData((previous) => ({
+            ...previous,
+            features: [...previous.features, newFeature],
+            feature: ""
+        }));
     };
 
     const deleteFeature = (index) => {
-        setFeatures(features.filter((item, i) => i !== index));
+        setPlanFormData((previous) => ({
+            ...previous,
+            features: previous.features.filter((item, i) => i !== index)
+        }));
     };
 
     const createPlan = () => {
+
+        if (!planFormData.name.trim()) {
+            alert("Please enter a plan name");
+            return;
+        }
+
+        if (
+            planFormData.monthly === "" ||
+            Number(planFormData.monthly) < 0
+        ) {
+            alert("Please enter a valid monthly price");
+            return;
+        }
+
+        if (
+            planFormData.annualBilling &&
+            (
+                planFormData.annual === "" ||
+                Number(planFormData.annual) < 0
+            )
+        ) {
+            alert("Please enter a valid annual price");
+            return;
+        }
+
         const plan = {
-            name,
-            description,
-            icon,
-            monthlyPrice: monthly,
-            annualPrice: annual,
-            annualBilling,
-            features,
-            status: status ? "Active" : "Inactive"
+            id: Date.now().toString(),
+
+            name: planFormData.name.trim(),
+            description: planFormData.description,
+            icon: planFormData.icon,
+
+            price: Number(planFormData.monthly),
+
+            annual: planFormData.annualBilling
+                ? Number(planFormData.annual)
+                : null,
+
+            annualBilling: planFormData.annualBilling,
+
+            features: planFormData.features.map((item) => [item, true]),
+
+            status: planFormData.status ? "ACTIVE" : "INACTIVE",
+
+            popular: false
         };
 
-        console.log("New Plan:", plan);
+        dispatch(addPlan(plan));
+
+        navigate("/home/membershipplans");
     };
 
     return (
         <div className="addPlan">
 
-            {/* PLAN BASICS */}
+
             <div className="box">
 
                 <h3>
@@ -96,16 +172,16 @@ export default function NewPlan() {
                         <input
                             type="text"
                             placeholder="e.g., Gold Membership"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            value={planFormData.name}
+                            onChange={(e) => updateForm("name", e.target.value)}
                         />
 
                         <label>Description</label>
 
                         <textarea
                             placeholder="Brief description of the plan benefits..."
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
+                            value={planFormData.description}
+                            onChange={(e) => updateForm("description", e.target.value)}
                         />
 
                     </div>
@@ -177,7 +253,7 @@ export default function NewPlan() {
                     <div>
                         <label className="annualPlan">
                             <p> Annual Price ($)    <span className="save">Save 20%</span></p>
-                            
+
                         </label>
 
                         <input

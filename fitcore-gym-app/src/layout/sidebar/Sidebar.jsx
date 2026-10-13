@@ -47,11 +47,11 @@ function Sidebar() {
             name: "Payments",
             path: "/home/payments"
         },
-        {
-            icon: TrendingUp,
-            name: "Progress",
-            path: "/home/progress"
-        }
+        // {
+        //     icon: TrendingUp,
+        //     name: "Progress",
+        //     path: "/home/progress"
+        // }
     ];
     return (
         <>

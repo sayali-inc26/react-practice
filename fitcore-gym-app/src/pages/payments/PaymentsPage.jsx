@@ -1,7 +1,12 @@
 import "./PaymentsPage.css"
+import RevenueTrends from "./components/RevenueTrends"
+import RecentPayments from "./components/RecentPayments"
 
 export default function PaymentsPage(){
     return(
-        <h1>Payment Page</h1>
+        <>
+            <RevenueTrends/>
+            <RecentPayments/>
+        </>
     )
 }

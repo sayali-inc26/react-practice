@@ -9,9 +9,9 @@ const api = axios.create({
     }
 });
 
-api.interceptors.request.use(
-    ()=>{
+// api.interceptors.request.use(
+//     ()=>{
         
-    }
-)
+//     }
+// )
 export default api;

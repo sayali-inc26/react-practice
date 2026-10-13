@@ -9,10 +9,12 @@ import AttendanceControlPage from "../pages/attendanceControl/AttendanceControlP
 import TarinerPage from "../pages/trainers/TrainerPage"
 import MembershipPlansPage from "../pages/membershipPlans/MembershipPlansPage"
 import PaymentsPage from "../pages/payments/PaymentsPage"
-import ProgressPage from "../pages/progress/ProgressPage"
+// import ProgressPage from "../pages/progress/ProgressPage"
 import AddTrainerPage from "../pages/addTariner/AddTrainerPage"
 import TarinerDetailsPage from "../pages/trainerDetails/TrainerDetailsPage"
 import NewPlan from "../pages/newPlan/NewPlan"
+
+import InvoiceDetaisPage from "../pages/invoice/InvoiceDetailsPage"
 
 
 export default function AppRoutes() {
@@ -32,7 +34,7 @@ export default function AppRoutes() {
 
                 <Route path="members" element={<Members/>}></Route>
 
-                <Route path="memberdetails" element={<MemberDetailsPage/>}></Route>
+                <Route path="memberdetails/:id" element={<MemberDetailsPage/>}></Route>
 
                 <Route path="attendance" element={<AttendanceControlPage/>}></Route>
 
@@ -48,7 +50,9 @@ export default function AppRoutes() {
 
                 <Route path="payments" element={<PaymentsPage/>}></Route>
 
-                <Route path="progress" element={<ProgressPage/>}></Route>
+                <Route path="invoicedetails" element={<InvoiceDetaisPage/>}></Route>
+
+                {/* <Route path="progress" element={<ProgressPage/>}></Route> */}
                 
 
             </Route>

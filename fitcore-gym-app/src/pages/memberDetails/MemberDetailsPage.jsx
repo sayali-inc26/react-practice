@@ -1,62 +1,192 @@
+
 import { useState } from "react";
-import {Pencil, RefreshCw, Plus, CalendarDays, Ruler, Weight, Gauge, Dumbbell, BadgeCheck, UserRound } from "lucide-react";
+
+import { useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+
+import {
+    Pencil,
+    RefreshCw,
+    Plus,
+    CalendarDays,
+    Ruler,
+    Weight,
+    Gauge,
+    Dumbbell,
+    BadgeCheck,
+    UserRound
+} from "lucide-react";
 
 import "./MemberDetailsPage.css";
 
 export default function MemberDetailsPage() {
+
     const [activeTab, setActiveTab] = useState("Overview");
 
-    const tabs = [ "Overview", "Workout", "Attendance", "Progress", "Payments" ];
+    const navigate = useNavigate();
 
-    const member = {
-        name: "C2w",
-        id: "#FC1001",
-        plan: "Premium",
-        status: "Active Member",
-        age: 24,
-        height: 175,
-        weight: 72,
-        bmi: 23.5,
-        goal: "Muscle Gain",
-        planStart: "Aug 2026",
-        planEnd: "Jan 2027",
-        daysRemaining: 183
+    // Get member ID from URL
+    const { id } = useParams();
+
+    // Get selected member from Redux
+    const member = useSelector((state) =>
+        state.member.members.find(
+            (item) => item.id === id
+        )
+    );
+
+    const tabs = [
+        "Overview",
+        "Workout",
+        "Attendance",
+        "Progress",
+        "Payments"
+    ];
+
+    // Calculate age using DOB
+    const calculateAge = (dob) => {
+
+        if (!dob) return "--";
+
+        const today = new Date();
+        const birthDate = new Date(dob + "T00:00:00");
+
+        let age = today.getFullYear() - birthDate.getFullYear();
+
+        const month = today.getMonth() - birthDate.getMonth();
+
+        if (
+            month < 0 ||
+            (month === 0 && today.getDate() < birthDate.getDate())
+        ) {
+            age--;
+        }
+
+        return age;
+    };
+
+    // Calculate remaining membership days
+    const calculateDays = (endDate) => {
+
+        if (!endDate) return 0;
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const end = new Date(endDate + "T00:00:00");
+
+        const difference = end - today;
+
+        return Math.max(
+            0,
+            Math.ceil(difference / (1000 * 60 * 60 * 24))
+        );
+    };
+
+    // If member does not exist
+    if (!member) {
+
+        return (
+            <div className="memberDetails">
+
+                <h2>Member not found</h2>
+
+                <p>Please select a member from the members list.</p>
+
+                <button onClick={() => navigate("/home/members")}>
+                    Back to Members
+                </button>
+
+            </div>
+        );
+    }
+
+    const age = calculateAge(member.dob);
+
+    const daysRemaining = calculateDays(member.endDate);
+
+    const formatDate = (date) => {
+
+        if (!date) return "--";
+
+        return new Date(date + "T00:00:00").toLocaleDateString(
+            "en-US",
+            {
+                month: "short",
+                year: "numeric"
+            }
+        );
+
     };
 
     return (
+
         <div className="memberDetails">
 
-            {/* Profile Header */}
+            {/* PROFILE HEADER */}
+
             <div className="detailsHeader">
 
                 <div className="detailsProfile">
+
                     <div className="detailsAvatar">
-                        <UserRound size={38} />
+
+                        {member.photo ? (
+
+                            <img
+                                src={member.photo}
+                                alt={member.fullName}
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    borderRadius: "50%"
+                                }}
+                            />
+
+                        ) : (
+
+                            <UserRound size={38} />
+
+                        )}
+
                     </div>
 
                     <div className="detailsInfo">
+
                         <div className="detailsName">
-                            <h1>{member.name}</h1>
+
+                            <h1>{member.fullName}</h1>
 
                             <span className="detailsPlan">
-                                <span>☆</span> {member.plan}
+                                ☆ {member.plan}
                             </span>
+
                         </div>
 
                         <div className="detailsMeta">
-                            <span>ID {member.id}</span>
-                            <span className="detailsDot">•</span>
-                            <span className="detailsStatus">
-                                {member.status}
+
+                            <span>
+                                ID #FC{member.id.slice(-5)}
                             </span>
+
+                            <span className="detailsDot">•</span>
+
+                            <span className="detailsStatus">
+                                {member.status} Member
+                            </span>
+
                         </div>
+
                     </div>
+
                 </div>
 
                 <div className="detailsActions">
+
                     <button
                         className="editButton"
-                        onClick={() => console.log("Edit member")}
+                        onClick={() => console.log("Edit:", member)}
                     >
                         <Pencil size={14} />
                         Edit Profile
@@ -64,7 +194,7 @@ export default function MemberDetailsPage() {
 
                     <button
                         className="renewButton"
-                        onClick={() => console.log("Renew membership")}
+                        onClick={() => console.log("Renew:", member)}
                     >
                         <RefreshCw size={14} />
                         Renew
@@ -72,123 +202,205 @@ export default function MemberDetailsPage() {
 
                     <button
                         className="progressButton"
-                        onClick={() => console.log("Add progress")}
+                        onClick={() => console.log("Progress:", member)}
                     >
                         <Plus size={15} />
                         Add Progress
                     </button>
+
                 </div>
 
             </div>
 
-            {/* Navigation Tabs */}
+            {/* NAVIGATION TABS */}
+
             <div className="detailsTabs">
+
                 {tabs.map((tab) => (
+
                     <button
                         key={tab}
-                        className={`detailsTab ${activeTab === tab ? "activeTab" : ""
-                            }`}
+                        className={`detailsTab ${activeTab === tab ? "activeTab" : ""}`}
                         onClick={() => setActiveTab(tab)}
                     >
                         {tab}
                     </button>
+
                 ))}
+
             </div>
 
-            {/* Overview Content */}
+            {/* OVERVIEW */}
+
             {activeTab === "Overview" ? (
+
                 <div className="detailsContent">
 
                     <div className="detailsMain">
 
-                        {/* Fitness Stats */}
+                        {/* FITNESS STATS */}
+
                         <div className="detailsStats">
 
                             <div className="detailsStatCard">
+
                                 <span className="statLabel">AGE</span>
-                                <h2>{member.age}</h2>
+
+                                <h2>{age}</h2>
+
                                 <span className="statUnit">Years</span>
-                                <CalendarDays className="statIcon" size={42} />
+
+                                <CalendarDays
+                                    className="statIcon"
+                                    size={42}
+                                />
+
                             </div>
 
                             <div className="detailsStatCard">
+
                                 <span className="statLabel">HEIGHT</span>
+
                                 <h2>{member.height}</h2>
+
                                 <span className="statUnit">cm</span>
-                                <Ruler className="statIcon" size={42} />
+
+                                <Ruler
+                                    className="statIcon"
+                                    size={42}
+                                />
+
                             </div>
 
                             <div className="detailsStatCard">
+
                                 <span className="statLabel">WEIGHT</span>
+
                                 <h2>{member.weight}</h2>
+
                                 <span className="statUnit">kg</span>
-                                <Weight className="statIcon" size={42} />
+
+                                <Weight
+                                    className="statIcon"
+                                    size={42}
+                                />
+
                             </div>
 
                             <div className="detailsStatCard">
+
                                 <span className="statLabel">BMI</span>
+
                                 <h2>{member.bmi}</h2>
-                                <span className="bmiStatus">Normal</span>
-                                <Gauge className="statIcon" size={42} />
+
+                                <span className="bmiStatus">
+
+                                    {Number(member.bmi) < 18.5
+                                        ? "Underweight"
+                                        : Number(member.bmi) < 25
+                                            ? "Normal"
+                                            : Number(member.bmi) < 30
+                                                ? "Overweight"
+                                                : "Obese"}
+
+                                </span>
+
+                                <Gauge
+                                    className="statIcon"
+                                    size={42}
+                                />
+
                             </div>
 
                         </div>
 
-                        {/* Primary Goal */}
+                        {/* PRIMARY GOAL */}
+
                         <div className="detailsGoal">
+
                             <div>
-                                <span className="statLabel">PRIMARY GOAL</span>
+
+                                <span className="statLabel">
+                                    PRIMARY GOAL
+                                </span>
+
                                 <h2>{member.goal}</h2>
+
                             </div>
 
                             <div className="goalIcon">
                                 <Dumbbell size={23} />
                             </div>
+
                         </div>
 
                     </div>
 
-                    {/* Membership Card */}
+                    {/* MEMBERSHIP CARD */}
+
                     <div className="detailsMembership">
 
                         <div className="membershipTop">
+
                             <span className="membershipBadge">
-                                PREMIUM PLAN
+                                {member.plan.toUpperCase()} PLAN
                             </span>
 
                             <BadgeCheck size={25} />
+
                         </div>
 
                         <div className="membershipDates">
+
                             <span>Valid Dates</span>
+
                             <p>
-                                {member.planStart} - {member.planEnd}
+                                {formatDate(member.startDate)}
+                                {" - "}
+                                {formatDate(member.endDate)}
                             </p>
+
                         </div>
 
                         <div className="membershipRemaining">
-                            <h2>{member.daysRemaining}</h2>
+
+                            <h2>{daysRemaining}</h2>
+
                             <span>Days Remaining</span>
 
                             <div className="membershipProgress">
-                                <div className="membershipProgressFill"></div>
+
+                                <div
+                                    className="membershipProgressFill"
+                                    style={{
+                                        width: daysRemaining > 0 ? "65%" : "0%"
+                                    }}
+                                ></div>
+
                             </div>
+
                         </div>
 
                     </div>
 
                 </div>
+
             ) : (
+
                 <div className="detailsTabContent">
+
                     <h2>{activeTab}</h2>
+
                     <p>
-                        {activeTab} information for {member.name} will appear here.
+                        {activeTab} information for {member.fullName}
+                        will appear here.
                     </p>
+
                 </div>
+
             )}
 
         </div>
+
     );
-
-
 }

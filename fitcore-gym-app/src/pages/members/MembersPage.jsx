@@ -5,23 +5,31 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 import { Outlet, useLocation } from "react-router-dom";
-const members = [
-    {
-        name: "Rahul Patil",
-        id: "#FC1001",
-        phone: "+1 (555) 123-4567",
-        plan: "Premium",
-        joined: "Oct 12, 2023",
-        expires: "Oct 12, 2024",
-        status: "Active",
-        initials: "RP"
-    }
-];
+
+import { useSelector } from "react-redux";
+
+import MemberRow from "./components/MemberRow";
+
+// const members = [
+//     {
+//         name: "Rahul Patil",
+//         id: "#FC1001",
+//         phone: "+1 (555) 123-4567",
+//         plan: "Premium",
+//         joined: "Oct 12, 2023",
+//         expires: "Oct 12, 2024",
+//         status: "Active",
+//         initials: "RP"
+//     }
+// ];
 
 
 export default function MembersPage() {
     const navigate = useNavigate();
 
+    const members = useSelector(
+        (state) => state.member.members
+    );
     return (
         <>
             <div className="membersContent">
@@ -89,7 +97,7 @@ export default function MembersPage() {
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            {/* <tbody>
                                 {
                                     members.map((member) => (
                                         <tr key={member.id}
@@ -122,14 +130,53 @@ export default function MembersPage() {
                                     ))
                                 }
 
+                            </tbody> */}
+
+
+                            <tbody>
+
+                                {members.length === 0 ? (
+
+                                    <tr>
+
+                                        <td
+                                            colSpan="7"
+                                            style={{
+                                                textAlign: "center",
+                                                padding: "30px"
+                                            }}
+                                        >
+                                            No members added yet.
+                                        </td>
+
+                                    </tr>
+
+                                ) : (
+
+                                    members.map((member) => (
+
+                                        <MemberRow
+                                            key={member.id}
+                                            member={member}
+                                        />
+
+                                    ))
+
+                                )}
+
                             </tbody>
 
+
                         </table>
-                        
+
                     </div>
 
                     <div className="membersFooter">
-                        <span> Showing 1 to {members.length} of {members.length} members </span>
+                        {/* <span> Showing 1 to {members.length} of {members.length} members </span> */}
+
+                        <span>
+                            Showing {members.length === 0 ? 0 : 1} to {members.length} of {members.length} members
+                        </span>
                         <div className="pageButtons">
                             <button disabled aria-label="Previous page">‹</button>
                             <button disabled aria-label="Next page">›</button>
