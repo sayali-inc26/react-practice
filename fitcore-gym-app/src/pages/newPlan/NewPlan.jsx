@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addPlan } from "../../redux/slices/planSlice";
+import { createMembershipPlan } from "../../services/membershipPlans"
 
 import {
     Info,
@@ -26,6 +27,8 @@ import "./NewPlan.css";
 export default function NewPlan() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const [loading, setLoading] = useState(false);
 
     const [planFormData, setPlanFormData] = useState({
         name: "",
@@ -99,7 +102,60 @@ export default function NewPlan() {
         }));
     };
 
-    const createPlan = () => {
+    // const createPlan = () => {
+
+    //     if (!planFormData.name.trim()) {
+    //         alert("Please enter a plan name");
+    //         return;
+    //     }
+
+    //     if (
+    //         planFormData.monthly === "" ||
+    //         Number(planFormData.monthly) < 0
+    //     ) {
+    //         alert("Please enter a valid monthly price");
+    //         return;
+    //     }
+
+    //     if (
+    //         planFormData.annualBilling &&
+    //         (
+    //             planFormData.annual === "" ||
+    //             Number(planFormData.annual) < 0
+    //         )
+    //     ) {
+    //         alert("Please enter a valid annual price");
+    //         return;
+    //     }
+
+    //     const plan = {
+    //         id: Date.now().toString(),
+
+    //         name: planFormData.name.trim(),
+    //         description: planFormData.description,
+    //         icon: planFormData.icon,
+
+    //         price: Number(planFormData.monthly),
+
+    //         annual: planFormData.annualBilling
+    //             ? Number(planFormData.annual)
+    //             : null,
+
+    //         annualBilling: planFormData.annualBilling,
+
+    //         features: planFormData.features.map((item) => [item, true]),
+
+    //         status: planFormData.status ? "ACTIVE" : "INACTIVE",
+
+    //         popular: false
+    //     };
+
+    //     dispatch(addPlan(plan));
+
+    //     navigate("/home/membershipplans");
+    // };
+
+    const createPlan = async () => {
 
         if (!planFormData.name.trim()) {
             alert("Please enter a plan name");
@@ -108,6 +164,7 @@ export default function NewPlan() {
 
         if (
             planFormData.monthly === "" ||
+            !Number.isFinite(Number(planFormData.monthly)) ||
             Number(planFormData.monthly) < 0
         ) {
             alert("Please enter a valid monthly price");
@@ -118,6 +175,7 @@ export default function NewPlan() {
             planFormData.annualBilling &&
             (
                 planFormData.annual === "" ||
+                !Number.isFinite(Number(planFormData.annual)) ||
                 Number(planFormData.annual) < 0
             )
         ) {
@@ -125,33 +183,69 @@ export default function NewPlan() {
             return;
         }
 
-        const plan = {
-            id: Date.now().toString(),
+        const planData = {
 
             name: planFormData.name.trim(),
+
             description: planFormData.description,
+
             icon: planFormData.icon,
 
-            price: Number(planFormData.monthly),
+            monthlyPrice: Number(planFormData.monthly),
 
-            annual: planFormData.annualBilling
+            annualBillingEnabled: planFormData.annualBilling,
+
+            annualPrice: planFormData.annualBilling
                 ? Number(planFormData.annual)
-                : null,
+                : 0,
 
-            annualBilling: planFormData.annualBilling,
+            features: planFormData.features,
 
-            features: planFormData.features.map((item) => [item, true]),
+            active: planFormData.status
 
-            status: planFormData.status ? "ACTIVE" : "INACTIVE",
-
-            popular: false
         };
 
-        dispatch(addPlan(plan));
+        try {
 
-        navigate("/home/membershipplans");
+            setLoading(true);
+
+            const response = await createMembershipPlan(planData);
+
+            console.log("Plan created successfully:", response);
+
+            dispatch(addPlan({
+                id: response.id,
+                name: response.name,
+                description: response.description,
+                icon: response.icon,
+                price: response.monthlyPrice,
+                annual: response.annualPrice,
+                annualBilling: response.annualBillingEnabled,
+                features: response.features.map((item) => [item, true]),
+                status: response.active ? "ACTIVE" : "INACTIVE",
+                popular: false
+            }));
+
+            alert("Membership plan created successfully!");
+
+            navigate("/home/membershipplans");
+
+        } catch (error) {
+
+            console.error("Failed to create plan:", error);
+
+            alert(
+                error.response?.data?.message ||
+                "Failed to create membership plan"
+            );
+
+        } finally {
+
+            setLoading(false);
+
+        }
+
     };
-
     return (
         <div className="addPlan">
 
@@ -196,8 +290,8 @@ export default function NewPlan() {
                                 <button
                                     type="button"
                                     key={name}
-                                    className={icon === name ? "chosen" : ""}
-                                    onClick={() => setIcon(name)}
+                                    className={planFormData.icon === name ? "chosen" : ""}
+                                    onClick={() => updateForm("icon", name)}
                                     aria-label={name}
                                 >
                                     <Icon size={25} />
@@ -227,8 +321,8 @@ export default function NewPlan() {
 
                         <input
                             type="checkbox"
-                            checked={annualBilling}
-                            onChange={(e) => setAnnualBilling(e.target.checked)}
+                            checked={planFormData.annualBilling}
+                            onChange={(e) => updateForm("annualBilling", e.target.checked)}
                         />
 
                         <span className="slider"></span>
@@ -245,8 +339,8 @@ export default function NewPlan() {
                             type="number"
                             min="0"
                             placeholder="$"
-                            value={monthly}
-                            onChange={(e) => setMonthly(e.target.value)}
+                            value={planFormData.monthly}
+                            onChange={(e) => updateForm("monthly", e.target.value)}
                         />
                     </div>
 
@@ -260,9 +354,9 @@ export default function NewPlan() {
                             type="number"
                             min="0"
                             placeholder="$"
-                            value={annual}
-                            onChange={(e) => setAnnual(e.target.value)}
-                            disabled={!annualBilling}
+                            value={planFormData.annual}
+                            onChange={(e) => updateForm("annual", e.target.value)}
+                            disabled={!planFormData.annualBilling}
                         />
                     </div>
 
@@ -280,7 +374,7 @@ export default function NewPlan() {
 
                 <div className="features">
 
-                    {features.map((item, index) => (
+                    {planFormData.features.map((item, index) => (
                         <div className="feature" key={`${item}-${index}`}>
 
                             <CheckCircle size={16} />
@@ -305,8 +399,8 @@ export default function NewPlan() {
                     <input
                         type="text"
                         placeholder="Add a new feature..."
-                        value={feature}
-                        onChange={(e) => setFeature(e.target.value)}
+                        value={planFormData.feature}
+                        onChange={(e) => updateForm("feature", e.target.value)}
                         onKeyDown={(e) => {
                             if (e.key === "Enter") {
                                 e.preventDefault();
@@ -329,13 +423,13 @@ export default function NewPlan() {
                 <label className="switch boxstatus">
 
                     <span>
-                        Plan Status: {status ? "Active" : "Inactive"}
+                        Plan Status: {planFormData.status ? "Active" : "Inactive"}
                     </span>
 
                     <input
                         type="checkbox"
-                        checked={status}
-                        onChange={(e) => setStatus(e.target.checked)}
+                        checked={planFormData.status}
+                        onChange={(e) => updateForm("status", e.target.checked)}
                     />
 
                     <span className="slider"></span>
@@ -356,8 +450,9 @@ export default function NewPlan() {
                         className="create"
                         type="button"
                         onClick={createPlan}
+                        disabled={loading}
                     >
-                        Create Plan
+                        {loading ? "Creating..." : "Create Plan"}
                     </button>
 
                 </div>

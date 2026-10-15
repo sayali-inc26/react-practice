@@ -119,12 +119,14 @@
     display: grid;
     grid-template-columns: 98px minmax(0, 1fr);
     gap: 18px;
+    /* margin-right: 20px; */
 }
 
 .upload {
     display: flex;
     flex-direction: column;
     gap: 7px;
+    /* margin-right: 20px; */
 }
 
 .photo {
@@ -141,6 +143,7 @@
     background: #1a1a1a;
     color: #bdbdbd !important;
     cursor: pointer;
+    
 }
 
 .photo svg {
@@ -166,6 +169,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
     min-width: 0;
+    margin-left: 20px;
 }
 
 .fields .full {

@@ -10,63 +10,70 @@ import {
 
 import { useNavigate } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+
 import "./TrainerPage.css";
 
-const trainers = [
-    {
-        id: 1,
-        name: "Vikram Singh",
-        spec: "Strength",
-        role: "Coach",
-        exp: 8,
-        members: 42,
-        rating: 4.9,
-        status: "Available",
-        image: ""
-    },
-    {
-        id: 2,
-        name: "Neha Patil",
-        spec: "Yoga",
-        role: "Instructor",
-        exp: 5,
-        members: 68,
-        rating: 5.0,
-        status: "In Session",
-        image: ""
-    },
-    {
-        id: 3,
-        name: "Marcus Wright",
-        spec: "CrossFit",
-        role: "Coach",
-        exp: 12,
-        members: 35,
-        rating: 4.7,
-        status: "Available",
-        image: ""
-    }
-];
+// const trainers = [
+//     {
+//         id: 1,
+//         name: "Vikram Singh",
+//         spec: "Strength",
+//         role: "Coach",
+//         exp: 8,
+//         members: 42,
+//         rating: 4.9,
+//         status: "Available",
+//         image: ""
+//     },
+//     {
+//         id: 2,
+//         name: "Neha Patil",
+//         spec: "Yoga",
+//         role: "Instructor",
+//         exp: 5,
+//         members: 68,
+//         rating: 5.0,
+//         status: "In Session",
+//         image: ""
+//     },
+//     {
+//         id: 3,
+//         name: "Marcus Wright",
+//         spec: "CrossFit",
+//         role: "Coach",
+//         exp: 12,
+//         members: 35,
+//         rating: 4.7,
+//         status: "Available",
+//         image: ""
+//     }
+// ];
+
 
 export default function TrainerPage() {
 
     const navigate = useNavigate();
 
+    const trainers = useSelector(
+        (state) =>state.trainer.trainers
+    );
+
     const [spec, setSpec] = useState("All Specs");
     const [status, setStatus] = useState("All");
     // const [showForm, setShowForm] = useState(false);
-    const [name, setName] = useState("");
-    const [specialization, setSpecialization] = useState("Strength");
+    // const [name, setName] = useState("");
+    // const [specialization, setSpecialization] = useState("Strength");
     const [message, setMessage] = useState("");
 
 
 
 
-    const [trainerList, setTrainerList] = useState(trainers);
+    // const [trainerList, setTrainerList] = useState(trainers);
 
-    const filtered = trainerList.filter((trainer) => {
+    const filtered = trainers.filter((trainer) => {
         const matchSpec =
-            spec === "All Specs" || trainer.spec === spec;
+            spec === "All Specs" || trainer.specialization === spec;
 
         const matchStatus =
             status === "All" || trainer.status === status;
@@ -74,29 +81,7 @@ export default function TrainerPage() {
         return matchSpec && matchStatus;
     });
 
-    function addTrainer(e) {
-        e.preventDefault();
-
-        if (!name.trim()) return;
-
-        const newTrainer = {
-            id: Date.now(),
-            name: name.trim(),
-            spec: specialization,
-            role: specialization === "Yoga" ? "Instructor" : "Coach",
-            exp: 0,
-            members: 0,
-            rating: 0,
-            status: "Available",
-            image: ""
-        };
-
-        setTrainerList((prev) => [...prev, newTrainer]);
-        setName("");
-        // setShowForm(false);
-        setSpec("All Specs");
-        setStatus("All");
-    }
+    
 
     function assignTrainer(trainer) {
         if (trainer.status === "In Session") {
@@ -134,11 +119,11 @@ export default function TrainerPage() {
                         </div>
                     </div>
 
-                    <h2>{trainerList.length + 21}</h2>
+                    <h2>{trainers.length}</h2>
 
                     <p className="green">
                         <TrendingUp size={15} />
-                        +2 this month
+                        Total registered trainers
                     </p>
                 </div>
 
@@ -151,10 +136,10 @@ export default function TrainerPage() {
                     </div>
 
                     <h2>
-                        {trainerList.filter((t) => t.status === "Available").length + 6}
+                        {trainers.filter((trainer) => trainer.status === "Available").length}
                     </h2>
 
-                    <p>Next shift change in 2h</p>
+                    <p>Currently available trainers</p>
                 </div>
 
                 <div className="stat">
@@ -165,8 +150,20 @@ export default function TrainerPage() {
                         </div>
                     </div>
 
-                    <h2>4.8</h2>
-                    <p>Based on 1.2k member reviews</p>
+                    <h2>
+                        {
+                            trainers.length > 0
+                                ? (
+                                    trainers.reduce(
+                                        (total, trainer) =>
+                                            total + (trainer.rating || 0),
+                                        0
+                                    ) / trainers.length
+                                ).toFixed(1)
+                                : "0.0"
+                        }
+                    </h2>
+                    <p>Average trainer rating</p>
                 </div>
 
             </div>
@@ -202,13 +199,13 @@ export default function TrainerPage() {
             )}
 
             {/* Trainer cards */}
-            <div className="cards" onClick={()=>{navigate("/home/trainerdetails")}}>
+            <div className="cards" >
                 {filtered.map((trainer) => (
-                    <div className="card" key={trainer.id}>
+                    <div className="card" key={trainer.id} onClick={()=>{navigate(`/home/trainerdetails/${trainer.id}`)}}>
 
                         <div className="cardTop">
                             <div className="photo">
-                                {trainer.image ? (
+                                {trainer.photo ? (
                                     <img src={trainer.image} alt={trainer.name} />
                                 ) : (
                                     <span>
@@ -219,8 +216,8 @@ export default function TrainerPage() {
 
                             <div className="details">
                                 <h2>{trainer.name}</h2>
-                                <p className="green">{trainer.spec}</p>
-                                <p>{trainer.role}</p>
+                                <p className="green">{trainer.specialization}</p>
+                                <p>{trainer.specialization}</p>
                             </div>
 
                             <span className={
@@ -233,7 +230,7 @@ export default function TrainerPage() {
                         <div className="numbers">
                             <div>
                                 <span>EXP (YRS)</span>
-                                <strong>{trainer.exp}</strong>
+                                <strong>{trainer.experience}</strong>
                             </div>
 
                             <div>

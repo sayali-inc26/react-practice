@@ -2,9 +2,9 @@
 import "./MembersPage.css";
 import { useNavigate } from "react-router-dom";
 
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
-import { Outlet, useLocation } from "react-router-dom";
+// import { Outlet, useLocation } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 

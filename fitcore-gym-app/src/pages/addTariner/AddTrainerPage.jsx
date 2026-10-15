@@ -1,4 +1,10 @@
 import { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+
+import { addTrainer } from "../../redux/slices/trainerSlice";
 import {
     UserRound,
     Award,
@@ -10,9 +16,13 @@ import {
 import "./AddTrainerPage.css";
 
 export default function AddTrainerPage() {
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const [photo, setPhoto] = useState("");
     const [shift, setShift] = useState("Morning");
-    const [days, setDays] = useState(["M", "T", "W", "T", "F"]);
+    const [days, setDays] = useState(["M-0", "T-1", "W-2", "T-3", "F-4"]);
 
     const [form, setForm] = useState({
         name: "",
@@ -50,15 +60,51 @@ export default function AddTrainerPage() {
         );
     }
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        console.log("Trainer Details:", {
-            ...form,
-            photo,
-            shift,
-            days
-        });
-    }
+    
+function handleSubmit(e) {
+
+    e.preventDefault();
+
+    const newTrainer = {
+
+        id: Date.now().toString(),
+
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+
+        specialization: form.specialization,
+
+        experience: Number(form.experience),
+
+        rate: Number(form.rate),
+
+        certifications: form.certifications,
+
+        summary: form.summary,
+
+        photo: photo,
+
+        shift: shift,
+
+        days: days,
+
+        status: "Available",
+
+        members: 0,
+
+        rating: 0
+
+    };
+
+    dispatch(addTrainer(newTrainer));
+
+    alert("Trainer added successfully!");
+
+    navigate("/home/trainers");
+
+}
+
 
     return (
         <div className="addTrainer">

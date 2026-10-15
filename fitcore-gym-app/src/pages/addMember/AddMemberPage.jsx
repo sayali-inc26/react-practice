@@ -2,7 +2,8 @@ import "./AddMemberPage.css";
 
 import { useNavigate } from "react-router-dom";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getMembershipPlans } from "../../services/membershipPlans";
 
 import { useDispatch } from "react-redux";
 
@@ -30,7 +31,7 @@ export default function AddMemberPage() {
         weight: "70",
         goal: "",
         experience: "Intermediate (1-3 yrs)",
-        plan: "Standard",
+        plan: "",
         duration: "12",
         startDate: "",
         endDate: "",
@@ -41,11 +42,47 @@ export default function AddMemberPage() {
 
     const [photo, setPhoto] = useState(null);
 
-    const prices = {
-        Basic: 29,
-        Standard: 49,
-        Premium: 89
-    };
+    // const prices = {
+    //     Basic: 29,
+    //     Standard: 49,
+    //     Premium: 89
+    // };
+
+    const [plans, setPlans] = useState([]);
+    const [plansLoading, setPlansLoading] = useState(true);
+    const [plansError, setPlansError] = useState("");
+
+    useEffect(() => {
+
+        const fetchPlans = async () => {
+
+            try {
+
+                const data = await getMembershipPlans();
+
+                console.log("Available Membership Plans:", data);
+
+                setPlans(
+                    data.filter((plan) => plan.active === true)
+                );
+
+            } catch (error) {
+
+                console.error("Failed to fetch plans:", error);
+
+                setPlansError("Unable to load membership plans");
+
+            } finally {
+
+                setPlansLoading(false);
+
+            }
+
+        };
+
+        fetchPlans();
+
+    }, []);
 
     const updateField = (event) => {
         const { name, value } = event.target;
@@ -64,8 +101,13 @@ export default function AddMemberPage() {
             ).toFixed(1)
             : "--";
 
-    const totalFee =
-        prices[formData.plan] * Number(formData.duration || 0);
+    const selectedPlan = plans.find(
+        (plan) => plan.id === Number(formData.plan)
+    );
+
+    const totalFee = selectedPlan
+        ? Number(selectedPlan.monthlyPrice) * Number(formData.duration || 0)
+        : 0;
 
     const calculateEndDate = (startDate, months) => {
         if (!startDate) return "";
@@ -103,6 +145,11 @@ export default function AddMemberPage() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        if (!selectedPlan) {
+            alert("Please select a valid membership plan");
+            return;
+        }
+
         console.log("New Member:", formData);
         console.log("Profile Photo:", photo);
 
@@ -110,7 +157,7 @@ export default function AddMemberPage() {
             ...formData,
             id: Date.now().toString(),
             status: "Active",
-            bmi:bmi,
+            bmi: bmi,
             photo: photo
         };
 
@@ -288,7 +335,7 @@ export default function AddMemberPage() {
 
                                 <div className="membershipPlans">
                                     <label className="fieldLabel">Select Tier</label>
-                                    <div className="planGrid"> {Object.entries(prices).map(([plan, price]) => (
+                                    {/* <div className="planGrid"> {Object.entries(prices).map(([plan, price]) => (
 
                                         <button type="button" key={plan} className={`planCard ${formData.plan === plan ? "selectedPlan" : ""}`} onClick={() => setFormData((previous) => ({ ...previous, plan }))} >
 
@@ -300,7 +347,59 @@ export default function AddMemberPage() {
 
                                         </button>
                                     ))}
+                                    </div> */}
+
+
+                                    <div className="planGrid">
+
+                                        {plansLoading && (
+                                            <p>Loading membership plans...</p>
+                                        )}
+
+                                        {plansError && (
+                                            <p>{plansError}</p>
+                                        )}
+
+                                        {!plansLoading && !plansError && plans.length === 0 && (
+                                            <p>No active membership plans available.</p>
+                                        )}
+
+                                        {!plansLoading && !plansError && plans.map((plan) => (
+
+                                            <button
+                                                type="button"
+                                                key={plan.id}
+                                                className={`planCard ${formData.plan === String(plan.id)
+                                                    ? "selectedPlan"
+                                                    : ""
+                                                    }`}
+                                                onClick={() =>
+                                                    setFormData((previous) => ({
+                                                        ...previous,
+                                                        plan: String(plan.id)
+                                                    }))
+                                                }
+                                            >
+
+                                                <span className="planName">
+                                                    {plan.name}
+                                                </span>
+
+                                                <span className="planCheck">
+                                                    {formData.plan === String(plan.id) ? "✓" : "○"}
+                                                </span>
+
+                                                <strong>
+                                                    ${plan.monthlyPrice}
+                                                    <small>/mo</small>
+                                                </strong>
+
+                                            </button>
+
+                                        ))}
+
                                     </div>
+
 
                                     <div className="membershipDetails">
                                         <div className="formGroup">
