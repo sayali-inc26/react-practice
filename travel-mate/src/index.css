@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+
+  font-family: Arial, sans-serif;
+}
+
+:root{
+
+  /* TEXT COLORS */
+
+  --text-primary-color:#031632;
+  --text-secondary-color: #44474D;
+  --text-highlited-color:#006A62;
+
+  /* TEXTFIELD COLORS */
+
+  --textfield-primary-color:#F4F3F2;
+
+
+  /* BUTTON COLORS */
+
+  --button-primary-color:#006A62;
+
+  /* BACKGROUND COLORS */
+
+  --background-primary-color:#FAF9F8;
+  --background-secondary-color: #7AF7E8;
+
+
+
+}

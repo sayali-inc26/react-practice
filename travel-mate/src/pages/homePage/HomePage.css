@@ -1,0 +1,404 @@
+
+
+
+.homePage {
+    min-height: 100vh;
+    background: var(--background-primary-color);
+    color: var(--text-primary-color);
+}
+
+
+/* HERO SECTION */
+
+.hero {
+    height: 460px;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.30);
+}
+
+.heroContent {
+    position: relative;
+    z-index: 1;
+    max-width: 750px;
+    padding: 20px;
+    color: white;
+}
+
+.heroContent h1 {
+    font-size: 42px;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin: 0 0 20px;
+}
+
+.heroContent p {
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 570px;
+    margin: 0 auto 28px;
+}
+
+.heroButtons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.startBtn,
+.exploreBtn {
+    padding: 14px 25px;
+    border-radius: 30px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.startBtn {
+    background: var(--button-primary-color);
+    color: white;
+    border: 1px solid var(--button-primary-color);
+}
+
+.exploreBtn {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 1px solid white;
+}
+
+.startBtn:hover {
+    opacity: 0.9;
+}
+
+.exploreBtn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* FEATURES */
+
+.features {
+    padding: 50px 6% 30px;
+    text-align: center;
+}
+
+.features h2 {
+    font-size: 26px;
+    margin: 0 0 8px;
+}
+
+.sectionText {
+    font-size: 13px;
+    color: var(--text-secondary-color);
+    margin: 0;
+}
+
+.featureList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 35px auto 0;
+}
+
+.featureCard {
+    background: white;
+    border-radius: 12px;
+    padding: 30px 24px;
+    min-height: 220px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.featureIcon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--background-secondary-color);
+    color: var(--text-highlited-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.featureCard h3 {
+    font-size: 19px;
+    margin: 0 0 12px;
+}
+
+.featureCard p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-secondary-color);
+    max-width: 260px;
+    margin: 0;
+}
+
+/* DESTINATIONS */
+
+.destinations {
+    padding: 30px 6% 90px;
+    max-width: 1500px;
+    margin: auto;
+}
+
+.sectionHead {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.sectionHead h2 {
+    font-size: 26px;
+    margin: 0 0 8px;
+}
+
+.sectionHead p {
+    color: var(--text-secondary-color);
+    font-size: 13px;
+    margin: 0;
+}
+
+.viewAll {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--text-highlited-color);
+}
+
+.placeList {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.placeCard {
+    height: 285px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #dddddd;
+}
+
+.placeCard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 40%,
+        rgba(0, 0, 0, 0.78) 100%
+    );
+}
+
+.placeCard img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.placeCard:hover img {
+    transform: scale(1.06);
+}
+
+.placeTag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 1;
+    background: var(--background-secondary-color);
+    color: var(--text-highlited-color);
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 15px;
+    padding: 5px 10px;
+}
+
+.placeInfo {
+    position: absolute;
+    z-index: 1;
+    bottom: 17px;
+    left: 15px;
+    right: 15px;
+    color: white;
+}
+
+.placeTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+.placeTitle h3 {
+    font-size: 19px;
+    margin: 0 0 7px;
+    font-weight: 500;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    padding: 4px 6px;
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 5px;
+}
+
+.placeInfo p {
+    font-size: 11px;
+    margin: 0;
+    color: #eeeeee;
+}
+/* DARK MODE */
+
+.homePage.dark {
+    background: #101d2b;
+    color: white;
+}
+
+.dark .nav,
+.dark .featureCard,
+.dark .homeFooter {
+    background: #17283b;
+}
+
+.dark .brand,
+.dark .navLinks a,
+.dark .themeBtn,
+.dark .profileBtn,
+.dark .featureCard h3,
+.dark .footerBrand {
+    color: white;
+}
+
+.dark .featureCard p,
+.dark .sectionText,
+.dark .sectionHead p,
+.dark .homeFooter p,
+.dark .footerLinks a {
+    color: #c5cbd2;
+}
+
+.dark .navLinks .selected {
+    color: var(--background-secondary-color);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+    .featureList {
+        gap: 12px;
+    }
+
+    .placeList {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .heroContent h1 {
+        font-size: 34px;
+    }
+
+    .homeFooter {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .nav {
+        height: auto;
+        min-height: 65px;
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 15px 5%;
+    }
+
+    .brand {
+        font-size: 20px;
+    }
+
+    .navLinks {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .navLinks a {
+        font-size: 11px;
+        padding-bottom: 8px;
+    }
+
+    .hero {
+        height: 400px;
+    }
+
+    .heroContent h1 {
+        font-size: 29px;
+    }
+
+    .heroContent p {
+        font-size: 13px;
+    }
+
+    .heroButtons {
+        flex-wrap: wrap;
+    }
+
+    .features {
+        padding: 35px 5%;
+    }
+
+    .featureList {
+        grid-template-columns: 1fr;
+    }
+
+    .destinations {
+        padding: 25px 5% 50px;
+    }
+
+    .sectionHead {
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column;
+    }
+
+    .placeList {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .placeCard {
+        height: 220px;
+    }
+
+    .placeTitle h3 {
+        font-size: 15px;
+    }
+
+    .homeFooter {
+        flex-direction: column;
+        text-align: center;
+    }
+}

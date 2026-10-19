@@ -1,0 +1,379 @@
+
+/* PAGE */
+
+.signupPage {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--background-primary-color);
+    color: var(--text-primary-color);
+}
+
+/* HEADER */
+
+.signupHeader {
+    height: 55px;
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.signupLogo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 17px;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--text-primary-color);
+}
+
+.signupLogo svg {
+    color: var(--text-highlited-color);
+}
+
+.help {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    text-decoration: none;
+    color: var(--text-secondary-color);
+}
+
+/* MAIN */
+
+.signupMain {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 45px 20px;
+}
+
+/* CARD */
+
+.signupBox {
+    width: 100%;
+    max-width: 440px;
+    background: white;
+    border-radius: 10px;
+    padding: 40px 42px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+}
+
+.tag {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: #d9faf5;
+    color: var(--text-highlited-color);
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.signupBox h1 {
+    font-size: 22px;
+    margin: 0 0 8px;
+    letter-spacing: -0.7px;
+}
+
+.signupText {
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--text-secondary-color);
+    margin: 0;
+}
+
+/* DIVIDER */
+
+.line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 16px 0;
+    color: var(--text-secondary-color);
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.line::before,
+.line::after {
+    content: "";
+    height: 1px;
+    background: #e5e5e5;
+    flex: 1;
+}
+
+/* FORM */
+
+.signupField {
+    margin-bottom: 13px;
+}
+
+.signupField label {
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.signupInput {
+    height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 12px;
+    background: var(--textfield-primary-color);
+    border-radius: 6px;
+    color: var(--text-secondary-color);
+}
+
+.signupInput input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--text-primary-color);
+    font-size: 11px;
+}
+
+.signupInput input::placeholder {
+    color: #888888;
+}
+
+.signupLabel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.signupLabel span {
+    color: var(--text-highlited-color);
+    font-size: 10px;
+}
+
+.showBtn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary-color);
+}
+
+/* PASSWORD STRENGTH */
+
+.strength {
+    display: flex;
+    gap: 4px;
+    margin-top: 5px;
+}
+
+.strength div {
+    flex: 1;
+    height: 4px;
+    border-radius: 3px;
+    background: var(--button-primary-color);
+}
+
+.strengthText {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    font-size: 9px;
+    margin-top: 6px;
+    color: var(--text-secondary-color);
+}
+
+.strengthText span:last-child {
+    color: var(--text-highlited-color);
+}
+
+/* TRAVEL STYLE */
+
+.travelStyles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.travelBtn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: none;
+    border-radius: 20px;
+    background: var(--textfield-primary-color);
+    padding: 6px 10px;
+    font-size: 9px;
+    color: var(--text-secondary-color);
+    cursor: pointer;
+}
+
+.travelBtn.active {
+    background: var(--text-primary-color);
+    color: white;
+}
+
+/* TERMS */
+
+.terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin: 20px 0;
+    font-size: 10px;
+    line-height: 1.6;
+    color: var(--text-secondary-color);
+    cursor: pointer;
+}
+
+.terms input {
+    margin: 3px 0 0;
+    accent-color: var(--button-primary-color);
+}
+
+.terms span {
+    flex: 1;
+}
+
+.terms a {
+    color: var(--text-primary-color);
+    text-decoration: underline;
+}
+
+/* CREATE BUTTON */
+
+.createBtn {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background: var(--button-primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 106, 98, 0.2);
+}
+
+.createBtn:hover {
+    opacity: 0.92;
+}
+
+/* GOOGLE */
+
+.signupGoogle {
+    width: 100%;
+    height: 36px;
+    margin-top: 16px;
+    border: none;
+    border-radius: 5px;
+    background: var(--textfield-primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 11px;
+    color: var(--text-primary-color);
+}
+
+.googleG {
+    font-size: 19px;
+    font-weight: bold;
+    background: conic-gradient(
+        #4285f4 0deg 90deg,
+        #34a853 90deg 180deg,
+        #fbbc05 180deg 250deg,
+        #ea4335 250deg 310deg,
+        #4285f4 310deg
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* SIGN IN */
+
+.signin {
+    text-align: center;
+    margin: 45px 0 0;
+    font-size: 11px;
+    color: var(--text-secondary-color);
+}
+
+.signin a {
+    margin-left: 6px;
+    color: var(--text-highlited-color);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* FOOTER */
+
+.signupFooter {
+    min-height: 42px;
+    padding: 12px 6%;
+    background: var(--textfield-primary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.signupFooter p {
+    font-size: 10px;
+    color: var(--text-secondary-color);
+    margin: 0;
+}
+
+.signupFooter div {
+    display: flex;
+    gap: 20px;
+}
+
+.signupFooter a {
+    font-size: 10px;
+    color: var(--text-secondary-color);
+    text-decoration: none;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .signupMain {
+        padding: 25px 15px;
+    }
+
+    .signupBox {
+        padding: 28px 22px;
+    }
+
+    .signupBox h1 {
+        font-size: 20px;
+    }
+
+    .signupFooter {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .signupFooter div {
+        gap: 12px;
+    }
+}
