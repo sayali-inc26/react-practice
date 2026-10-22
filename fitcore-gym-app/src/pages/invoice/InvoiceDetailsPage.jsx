@@ -6,61 +6,177 @@ import {
     CreditCard
 } from "lucide-react";
 
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+import {
+    getPaymentById,
+    getInvoice,
+    downloadInvoice,
+    emailInvoice
+} from "../../services/payments";
+
 import "./InvoiceDetailsPage.css";
 
 export default function InvoiceDetailsPage() {
 
-    const items = [
-        {
-            name: "Standard Pro Membership",
-            note: "Monthly recurring",
-            qty: 1,
-            price: 89
-        },
-        {
-            name: "Personal Training Session",
-            note: "Coach: Sarah Jenkins",
-            qty: 2,
-            price: 65
-        },
-        {
-            name: "Service Fee",
-            note: "",
-            qty: 1,
-            price: 5
+    //     const items = [
+    //         {
+    //             name: "Standard Pro Membership",
+    //             note: "Monthly recurring",
+    //             qty: 1,
+    //             price: 89
+    //         },
+    //         {
+    //             name: "Personal Training Session",
+    //             note: "Coach: Sarah Jenkins",
+    //             qty: 2,
+    //             price: 65
+    //         },
+    //         {
+    //             name: "Service Fee",
+    //             note: "",
+    //             qty: 1,
+    //             price: 5
+    //         }
+    //     ];
+
+    //     const subtotal = items.reduce(
+    //         (sum, item) => sum + item.qty * item.price, 0
+    //     );
+
+    //     const tax = subtotal * 0.08875;
+    //     const total = subtotal + tax;
+
+    //     const money = (value) => `$${value.toFixed(2)}`;
+
+    //     const downloadPDF = () => {
+    //         window.print();
+    //     };
+
+    //     const sendEmail = () => {
+    //         const subject = "Invoice INV-2024-001";
+
+    //         const body = `Hello Alex,
+
+    // Please find your invoice details below.
+
+    // Invoice Number: INV-2024-001
+    // Total Amount: ${money(total)}
+    // Payment Status: Paid
+
+    // Thank you,
+    // FitCore Gym`;
+
+    //         window.location.href =
+    //             `mailto:alex.mercer@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    //     };
+
+
+    const { id } = useParams();
+
+    const [payment, setPayment] = useState(null);
+    const [invoice, setInvoice] = useState(null);
+
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+    const [sending, setSending] = useState(false);
+
+    useEffect(() => {
+
+        const fetchDetails = async () => {
+
+            try {
+                setLoading(true);
+                setError("");
+
+                const [paymentResponse, invoiceResponse] =
+                    await Promise.all([
+                        getPaymentById(id),
+                        getInvoice(id)
+                    ]);
+
+                console.log("Selected Payment:", paymentResponse);
+                console.log("Selected Invoice:", invoiceResponse);
+
+                setPayment(
+                    paymentResponse.data || paymentResponse
+                );
+
+                setInvoice(
+                    invoiceResponse.data || invoiceResponse
+                );
+
+            } catch (error) {
+
+                console.error(error);
+                setError("Unable to load invoice details.");
+
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchDetails();
+
+    }, [id]);
+
+
+    const downloadPDF = async () => {
+
+        try {
+            const file = await downloadInvoice(id);
+
+            const url = URL.createObjectURL(file);
+
+            const link = document.createElement("a");
+
+            link.href = url;
+            link.download = `Invoice-${id}.pdf`;
+
+            link.click();
+
+            URL.revokeObjectURL(url);
+
+        } catch (error) {
+            console.error("Download failed:", error);
+            alert("Unable to download invoice.");
         }
-    ];
-
-    const subtotal = items.reduce(
-        (sum, item) => sum + item.qty * item.price, 0
-    );
-
-    const tax = subtotal * 0.08875;
-    const total = subtotal + tax;
-
-    const money = (value) => `$${value.toFixed(2)}`;
-
-    const downloadPDF = () => {
-        window.print();
     };
 
-    const sendEmail = () => {
-        const subject = "Invoice INV-2024-001";
 
-        const body = `Hello Alex,
+    const sendEmail = async () => {
 
-Please find your invoice details below.
+        try {
+            setSending(true);
 
-Invoice Number: INV-2024-001
-Total Amount: ${money(total)}
-Payment Status: Paid
+            await emailInvoice(id);
 
-Thank you,
-FitCore Gym`;
+            alert("Invoice email request completed.");
 
-        window.location.href =
-            `mailto:alex.mercer@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        } catch (error) {
+
+            console.error(error);
+            alert("Unable to send invoice.");
+
+        } finally {
+            setSending(false);
+        }
     };
+
+
+    if (loading) {
+        return <p>Loading invoice details...</p>;
+    }
+
+    if (error) {
+        return <p>{error}</p>;
+    }
+
+    if (!invoice || !payment) {
+        return <p>Invoice not found.</p>;
+    }
+
 
     return (
         <div className="invoicePage">

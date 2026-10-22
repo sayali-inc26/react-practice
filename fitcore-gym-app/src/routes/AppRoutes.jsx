@@ -50,7 +50,7 @@ export default function AppRoutes() {
 
                 <Route path="payments" element={<PaymentsPage/>}></Route>
 
-                <Route path="invoicedetails" element={<InvoiceDetaisPage/>}></Route>
+                <Route path="invoicedetails/:id" element={<InvoiceDetaisPage/>}></Route>
 
                 {/* <Route path="progress" element={<ProgressPage/>}></Route> */}
                 

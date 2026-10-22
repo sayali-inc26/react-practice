@@ -1,70 +1,79 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ReceiptText } from "lucide-react";
-
 import { useNavigate } from "react-router-dom";
+
+// import { getMember } from "../../../services/members";
+import { getPayments } from "../../../services/payments";
 
 import "./RecentPayments.css";
 
 export default function RecentPayments() {
 
-    const [showAll, setShowAll] = useState(false);
-
     const navigate = useNavigate();
 
-    const payments = [
-        {
-            id: 1,
-            name: "Marcus Johnson",
-            initials: "MJ",
-            plan: "Premium Annual",
-            amount: "$1,200.00",
-            date: "Jun 24, 2024",
-            status: "Success"
-        },
-        {
-            id: 2,
-            name: "Sarah Chen",
-            initials: "SC",
-            plan: "Pro Monthly",
-            amount: "$85.00",
-            date: "Jun 23, 2024",
-            status: "Pending"
-        },
-        {
-            id: 3,
-            name: "David Rodriguez",
-            initials: "DR",
-            plan: "Basic Monthly",
-            amount: "$45.00",
-            date: "Jun 22, 2024",
-            status: "Failed"
-        },
-        {
-            id: 4,
-            name: "James Wilson",
-            initials: "JW",
-            plan: "Personal Training x5",
-            amount: "$350.00",
-            date: "Jun 21, 2024",
-            status: "Success"
-        }
-    ];
+    const [showAll, setShowAll] = useState(false);
+
+    // const [members, setMembers] = useState([]);
+
+    const [payments, setPayments] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+
+    useEffect(() => {
+
+        const fetchPayments = async () => {
+
+            try {
+                setLoading(true);
+                setError("");
+
+                const response = await getPayments();
+
+                console.log("Payments API:", response);
+
+                const data = response.data || response;
+
+                setPayments(
+                    Array.isArray(data) ? data : []
+                );
+
+            } catch (error) {
+
+                console.error(error);
+                setError("Unable to fetch payments.");
+
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchPayments();
+
+    }, []);
+
+
 
     return (
+
         <div className="recentPayments">
 
             {/* Header */}
 
             <div className="recentHeader">
-                <h2>Recent Payments</h2>
+
+                <h2>Members ({payments.length})</h2>
 
                 <button onClick={() => setShowAll(!showAll)}>
                     {showAll ? "Show Less" : "View All"}
                 </button>
+
             </div>
 
-            {/* Payments Table */}
+
+            {/* Members Table */}
+
 
             <div className="recentScroll">
 
@@ -73,9 +82,9 @@ export default function RecentPayments() {
                     <thead>
                         <tr>
                             <th>MEMBER</th>
+                            <th>MEMBER ID</th>
                             <th>PLAN TYPE</th>
                             <th>AMOUNT</th>
-                            <th>DATE</th>
                             <th>STATUS</th>
                             <th>ACTION</th>
                         </tr>
@@ -83,58 +92,139 @@ export default function RecentPayments() {
 
                     <tbody>
 
-                        {(showAll ? payments : payments.slice(0, 4)).map((payment) => (
+                        {loading ? (
 
-                            <tr key={payment.id}
-                                onClick={() => navigate("/home/invoicedetails")}
-                                style={{ cursor: "pointer" }}
-                            >
-
-                                <td>
-                                    <div className="recentMember">
-
-                                        <div className="recentAvatar">
-                                            {payment.initials}
-                                        </div>
-
-                                        <span>{payment.name}</span>
-
-                                    </div>
+                            <tr>
+                                <td colSpan="6" style={{ textAlign: "center" }}>
+                                    Loading payments...
                                 </td>
-
-                                <td>{payment.plan}</td>
-
-                                <td className="recentAmount">
-                                    {payment.amount}
-                                </td>
-
-                                <td>{payment.date}</td>
-
-                                <td>
-                                    <span className={`recentStatus ${payment.status.toLowerCase()}`}>
-                                        {payment.status}
-                                    </span>
-                                </td>
-
-                                <td>
-                                    <button
-                                        className="recentAction"
-                                        title="View Receipt"
-                                        onClick={() => console.log("Receipt:", payment)}
-                                    >
-                                        <ReceiptText size={15} />
-                                    </button>
-                                </td>
-
                             </tr>
 
-                        ))}
+                        ) : error ? (
+
+                            <tr>
+                                <td colSpan="6" style={{ textAlign: "center" }}>
+                                    {error}
+                                </td>
+                            </tr>
+
+                        ) : payments.length === 0 ? (
+
+                            <tr>
+                                <td colSpan="6" style={{ textAlign: "center" }}>
+                                    No payments found.
+                                </td>
+                            </tr>
+
+                        ) : (
+
+                            (showAll ? payments : payments.slice(0, 4))
+                                .map((payment) => (
+
+                                    <tr
+                                        key={payment.id}
+                                        onClick={() => {
+                                            navigate(`/home/invoicedetails/${payment.id}`);
+                                        }}
+                                        style={{ cursor: "pointer" }}
+                                    >
+
+                                        {/* Member Name */}
+
+                                        <td>
+                                            <div className="recentMember">
+
+                                                <div className="recentAvatar">
+
+                                                    {(payment.memberName || "")
+                                                        .trim()
+                                                        .split(/\s+/)
+                                                        .filter(Boolean)
+                                                        .map((word) => word[0])
+                                                        .slice(0, 2)
+                                                        .join("")
+                                                        .toUpperCase()}
+
+                                                </div>
+
+                                                <span>
+                                                    {payment.memberName || "N/A"}
+                                                </span>
+
+                                            </div>
+                                        </td>
+
+
+                                        {/* Member ID */}
+
+                                        <td>
+                                            {payment.memberCode || payment.memberId || "N/A"}
+                                        </td>
+
+
+                                        {/* Membership Plan */}
+
+                                        <td>
+                                            {payment.membershipPlanName || "N/A"}
+                                        </td>
+
+
+                                        {/* Amount */}
+
+                                        <td className="recentAmount">
+
+                                            {payment.amount != null
+                                                ? `₹${Number(payment.amount).toLocaleString("en-IN")}`
+                                                : "N/A"}
+
+                                        </td>
+
+
+                                        {/* Payment Status */}
+
+                                        <td>
+                                            <span
+                                                className={`recentStatus ${(payment.status || "")
+                                                        .toLowerCase()
+                                                    }`}
+                                            >
+                                                {payment.status || "N/A"}
+                                            </span>
+                                        </td>
+
+
+                                        {/* Action */}
+
+                                        <td>
+                                            <button
+                                                className="recentAction"
+                                                title="View Invoice"
+                                                onClick={(e) => {
+
+                                                    e.stopPropagation();
+
+                                                    navigate(
+                                                        `/home/invoicedetails/${payment.id}`
+                                                    );
+
+                                                }}
+                                            >
+                                                <ReceiptText size={15} />
+                                            </button>
+                                        </td>
+
+                                    </tr>
+
+                                ))
+
+                        )}
 
                     </tbody>
 
                 </table>
 
             </div>
+
 
         </div>
     );
