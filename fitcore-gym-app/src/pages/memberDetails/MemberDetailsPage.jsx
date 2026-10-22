@@ -1,7 +1,10 @@
 
-import { useState } from "react";
 
-import { useSelector } from "react-redux";
+
+import { useState, useEffect } from "react";
+
+import { getMemberById } from "../../services/members";
+
 import { useParams, useNavigate } from "react-router-dom";
 
 import {
@@ -21,19 +24,44 @@ import "./MemberDetailsPage.css";
 
 export default function MemberDetailsPage() {
 
-    const [activeTab, setActiveTab] = useState("Overview");
-
+    const { id } = useParams();
     const navigate = useNavigate();
 
-    // Get member ID from URL
-    const { id } = useParams();
+    const [activeTab, setActiveTab] = useState("Overview");
 
-    // Get selected member from Redux
-    const member = useSelector((state) =>
-        state.member.members.find(
-            (item) => item.id === id
-        )
-    );
+    const [member, setMember] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+
+        const fetchMember = async () => {
+
+            try {
+                setLoading(true);
+                setError("");
+
+                const response = await getMemberById(id);
+
+                console.log("Member Details:", response);
+
+                setMember(response.data || response);
+
+            } catch (error) {
+
+                console.error("Failed to fetch member:", error);
+
+                setError("Unable to fetch member details.");
+
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchMember();
+
+    }, [id]);
+
 
     const tabs = [
         "Overview",
@@ -83,23 +111,39 @@ export default function MemberDetailsPage() {
         );
     };
 
-    // If member does not exist
-    if (!member) {
 
+    if (loading) {
         return (
             <div className="memberDetails">
+                <p>Loading member details...</p>
+            </div>
+        );
+    }
 
-                <h2>Member not found</h2>
-
-                <p>Please select a member from the members list.</p>
+    if (error) {
+        return (
+            <div className="memberDetails">
+                <p>{error}</p>
 
                 <button onClick={() => navigate("/home/members")}>
                     Back to Members
                 </button>
-
             </div>
         );
     }
+
+    if (!member) {
+        return (
+            <div className="memberDetails">
+                <h2>Member not found</h2>
+
+                <button onClick={() => navigate("/home/members")}>
+                    Back to Members
+                </button>
+            </div>
+        );
+    }
+
 
     const age = calculateAge(member.dob);
 
@@ -131,10 +175,10 @@ export default function MemberDetailsPage() {
 
                     <div className="detailsAvatar">
 
-                        {member.photo ? (
+                        {member.profilePhotoUrl ? (
 
                             <img
-                                src={member.photo}
+                                src={member.profilePhotoUrl}
                                 alt={member.fullName}
                                 style={{
                                     width: "100%",
@@ -167,7 +211,7 @@ export default function MemberDetailsPage() {
                         <div className="detailsMeta">
 
                             <span>
-                                ID #FC{member.id.slice(-5)}
+                                ID #FC{String(member.id).slice(-5)}
                             </span>
 
                             <span className="detailsDot">•</span>
@@ -261,7 +305,7 @@ export default function MemberDetailsPage() {
 
                                 <span className="statLabel">HEIGHT</span>
 
-                                <h2>{member.height}</h2>
+                                <h2>{member.heightCm}</h2>
 
                                 <span className="statUnit">cm</span>
 
@@ -276,7 +320,7 @@ export default function MemberDetailsPage() {
 
                                 <span className="statLabel">WEIGHT</span>
 
-                                <h2>{member.weight}</h2>
+                                <h2>{member.weightKg}</h2>
 
                                 <span className="statUnit">kg</span>
 
@@ -324,7 +368,7 @@ export default function MemberDetailsPage() {
                                     PRIMARY GOAL
                                 </span>
 
-                                <h2>{member.goal}</h2>
+                                <h2>{member.primaryGoal}</h2>
 
                             </div>
 
@@ -343,7 +387,7 @@ export default function MemberDetailsPage() {
                         <div className="membershipTop">
 
                             <span className="membershipBadge">
-                                {member.plan.toUpperCase()} PLAN
+                                {(member.plan || "No Plan").toUpperCase()} PLAN
                             </span>
 
                             <BadgeCheck size={25} />

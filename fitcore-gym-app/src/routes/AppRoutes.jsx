@@ -42,7 +42,7 @@ export default function AppRoutes() {
 
                 <Route path="addtrainer" element={<AddTrainerPage/>}></Route>
 
-                <Route path="trainerdetails" element={<TarinerDetailsPage/>}></Route>
+                <Route path="trainerdetails/:id" element={<TarinerDetailsPage/>}></Route>
 
                 <Route path="membershipplans" element={<MembershipPlansPage/>}></Route>
 

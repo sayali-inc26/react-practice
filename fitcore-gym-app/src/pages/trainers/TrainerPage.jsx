@@ -1,5 +1,4 @@
 
-import { useState } from "react";
 import {
     Plus,
     Users,
@@ -9,10 +8,15 @@ import {
 } from "lucide-react";
 
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import { useSelector } from "react-redux";
+import { getTrainer } from "../../services/trainers";
+import { setTrainers } from "../../redux/slices/trainerSlice";
+
 
 import "./TrainerPage.css";
+
 
 // const trainers = [
 //     {
@@ -54,22 +58,14 @@ import "./TrainerPage.css";
 export default function TrainerPage() {
 
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const trainers = useSelector(
-        (state) =>state.trainer.trainers
+        (state) => state.trainer.trainers
     );
 
     const [spec, setSpec] = useState("All Specs");
     const [status, setStatus] = useState("All");
-    // const [showForm, setShowForm] = useState(false);
-    // const [name, setName] = useState("");
-    // const [specialization, setSpecialization] = useState("Strength");
     const [message, setMessage] = useState("");
-
-
-
-
-    // const [trainerList, setTrainerList] = useState(trainers);
 
     const filtered = trainers.filter((trainer) => {
         const matchSpec =
@@ -81,17 +77,52 @@ export default function TrainerPage() {
         return matchSpec && matchStatus;
     });
 
-    
+
 
     function assignTrainer(trainer) {
         if (trainer.status === "In Session") {
-            setMessage(`${trainer.name} is already in a session.`);
+            setMessage(`${trainer.fullName} is already in a session.`);
             return;
         }
 
-        setMessage(`${trainer.name} selected for assignment.`);
+        setMessage(`${trainer.fullName} selected for assignment.`);
     }
 
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+
+        const fetchTrainers = async () => {
+
+            try {
+                setLoading(true);
+                setError("");
+
+                const response = await getTrainer();
+
+                console.log("Fetched Trainers:", response);
+
+                // Store trainers in Redux
+                dispatch(setTrainers(
+                    Array.isArray(response)
+                        ? response
+                        : response.data || []
+                ));
+
+            } catch (error) {
+
+                console.error("Failed to fetch trainers:", error);
+                setError("Unable to load trainers.");
+
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchTrainers();
+
+    }, [dispatch]);
     return (
         <div className="trainers">
 
@@ -102,13 +133,13 @@ export default function TrainerPage() {
                     <p>Manage your coaching staff and their schedules.</p>
                 </div>
 
-                <button className="add" onClick={() => {navigate("/home/addtrainer"); }}>
+                <button className="add" onClick={() => { navigate("/home/addtrainer"); }}>
                     <Plus size={18} />
                     Add Trainer
                 </button>
             </div>
 
-           
+
             <div className="stats">
 
                 <div className="stat">
@@ -201,21 +232,39 @@ export default function TrainerPage() {
             {/* Trainer cards */}
             <div className="cards" >
                 {filtered.map((trainer) => (
-                    <div className="card" key={trainer.id} onClick={()=>{navigate(`/home/trainerdetails/${trainer.id}`)}}>
+                    <div className="card" key={trainer.id}>
 
                         <div className="cardTop">
+
                             <div className="photo">
-                                {trainer.photo ? (
-                                    <img src={trainer.image} alt={trainer.name} />
+
+                                {trainer.profilePhotoUrl ? (
+
+                                    <img
+                                        src={trainer.profilePhotoUrl}
+                                        alt={trainer.fullName}
+                                    />
+
                                 ) : (
+
                                     <span>
-                                        {trainer.name.split(" ").map((part) => part[0]).join("")}
+                                        {(trainer.fullName || "")
+                                            .trim()
+                                            .split(/\s+/)
+                                            .filter(Boolean)
+                                            .map((part) => part[0])
+                                            .slice(0, 2)
+                                            .join("")
+                                            .toUpperCase()}
                                     </span>
+
                                 )}
+
                             </div>
 
+
                             <div className="details">
-                                <h2>{trainer.name}</h2>
+                                <h2>{trainer.fullName}</h2>
                                 <p className="green">{trainer.specialization}</p>
                                 <p>{trainer.specialization}</p>
                             </div>
@@ -230,35 +279,51 @@ export default function TrainerPage() {
                         <div className="numbers">
                             <div>
                                 <span>EXP (YRS)</span>
-                                <strong>{trainer.experience}</strong>
+                                <strong>{trainer.experienceYears}</strong>
                             </div>
 
                             <div>
                                 <span>MEMBERS</span>
-                                <strong>{trainer.members}</strong>
+                                <strong>{trainer.memberCount}</strong>
                             </div>
 
                             <div>
                                 <span>RATING</span>
                                 <strong>
-                                    {trainer.rating.toFixed(1)}
+                                    {trainer.rating}
                                     <Star size={12} className="star" />
                                 </strong>
                             </div>
                         </div>
 
+
                         <div className="actions">
-                            <button onClick={() => setMessage(`${trainer.name} profile selected.`)}>
+
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+
+                                    console.log("Profile clicked:", trainer.id);
+
+                                    navigate(`/home/trainerdetails/${trainer.id}`);
+                                }}
+                            >
                                 Profile
                             </button>
 
                             <button
-                                disabled={trainer.status === "In Session"}
-                                onClick={() => assignTrainer(trainer)}
+                                disabled={trainer.status === "IN_SESSION"}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+
+                                    assignTrainer(trainer);
+                                }}
                             >
                                 Assign
                             </button>
+
                         </div>
+
 
                     </div>
                 ))}

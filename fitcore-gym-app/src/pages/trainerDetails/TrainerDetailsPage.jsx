@@ -1,4 +1,9 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+import { getTrainerById } from "../../services/trainers";
+
 import {
     Mail,
     Phone,
@@ -14,68 +19,152 @@ import {
 import "./TrainerDetailsPage.css";
 
 export default function TrainerDetailsPage() {
+    const { id } = useParams();
+
+    const [trainer, setTrainer] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
     const [tab, setTab] = useState("Performance");
+
+
 
     const stats = [
         {
             title: "Active Clients",
-            value: "42",
+            value: trainer?.memberCount ?? 0,
             icon: Users
         },
         {
             title: "Average Rating",
-            value: "4.9",
+            value: trainer?.rating ?? 0,
             extra: "/5.0",
-            icon: Star,
-            change: "+0.2"
+            icon: Star
         },
         {
             title: "Sessions This Week",
-            value: "28",
+            value: trainer?.sessionsThisWeek ?? 0,
             icon: CalendarDays,
             progress: true
         },
         {
             title: "Experience",
-            value: "8",
+            value: trainer?.experienceYears ?? 0,
             extra: "yrs",
             icon: Award
         }
     ];
 
+
     const bars = [45, 65, 50, 85, 95, 75, 55];
+
+    useEffect(() => {
+
+        const fetchTrainer = async () => {
+
+            try {
+                setLoading(true);
+                setError("");
+
+                const response = await getTrainerById(id);
+
+                console.log("Selected Trainer:", response);
+
+                setTrainer(response.data || response);
+
+            } catch (error) {
+
+                console.error(error);
+                setError("Unable to fetch trainer details.");
+
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchTrainer();
+
+    }, [id]);
+
+    if (loading) {
+        return <p>Loading trainer details...</p>;
+    }
+
+    if (error) {
+        return <p>{error}</p>;
+    }
+
+    if (!trainer) {
+        return <p>Trainer not found.</p>;
+    }
 
     return (
         <div className="details">
 
+
             {/* Trainer Header */}
+
             <div className="header">
+
                 <div className="profile">
+
                     <div className="photo">
-                        <img
-                            src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=300&h=300&fit=crop"
-                            alt="Trainer"
-                        />
+
+                        {trainer.profilePhotoUrl ? (
+                            <img
+                                src={trainer.profilePhotoUrl}
+                                alt={trainer.fullName}
+                            />
+                        ) : (
+                            <span>
+                                {trainer.fullName
+                                    ?.split(" ")
+                                    .map((word) => word[0])
+                                    .slice(0, 2)
+                                    .join("")
+                                    .toUpperCase()}
+                            </span>
+                        )}
+
                         <span className="dot"></span>
+
                     </div>
 
                     <div className="info">
-                        <h1>Vikram Singh</h1>
-                        <h3>Strength &amp; Conditioning Coach</h3>
+
+                        <h1>{trainer.fullName}</h1>
+
+                        <h3>{trainer.specialization}</h3>
 
                         <div className="contact">
-                            <span><Mail /> vikram.singh@fitcore.io</span>
-                            <span><Phone /> +1 (555) 019-2834</span>
-                            <span><MapPin /> Downtown Branch</span>
+
+                            <span>
+                                <Mail size={15} />
+                                {trainer.email || "N/A"}
+                            </span>
+
+                            <span>
+                                <Phone size={15} />
+                                {trainer.phoneNumber || "N/A"}
+                            </span>
+
+                            <span>
+                                <MapPin size={15} />
+                                {trainer.branch || "N/A"}
+                            </span>
+
                         </div>
+
                     </div>
+
                 </div>
 
                 <button className="edit">
                     <Pencil size={13} />
                     Edit Profile
                 </button>
+
             </div>
+
 
             {/* Statistics */}
             <div className="stats">
@@ -166,19 +255,30 @@ export default function TrainerDetailsPage() {
                 </div>
             )}
 
+
             {tab === "Clients" && (
                 <div className="box message">
                     <h3>Clients</h3>
-                    <p>42 active clients assigned to Vikram Singh.</p>
+
+                    <p>
+                        {trainer.memberCount ?? 0} active clients
+                        assigned to {trainer.fullName}.
+                    </p>
                 </div>
             )}
+
 
             {tab === "Schedule" && (
                 <div className="box message">
                     <h3>Schedule</h3>
-                    <p>28 sessions scheduled this week.</p>
+
+                    <p>
+                        {trainer.sessionsThisWeek ?? 0} sessions
+                        scheduled this week.
+                    </p>
                 </div>
             )}
+
 
             {tab === "Bio & Certs" && (
                 <div className="box message">

@@ -8,6 +8,9 @@ const memberSlice = createSlice({
     name: "member",
     initialState,
     reducers: {
+        setMembers: (state, action) => {
+            state.members = action.payload;
+        },
         addMember: (state, action) => {
             state.members.push(action.payload);
         },
@@ -20,6 +23,6 @@ const memberSlice = createSlice({
     }
 });
 
-export const {addMember, removeMember} = memberSlice.actions;
+export const {setMembers,addMember, removeMember} = memberSlice.actions;
 
 export default memberSlice.reducer;

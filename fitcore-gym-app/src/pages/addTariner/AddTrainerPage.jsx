@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 
+import { createTrainer } from "../../services/trainers";
+
 import { addTrainer } from "../../redux/slices/trainerSlice";
 import {
     UserRound,
@@ -21,6 +23,7 @@ export default function AddTrainerPage() {
     const dispatch = useDispatch();
 
     const [photo, setPhoto] = useState("");
+    const [photoFile, setPhotoFile] = useState(null);
     const [shift, setShift] = useState("Morning");
     const [days, setDays] = useState(["M-0", "T-1", "W-2", "T-3", "F-4"]);
 
@@ -46,6 +49,7 @@ export default function AddTrainerPage() {
         const file = e.target.files[0];
 
         if (file) {
+            setPhotoFile(file);
             setPhoto(URL.createObjectURL(file));
         }
     }
@@ -60,50 +64,196 @@ export default function AddTrainerPage() {
         );
     }
 
-    
-function handleSubmit(e) {
 
-    e.preventDefault();
+    // function handleSubmit(e) {
 
-    const newTrainer = {
+    //     e.preventDefault();
 
-        id: Date.now().toString(),
+    //     const newTrainer = {
 
-        name: form.name,
-        email: form.email,
-        phone: form.phone,
+    //         id: Date.now().toString(),
 
-        specialization: form.specialization,
+    //         name: form.name,
+    //         email: form.email,
+    //         phone: form.phone,
 
-        experience: Number(form.experience),
+    //         specialization: form.specialization,
 
-        rate: Number(form.rate),
+    //         experience: Number(form.experience),
 
-        certifications: form.certifications,
+    //         rate: Number(form.rate),
 
-        summary: form.summary,
+    //         certifications: form.certifications,
 
-        photo: photo,
+    //         summary: form.summary,
 
-        shift: shift,
+    //         photo: photo,
 
-        days: days,
+    //         shift: shift,
 
-        status: "Available",
+    //         days: days,
 
-        members: 0,
+    //         status: "Available",
 
-        rating: 0
+    //         members: 0,
 
-    };
+    //         rating: 0
 
-    dispatch(addTrainer(newTrainer));
+    //     };
 
-    alert("Trainer added successfully!");
+    //     dispatch(addTrainer(newTrainer));
 
-    navigate("/home/trainers");
+    //     alert("Trainer added successfully!");
 
-}
+    //     navigate("/home/trainers");
+
+    // }
+
+
+    // async function handleSubmit(e) {
+
+    //     e.preventDefault();
+
+    //     const trainerData = new FormData();
+
+    //     trainerData.append("name", form.name);
+    //     trainerData.append("email", form.email);
+    //     trainerData.append("phone", form.phone);
+
+    //     trainerData.append("specialization", form.specialization);
+    //     trainerData.append("experience", form.experience);
+    //     trainerData.append("rate", form.rate);
+
+    //     trainerData.append("certifications", form.certifications);
+    //     trainerData.append("summary", form.summary);
+
+    //     trainerData.append("shift", shift);
+
+    //     days.forEach((day) => {
+    //         trainerData.append("days", day);
+    //     });
+
+    //     if (photoFile) {
+    //         trainerData.append("photo", photoFile);
+    //     }
+
+    //     try {
+
+    //         const response = await createTrainer(trainerData);
+
+    //         console.log("Trainer Created:", response);
+
+    //         dispatch(addTrainer(response));
+
+    //         alert("Trainer added successfully!");
+
+    //         navigate("/home/trainers");
+
+    //     } catch (error) {
+
+    //         console.error("Error:", error.response?.data || error.message);
+
+    //         alert("Failed to add trainer");
+    //     }
+    // }
+
+
+    async function handleSubmit(e) {
+
+        e.preventDefault();
+
+        const trainerData = new FormData();
+
+        // Personal Information
+        trainerData.append("fullName", form.name);
+        trainerData.append("email", form.email);
+        trainerData.append("phoneNumber", form.phone);
+
+        // Professional Information
+        trainerData.append(
+            "specialization",
+            form.specialization.toUpperCase().replaceAll(" ", "_")
+        );
+
+        trainerData.append("experienceYears", form.experience);
+        trainerData.append("hourlyRate", form.rate);
+
+        // Certifications Array
+        form.certifications
+            .split(",")
+            .map((item) => item.trim())
+            .filter((item) => item !== "")
+            .forEach((item) => {
+                trainerData.append("certifications", item);
+            });
+
+        // Bio
+        trainerData.append("bio", form.summary);
+
+        // Preferred Shift
+        trainerData.append("preferredShift", shift.toUpperCase());
+
+        // Working Days
+        const weekDays = [
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY",
+            "SUNDAY"
+        ];
+
+        days.forEach((day) => {
+
+            const index = Number(day.split("-")[1]);
+
+            trainerData.append("workingDays", weekDays[index]);
+
+        });
+
+        // Active Status
+        trainerData.append("active", "true");
+
+        // Profile Photo
+        if (photoFile) {
+            trainerData.append("profilePhoto", photoFile);
+        }
+
+        // Check data before sending
+        console.log(
+            "Sending Trainer:",
+            [...trainerData.entries()]
+        );
+
+        try {
+
+            const response = await createTrainer(trainerData);
+
+            console.log("Trainer Created:", response);
+
+            dispatch(addTrainer(response));
+
+            alert("Trainer added successfully!");
+
+            navigate("/home/trainers");
+
+        } catch (error) {
+
+            console.error("Status:", error.response?.status);
+
+            console.error(
+                "Backend Error:",
+                error.response?.data
+            );
+
+            alert(
+                error.response?.data?.message ||
+                "Failed to add trainer"
+            );
+        }
+    }
+
 
 
     return (
@@ -247,6 +397,7 @@ function handleSubmit(e) {
 
                                 <label>
                                     Specialization
+
                                     <select
                                         name="specialization"
                                         value={form.specialization}
@@ -254,12 +405,15 @@ function handleSubmit(e) {
                                         required
                                     >
                                         <option value="">Select specialization...</option>
-                                        <option value="Strength">Strength</option>
-                                        <option value="Cardio">Cardio</option>
-                                        <option value="Yoga">Yoga</option>
-                                        <option value="CrossFit">CrossFit</option>
-                                        <option value="Personal Training">Personal Training</option>
+
+                                        <option value="STRENGTH">Strength</option>
+                                        <option value="CARDIO">Cardio</option>
+                                        <option value="YOGA">Yoga</option>
+                                        <option value="CROSSFIT">CrossFit</option>
+                                        <option value="PERSONAL_TRAINING">Personal Training</option>
+
                                     </select>
+
                                 </label>
 
                                 <div className="two">

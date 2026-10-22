@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 export default function MemberRow({ member }) {
     const navigate = useNavigate();
 
-    const initials = member.fullName
-        .split("")
+    const initials = (member.fullName || "")
+        .trim()
+        .split(/\s+/)
         .map((word) => word[0])
         .slice(0, 2)
         .join("")
@@ -24,10 +25,10 @@ export default function MemberRow({ member }) {
                     <div className="memberAvatar">
 
                         {
-                            member.photo ? (
+                            member.profilePhotoUrl ? (
 
                                 <img
-                                    src={member.photo}
+                                    src={member.profilePhotoUrl}
                                     alt={member.fullName}
                                     style={{
                                         width: "100%",
@@ -52,10 +53,10 @@ export default function MemberRow({ member }) {
             </td>
 
             <td>
-                #FC{member.id.slice(-5)}
+                #FC{String(member.id).padStart(5, "0")}
             </td>
 
-            <td>{member.phone}</td>
+            <td>{member.phoneNumber}</td>
 
             <td>
                 <span className="memberPlan">
@@ -82,7 +83,7 @@ export default function MemberRow({ member }) {
             <td>
 
                 <span className="memberStatus">
-                    {member.status}
+                    {member.active}
                 </span>
 
             </td>

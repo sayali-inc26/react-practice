@@ -1,35 +1,35 @@
-import {Users,Zap,UserCheck,Banknote} from "lucide-react";
+import { Users, Zap, UserCheck, Banknote } from "lucide-react";
 
 import "./HomeDashboardStats.css";
 
-function HomeDashboardStats() {
+function HomeDashboardStats({ stats }) {
 
-    const stats = [
+    const cards = [
         {
             title: "Total Members",
-            value: "248",
-            change: "↑+12",
+            value: stats?.totalMembers ?? 0,
+            change: `+${stats?.newMembersThisMonth ?? 0}`,
             icon: Users,
             type: "change"
         },
         {
             title: "Active Members",
-            value: "214",
-            change: "86%",
+            value: stats?.activeMembers ?? 0,
+            change: `${stats?.activePercent ?? 0}%`,
             icon: Zap,
             type: "progress"
         },
         {
             title: "Today's Check-ins",
-            value: "76",
-            change: "↗+14%",
+            value: stats?.todayCheckIns ?? 0,
+            change: `${stats?.checkInChangePercent ?? 0}%`,
             icon: UserCheck,
             type: "change"
         },
         {
             title: "Monthly Revenue",
-            value: "₹1.84L",
-            change: "↑+8.4%",
+            value: `₹${Number(stats?.monthlyRevenue ?? 0).toLocaleString("en-IN")}`,
+            change: `${stats?.revenueChangePercent ?? 0}%`,
             icon: Banknote,
             type: "change"
         }
@@ -38,7 +38,8 @@ function HomeDashboardStats() {
     return (
         <div className="dashboardStats">
 
-            {stats.map((stat) => {
+            {cards.map((stat) => {
+
                 const Icon = stat.icon;
 
                 return (
@@ -56,16 +57,26 @@ function HomeDashboardStats() {
                             <h2>{stat.value}</h2>
 
                             {stat.type === "progress" ? (
+
                                 <div className="statProgress">
                                     <span>{stat.change}</span>
+
                                     <div className="statProgressTrack">
-                                        <div className="statProgressFill"></div>
+                                        <div
+                                            className="statProgressFill"
+                                            style={{
+                                                width: `${Math.min(100, Math.max(0, stats?.activePercent ?? 0))}%`
+                                            }}
+                                        ></div>
                                     </div>
                                 </div>
+
                             ) : (
+
                                 <span className="statChange">
                                     {stat.change}
                                 </span>
+
                             )}
 
                         </div>
@@ -77,5 +88,6 @@ function HomeDashboardStats() {
         </div>
     );
 }
+
 
 export default HomeDashboardStats;

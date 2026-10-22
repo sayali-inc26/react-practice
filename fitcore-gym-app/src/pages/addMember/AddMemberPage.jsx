@@ -3,11 +3,14 @@ import "./AddMemberPage.css";
 import { useNavigate } from "react-router-dom";
 
 import { useState, useEffect } from "react";
+
 import { getMembershipPlans } from "../../services/membershipPlans";
 
 import { useDispatch } from "react-redux";
 
 import { addMember } from "../../redux/slices/memberSlice";
+
+import { createMember } from "../../services/members";
 
 import {
     MonitorCheck,
@@ -51,6 +54,7 @@ export default function AddMemberPage() {
     const [plans, setPlans] = useState([]);
     const [plansLoading, setPlansLoading] = useState(true);
     const [plansError, setPlansError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
 
@@ -142,32 +146,139 @@ export default function AddMemberPage() {
         }));
     };
 
-    const handleSubmit = (event) => {
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+
+    //     if (!selectedPlan) {
+    //         alert("Please select a valid membership plan");
+    //         return;
+    //     }
+
+    //     console.log("New Member:", formData);
+    //     console.log("Profile Photo:", photo);
+
+    //     const newMember = {
+    //         ...formData,
+    //         id: Date.now().toString(),
+    //         status: "Active",
+    //         bmi: bmi,
+    //         photo: photo
+    //     };
+
+    //     dispatch(addMember(newMember));
+
+    //     alert("Member added successfully")
+
+    //     navigate("/home/members")
+
+    //     // Connect your create-member API here.
+    // };
+
+
+    const handleSubmit = async (event) => {
+
         event.preventDefault();
+
+        if (loading) return;
 
         if (!selectedPlan) {
             alert("Please select a valid membership plan");
             return;
         }
 
-        console.log("New Member:", formData);
-        console.log("Profile Photo:", photo);
+        try {
 
-        const newMember = {
-            ...formData,
-            id: Date.now().toString(),
-            status: "Active",
-            bmi: bmi,
-            photo: photo
-        };
+            setLoading(true);
 
-        dispatch(addMember(newMember));
+            // Create FormData for multipart API
+            const memberData = new FormData();
 
-        alert("Member added successfully")
+            // Personal Information
+            memberData.append("fullName", formData.fullName.trim());
 
-        navigate("/home/members")
+            memberData.append("dateOfBirth", formData.dob);
 
-        // Connect your create-member API here.
+            memberData.append("gender", formData.gender);
+
+            memberData.append("phoneNumber", formData.phone);
+
+            memberData.append("email", formData.email);
+
+            memberData.append("homeAddress", formData.address);
+
+            // Fitness Metrics
+            memberData.append("heightCm", Number(formData.height));
+
+            memberData.append("weightKg", Number(formData.weight));
+
+            memberData.append("primaryGoal", formData.goal);
+
+            memberData.append("experienceLevel", formData.experience);
+
+            // Membership Information
+            memberData.append(
+                "membershipPlanId",
+                Number(selectedPlan.id)
+            );
+
+            memberData.append(
+                "durationMonths",
+                Number(formData.duration)
+            );
+
+            memberData.append("startDate", formData.startDate);
+
+            // Emergency Contact
+            memberData.append(
+                "emergencyContactName",
+                formData.contactName
+            );
+
+            memberData.append(
+                "emergencyContactRelationship",
+                formData.relationship
+            );
+
+            memberData.append(
+                "emergencyContactPhone",
+                formData.emergencyPhone
+            );
+
+            // Member Status
+            memberData.append("active", "true");
+
+            // Profile Photo
+            if (photo) {
+                memberData.append("profilePhoto", photo);
+            }
+
+            // Send data to backend
+            const response = await createMember(memberData);
+
+            console.log("Member Created:", response);
+
+            // Store backend response in Redux
+            dispatch(addMember(response));
+
+            alert("Member added successfully!");
+
+            navigate("/home/members");
+
+        } catch (error) {
+
+            console.error("Failed to create member:", error);
+
+            alert(
+                error.response?.data?.message ||
+                "Failed to add member. Please try again."
+            );
+
+        } finally {
+
+            setLoading(false);
+
+        }
+
     };
 
     return (
@@ -199,16 +310,32 @@ export default function AddMemberPage() {
 
                                     <div className="photoSection">
 
-                                        <label className="photoCircle" htmlFor="memberPhoto"> {photo ? (
+                                        <label className="photoCircle" htmlFor="memberPhoto">
 
-                                            <img src={photo} alt="Member profile" />) : (<span>📷</span>)}
+                                            {photo ? (
+                                                <img
+                                                    src={URL.createObjectURL(photo)}
+                                                    alt="Member profile"
+                                                />
+                                            ) : (
+                                                <span>📷</span>
+                                            )}
 
                                         </label>
 
-                                        <input id="memberPhoto" type="file" accept="image/*" className="hiddenInput" onChange={(event) => {
+                                        <input
+                                            id="memberPhoto"
+                                            type="file"
+                                            accept="image/*"
+                                            className="hiddenInput"
+                                            onChange={(event) => {
+                                                const file = event.target.files?.[0];
 
-                                            const file = event.target.files?.[0]; if (file) { setPhoto(URL.createObjectURL(file)); }
-                                        }} />
+                                                if (file) {
+                                                    setPhoto(file);
+                                                }
+                                            }}
+                                        />
 
                                         <span className="photoLabel">PROFILE PHOTO</span>
 
@@ -236,18 +363,16 @@ export default function AddMemberPage() {
 
                                                 <label>Gender</label>
 
-                                                <select name="gender" value={formData.gender} onChange={updateField} required >
-
+                                                <select
+                                                    name="gender"
+                                                    value={formData.gender}
+                                                    onChange={updateField}
+                                                    required
+                                                >
                                                     <option value="">Select Gender</option>
-
-                                                    <option>Male</option>
-
-                                                    <option>Female</option>
-
-                                                    <option>Other</option>
-
-                                                    <option>Prefer not to say</option>
-
+                                                    <option value="MALE">Male</option>
+                                                    <option value="FEMALE">Female</option>
+                                                    <option value="OTHER">Other</option>
                                                 </select>
                                             </div>
                                             <div className="formGroup">
@@ -307,19 +432,32 @@ export default function AddMemberPage() {
                                     </div>
                                     <div className="formGroup">
                                         <label>Primary Goal</label>
-                                        <select name="goal" value={formData.goal} onChange={updateField} required >
+                                        <select
+                                            name="goal"
+                                            value={formData.goal}
+                                            onChange={updateField}
+                                            required
+                                        >
                                             <option value="">Select Goal</option>
-                                            <option>Weight Loss</option>
-                                            <option>Muscle Gain</option>
-                                            <option>General Fitness</option>
-                                            <option>Strength Training</option>
-                                            <option>Endurance</option>
+
+                                            <option value="WEIGHT_LOSS">Weight Loss</option>
+                                            <option value="WEIGHT_GAIN">Weight Gain</option>
+                                            <option value="MUSCLE_BUILDING">Muscle Building</option>
+                                            <option value="ENDURANCE">Endurance</option>
+                                            <option value="GENERAL_FITNESS">General Fitness</option>
                                         </select>
                                         <label>Experience Level</label>
-                                        <select name="experience" value={formData.experience} onChange={updateField} >
-                                            <option>Beginner (0-1 yr)</option>
-                                            <option>Intermediate (1-3 yrs)</option>
-                                            <option>Advanced (3+ yrs)</option>
+                                        <select
+                                            name="experience"
+                                            value={formData.experience}
+                                            onChange={updateField}
+                                            required
+                                        >
+                                            <option value="">Select Experience</option>
+
+                                            <option value="BEGINNER">Beginner (0-1 yr)</option>
+                                            <option value="INTERMEDIATE">Intermediate (1-3 yrs)</option>
+                                            <option value="ADVANCED">Advanced (3+ yrs)</option>
                                         </select>
                                     </div>
                                 </div>
@@ -473,7 +611,17 @@ export default function AddMemberPage() {
                             <div className="formActions">
                                 <button type="button" className="cancelButton" onClick={() => navigate("/home/members")} > Cancel </button>
 
-                                <button type="submit" className="submitButton"><UserRound size={12} color="black" />Add Member </button>
+                                {/* <button type="submit" className="submitButton"><UserRound size={12} color="black" />Add Member </button> */}
+
+                                <button
+                                    type="submit"
+                                    className="submitButton"
+                                    disabled={loading || plansLoading || !!plansError}
+                                >
+                                    <UserRound size={12} color="black" />
+
+                                    {loading ? "Adding Member..." : "Add Member"}
+                                </button>
                             </div>
                         </form>
                     </div>

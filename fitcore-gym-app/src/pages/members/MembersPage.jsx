@@ -2,34 +2,51 @@
 import "./MembersPage.css";
 import { useNavigate } from "react-router-dom";
 
-// import { useEffect } from "react";
 
-// import { Outlet, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { useSelector } from "react-redux";
+import { getMember } from "../../services/members";
+import { setMembers } from "../../redux/slices/memberSlice";
+
+// import { useSelector } from "react-redux";
 
 import MemberRow from "./components/MemberRow";
 
-// const members = [
-//     {
-//         name: "Rahul Patil",
-//         id: "#FC1001",
-//         phone: "+1 (555) 123-4567",
-//         plan: "Premium",
-//         joined: "Oct 12, 2023",
-//         expires: "Oct 12, 2024",
-//         status: "Active",
-//         initials: "RP"
-//     }
-// ];
-
-
 export default function MembersPage() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [loading, setLoading] = useState(true);
 
     const members = useSelector(
         (state) => state.member.members
     );
+
+    useEffect(() => {
+
+        const fetchMembers = async () => {
+
+            try {
+                const data = await getMember();
+
+                console.log("Fetched Members:", data);
+
+                dispatch(setMembers(data));
+
+            } catch (error) {
+
+                console.log("Failed to fetch members:", error);
+
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchMembers();
+
+    }, [dispatch]);
+
     return (
         <>
             <div className="membersContent">

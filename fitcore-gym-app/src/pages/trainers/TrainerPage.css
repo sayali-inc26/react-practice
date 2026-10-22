@@ -282,7 +282,7 @@
 }
 
 /* Buttons */
-
+/* 
 .actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -296,6 +296,44 @@
     background: transparent;
     color: #dedede;
     font-size: 12px;
+    cursor: pointer;
+    width: 50px;
+}
+
+.actions button:last-child {
+    background: #343434;
+    color: #d7ff00;
+}
+
+.actions button:hover:not(:disabled) {
+    border-color: #d7ff00;
+}
+
+.actions button:disabled {
+    color: #777;
+    cursor: not-allowed;
+    opacity: 0.6;
+} */
+
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+}
+
+.actions button {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    border: 1px solid #383838;
+    border-radius: 5px;
+    background: transparent;
+    color: #dedede;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
 }
 
@@ -313,6 +351,7 @@
     cursor: not-allowed;
     opacity: 0.6;
 }
+
 
 .message {
     display: flex;
@@ -406,4 +445,25 @@
         width: 100%;
     }
 
+}
+
+
+/* Force trainer action button size */
+
+.trainers .cards .card .actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.trainers .cards .card .actions button {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    padding: 14px 10px !important;
+    box-sizing: border-box !important;
+    font-size: 14px !important;
 }
