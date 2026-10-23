@@ -94,3 +94,12 @@ export const getTrainerById = async (id) => {
         throw error;
     }
 };
+
+// Assign member to trainer
+export const assignMemberToTrainer = async (trainerId, memberId) => {
+    const response = await api.put(
+        `/trainers/${trainerId}/members/${memberId}`
+    );
+
+    return response.data;
+};

@@ -333,12 +333,12 @@ export default function NewPlan() {
                 <div className="prices">
 
                     <div>
-                        <label>Monthly Price ($)</label>
+                        <label>Monthly Price (₹)</label>
 
                         <input
                             type="number"
                             min="0"
-                            placeholder="$"
+                            placeholder="₹"
                             value={planFormData.monthly}
                             onChange={(e) => updateForm("monthly", e.target.value)}
                         />
@@ -346,14 +346,14 @@ export default function NewPlan() {
 
                     <div>
                         <label className="annualPlan">
-                            <p> Annual Price ($)    <span className="save">Save 20%</span></p>
+                            <p> Annual Price (₹)    <span className="save">Save 20%</span></p>
 
                         </label>
 
                         <input
                             type="number"
                             min="0"
-                            placeholder="$"
+                            placeholder="₹"
                             value={planFormData.annual}
                             onChange={(e) => updateForm("annual", e.target.value)}
                             disabled={!planFormData.annualBilling}

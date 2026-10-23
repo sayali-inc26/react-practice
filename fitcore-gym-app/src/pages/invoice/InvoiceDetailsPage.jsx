@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import {
     getPaymentById,
@@ -20,60 +20,8 @@ import "./InvoiceDetailsPage.css";
 
 export default function InvoiceDetailsPage() {
 
-    //     const items = [
-    //         {
-    //             name: "Standard Pro Membership",
-    //             note: "Monthly recurring",
-    //             qty: 1,
-    //             price: 89
-    //         },
-    //         {
-    //             name: "Personal Training Session",
-    //             note: "Coach: Sarah Jenkins",
-    //             qty: 2,
-    //             price: 65
-    //         },
-    //         {
-    //             name: "Service Fee",
-    //             note: "",
-    //             qty: 1,
-    //             price: 5
-    //         }
-    //     ];
-
-    //     const subtotal = items.reduce(
-    //         (sum, item) => sum + item.qty * item.price, 0
-    //     );
-
-    //     const tax = subtotal * 0.08875;
-    //     const total = subtotal + tax;
-
-    //     const money = (value) => `$${value.toFixed(2)}`;
-
-    //     const downloadPDF = () => {
-    //         window.print();
-    //     };
-
-    //     const sendEmail = () => {
-    //         const subject = "Invoice INV-2024-001";
-
-    //         const body = `Hello Alex,
-
-    // Please find your invoice details below.
-
-    // Invoice Number: INV-2024-001
-    // Total Amount: ${money(total)}
-    // Payment Status: Paid
-
-    // Thank you,
-    // FitCore Gym`;
-
-    //         window.location.href =
-    //             `mailto:alex.mercer@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    //     };
-
-
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const [payment, setPayment] = useState(null);
     const [invoice, setInvoice] = useState(null);
@@ -81,12 +29,16 @@ export default function InvoiceDetailsPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [sending, setSending] = useState(false);
+    const [downloading, setDownloading] = useState(false);
+
+    // Fetch selected payment and invoice
 
     useEffect(() => {
 
         const fetchDetails = async () => {
 
             try {
+
                 setLoading(true);
                 setError("");
 
@@ -96,8 +48,8 @@ export default function InvoiceDetailsPage() {
                         getInvoice(id)
                     ]);
 
-                console.log("Selected Payment:", paymentResponse);
-                console.log("Selected Invoice:", invoiceResponse);
+                console.log("Payment:", paymentResponse);
+                console.log("Invoice:", invoiceResponse);
 
                 setPayment(
                     paymentResponse.data || paymentResponse
@@ -109,12 +61,16 @@ export default function InvoiceDetailsPage() {
 
             } catch (error) {
 
-                console.error(error);
+                console.error("Invoice Error:", error);
+
                 setError("Unable to load invoice details.");
 
             } finally {
+
                 setLoading(false);
+
             }
+
         };
 
         fetchDetails();
@@ -122,9 +78,14 @@ export default function InvoiceDetailsPage() {
     }, [id]);
 
 
+    // Download PDF
+
     const downloadPDF = async () => {
 
         try {
+
+            setDownloading(true);
+
             const file = await downloadInvoice(id);
 
             const url = URL.createObjectURL(file);
@@ -132,22 +93,38 @@ export default function InvoiceDetailsPage() {
             const link = document.createElement("a");
 
             link.href = url;
+
             link.download = `Invoice-${id}.pdf`;
+
+            document.body.appendChild(link);
 
             link.click();
 
-            URL.revokeObjectURL(url);
+            link.remove();
+
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
 
         } catch (error) {
-            console.error("Download failed:", error);
+
+            console.error(error);
+
             alert("Unable to download invoice.");
+
+        } finally {
+
+            setDownloading(false);
+
         }
+
     };
 
+
+    // Email Invoice
 
     const sendEmail = async () => {
 
         try {
+
             setSending(true);
 
             await emailInvoice(id);
@@ -157,13 +134,19 @@ export default function InvoiceDetailsPage() {
         } catch (error) {
 
             console.error(error);
+
             alert("Unable to send invoice.");
 
         } finally {
+
             setSending(false);
+
         }
+
     };
 
+
+    // Loading and error
 
     if (loading) {
         return <p>Loading invoice details...</p>;
@@ -173,12 +156,77 @@ export default function InvoiceDetailsPage() {
         return <p>{error}</p>;
     }
 
-    if (!invoice || !payment) {
+    if (!payment || !invoice) {
         return <p>Invoice not found.</p>;
     }
 
 
+    // Formatting
+
+    const money = (value) => {
+
+        if (value == null) return "N/A";
+
+        return `$${Number(value).toLocaleString("en-IN", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        })}`;
+
+    };
+
+
+    const formatDate = (value) => {
+
+        if (!value) return "N/A";
+
+        const date = new Date(value);
+
+        if (Number.isNaN(date.getTime())) return "N/A";
+
+        return date.toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        });
+
+    };
+
+
+    // Invoice Information
+
+    const invoiceNumber =
+        invoice.invoiceNumber ||
+        payment.invoiceNumber ||
+        "N/A";
+
+    const status = payment.status || "N/A";
+
+    const memberName =
+        invoice.memberName ||
+        payment.memberName ||
+        "N/A";
+
+    const planName =
+        payment.planType ||
+        "Membership";
+
+    // Use the line items returned by the invoice API.
+    // Confirm the property name against your Swagger response.
+
+    const items = Array.isArray(invoice.lineItems)
+        ? invoice.lineItems
+        : Array.isArray(invoice.items)
+            ? invoice.items
+            : [];
+
+    const subtotal = invoice.subtotal;
+    const tax = invoice.tax ?? invoice.taxAmount;
+
+    const total = invoice.total ?? invoice.totalAmount ?? payment.amount;
+
+
     return (
+
         <div className="invoicePage">
 
             {/* Page Header */}
@@ -186,82 +234,151 @@ export default function InvoiceDetailsPage() {
             <div className="header">
 
                 <div>
+
+                    <button
+                        onClick={() => navigate("/home/payments")}
+                        style={{ marginBottom: "15px" }}
+                    >
+                        ← Back to Payments
+                    </button>
+
                     <h1>Invoice Details</h1>
+
                     <p>Manage and review billing information.</p>
+
                 </div>
+
 
                 <div className="buttons">
 
-                    <button className="download" onClick={downloadPDF}>
+                    <button
+                        className="download"
+                        onClick={downloadPDF}
+                        disabled={downloading}
+                    >
+
                         <Download size={16} />
-                        Download PDF
+
+                        {downloading ? "Downloading..." : "Download PDF"}
+
                     </button>
 
-                    <button className="email" onClick={sendEmail}>
+
+                    <button
+                        className="email"
+                        onClick={sendEmail}
+                        disabled={sending}
+                    >
+
                         <Mail size={16} />
-                        Send Email
+
+                        {sending ? "Sending..." : "Send Email"}
+
                     </button>
 
                 </div>
 
             </div>
 
+
             {/* Invoice Card */}
 
             <div className="invoice">
 
-                {/* Invoice Top */}
-
                 <div className="top">
 
                     <div>
+
                         <h1>Invoice</h1>
-                        <h2>#INV-2024-001</h2>
+
+                        <h2>#{invoiceNumber}</h2>
+
                     </div>
+
 
                     <div className="dates">
 
-                        <span className="paid">
+                        <span className={`paid ${status.toLowerCase()}`}>
+
                             <span className="dot"></span>
-                            Paid
+
+                            {status}
+
                         </span>
 
-                        <p>Issue Date: <strong>Oct 24, 2024</strong></p>
-                        <p>Due Date: <strong>Nov 07, 2024</strong></p>
+                        <p>
+                            Issue Date:
+                            <strong>
+                                {" "}{formatDate(
+                                    invoice.issueDate ||
+                                    payment.createdAt
+                                )}
+                            </strong>
+                        </p>
+
+                        <p>
+                            Due Date:
+                            <strong>
+                                {" "}{formatDate(
+                                    invoice.dueDate ||
+                                    payment.dueDate
+                                )}
+                            </strong>
+                        </p>
 
                     </div>
 
                 </div>
 
+
                 <hr />
+
 
                 {/* Billing Information */}
 
                 <div className="bill">
 
                     <div>
+
                         <label>BILLED TO</label>
 
-                        <h2>Alex Mercer</h2>
+                        <h2>{memberName}</h2>
 
-                        <p>123 Fitness Blvd, Suite 4B</p>
-                        <p>Metropolis, NY 10001</p>
+                        <p>
+                            Member ID: {payment.memberId ?? "N/A"}
+                        </p>
 
-                        <span>alex.mercer@example.com</span>
+                        {invoice.billedTo?.address && (
+                            <p>{invoice.billedTo.address}</p>
+                        )}
+
+                        {invoice.billedTo?.email && (
+                            <span>{invoice.billedTo.email}</span>
+                        )}
+
                     </div>
 
+
                     <div className="from">
+
                         <label>FROM</label>
 
-                        <h2>FitCore Gym</h2>
+                        <h2>
+                            {invoice.from?.name || "FitCore Gym"}
+                        </h2>
 
-                        <p>99 Ironworks Way</p>
-                        <p>Metropolis, NY 10005</p>
+                        {invoice.from?.address && (
+                            <p>{invoice.from.address}</p>
+                        )}
 
-                        <span>billing@fitcore.io</span>
+                        {invoice.from?.email && (
+                            <span>{invoice.from.email}</span>
+                        )}
+
                     </div>
 
                 </div>
+
 
                 {/* Invoice Items */}
 
@@ -270,39 +387,78 @@ export default function InvoiceDetailsPage() {
                     <table>
 
                         <thead>
+
                             <tr>
                                 <th>Description</th>
                                 <th>Qty</th>
                                 <th>Unit Price</th>
                                 <th>Total</th>
                             </tr>
+
                         </thead>
+
 
                         <tbody>
 
-                            {items.map((item, index) => (
+                            {items.length > 0 ? (
 
-                                <tr key={index}>
+                                items.map((item, index) => {
 
-                                    <td>
-                                        <div className="description">
-                                            <span>{item.name}</span>
+                                    const qty = Number(
+                                        item.quantity ?? item.qty ?? 1
+                                    );
 
-                                            {item.note && (
-                                                <small>{item.note}</small>
-                                            )}
-                                        </div>
+                                    const price = Number(
+                                        item.unitPrice ?? item.price ?? 0
+                                    );
+
+                                    return (
+
+                                        <tr key={item.id ?? index}>
+
+                                            <td>
+
+                                                <div className="description">
+
+                                                    <span>
+                                                        {item.description ||
+                                                            item.name ||
+                                                            planName}
+                                                    </span>
+
+                                                    {item.note && (
+                                                        <small>{item.note}</small>
+                                                    )}
+
+                                                </div>
+
+                                            </td>
+
+                                            <td>{qty}</td>
+
+                                            <td>{money(price)}</td>
+
+                                            <td>
+                                                {money(
+                                                    item.total ?? qty * price
+                                                )}
+                                            </td>
+
+                                        </tr>
+
+                                    );
+
+                                })
+
+                            ) : (
+
+                                <tr>
+                                    <td colSpan="4">
+                                        No invoice line items available.
                                     </td>
-
-                                    <td>{item.qty}</td>
-
-                                    <td>{money(item.price)}</td>
-
-                                    <td>{money(item.qty * item.price)}</td>
-
                                 </tr>
 
-                            ))}
+                            )}
 
                         </tbody>
 
@@ -310,28 +466,41 @@ export default function InvoiceDetailsPage() {
 
                 </div>
 
+
                 {/* Total */}
 
                 <div className="summary">
 
                     <div className="line">
+
                         <span>Subtotal</span>
+
                         <strong>{money(subtotal)}</strong>
+
                     </div>
+
 
                     <div className="line">
-                        <span>Tax (8.875%)</span>
+
+                        <span>Tax</span>
+
                         <strong>{money(tax)}</strong>
+
                     </div>
 
+
                     <div className="grand">
+
                         <h2>Grand Total</h2>
+
                         <h2>{money(total)}</h2>
+
                     </div>
 
                 </div>
 
             </div>
+
 
             {/* Payment History */}
 
@@ -342,6 +511,7 @@ export default function InvoiceDetailsPage() {
                     Payment History
                 </h2>
 
+
                 <div className="timeline">
 
                     <div className="event">
@@ -350,30 +520,34 @@ export default function InvoiceDetailsPage() {
 
                         <div className="details">
 
-                            <h4>Oct 24, 2024 at 10:15 AM</h4>
+                            <h4>
+                                {formatDate(
+                                    payment.paidAt ||
+                                    payment.paymentDate
+                                )}
+                            </h4>
 
                             <p>
-                                Payment of {money(total)} processed successfully.
+                                Payment of {money(payment.amount)}
+                                {" - "}{status}
                             </p>
 
                             <span>
+
                                 <CreditCard size={15} />
-                                Visa ending in 4242
+
+                                {payment.method || "N/A"}
+
                             </span>
 
-                        </div>
+                            {payment.transactionRef && (
 
-                    </div>
+                                <p>
+                                    Transaction:
+                                    {" "}{payment.transactionRef}
+                                </p>
 
-                    <div className="event">
-
-                        <div className="point"></div>
-
-                        <div className="details">
-
-                            <h4>Oct 24, 2024 at 08:00 AM</h4>
-
-                            <p>Invoice generated and sent to customer.</p>
+                            )}
 
                         </div>
 
@@ -384,5 +558,6 @@ export default function InvoiceDetailsPage() {
             </div>
 
         </div>
+
     );
 }

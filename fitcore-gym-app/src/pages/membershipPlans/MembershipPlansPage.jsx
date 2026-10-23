@@ -100,7 +100,7 @@ export default function MembershipPlansPage() {
         ["Locker Rooms & Showers", "✓", "✓", "✓"],
         ["24/7 Keyfob Entry", "—", "✓", "✓"],
         ["Group Fitness Classes", "—", "Unlimited", "Unlimited"],
-        ["Pool & Spa Area", "—", "$10/visit", "✓"],
+        ["Pool & Spa Area", "—", "₹10/visit", "✓"],
         ["Guest Passes", "—", "1 / Month", "4 / Month"]
     ];
 
@@ -376,7 +376,7 @@ export default function MembershipPlansPage() {
                             <div className="price">
 
                                 {price !== null && price !== undefined
-                                    ? `$${price}`
+                                    ? `₹${price}`
                                     : "N/A"}
 
                                 <small>
@@ -420,7 +420,7 @@ export default function MembershipPlansPage() {
                                     className="profile"
                                     title="Manage members"
                                     onClick={() =>
-                                        alert(`Manage ${plan.name} members`)
+                                        alert(`Manage ₹{plan.name} members`)
                                     }
                                 >
                                     <Users size={14} />

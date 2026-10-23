@@ -528,7 +528,7 @@ export default function AddMemberPage() {
                                                 </span>
 
                                                 <strong>
-                                                    ${plan.monthlyPrice}
+                                                    ₹{plan.monthlyPrice}
                                                     <small>/mo</small>
                                                 </strong>
 
@@ -564,7 +564,7 @@ export default function AddMemberPage() {
                                         <div className="formGroup">
 
                                             <label>Total Fee Due</label>
-                                            <input value={`$${totalFee.toFixed(2)}`} readOnly />
+                                            <input value={`${totalFee.toFixed(2)}`} readOnly />
 
                                         </div>
                                     </div>

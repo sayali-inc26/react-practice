@@ -20,13 +20,13 @@ export default function RevenueTrends() {
     const stats = [
         {
             title: "Total Revenue",
-            value: "$42,500",
+            value: "₹42,500",
             change: "↑ 12.5% vs last month",
             icon: null
         },
         {
             title: "Pending Invoices",
-            value: "$3,240",
+            value: "₹3,240",
             change: "45 invoices awaiting payment",
             icon: CalendarClock
         },

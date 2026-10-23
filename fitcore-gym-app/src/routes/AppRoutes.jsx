@@ -13,6 +13,8 @@ import PaymentsPage from "../pages/payments/PaymentsPage"
 import AddTrainerPage from "../pages/addTariner/AddTrainerPage"
 import TarinerDetailsPage from "../pages/trainerDetails/TrainerDetailsPage"
 import NewPlan from "../pages/newPlan/NewPlan"
+import RecordPaymentPage from "../pages/memberDetails/RecordPaymentPage";
+import AssignTrainerPage from "../pages/trainers/AssignTrainerPage"
 
 import InvoiceDetaisPage from "../pages/invoice/InvoiceDetailsPage"
 
@@ -28,32 +30,36 @@ export default function AppRoutes() {
 
                 <Route index element={<HomeDashboard />} />
 
-                <Route path="homedashboard" element={<HomeDashboard/>}></Route>
+                <Route path="homedashboard" element={<HomeDashboard />}></Route>
 
-                <Route path="addmember" element={<AddMemberPage/>}></Route>
+                <Route path="addmember" element={<AddMemberPage />}></Route>
 
-                <Route path="members" element={<Members/>}></Route>
+                <Route path="members" element={<Members />}></Route>
 
-                <Route path="memberdetails/:id" element={<MemberDetailsPage/>}></Route>
+                <Route path="memberdetails/:id" element={<MemberDetailsPage />}></Route>
 
-                <Route path="attendance" element={<AttendanceControlPage/>}></Route>
+                <Route path="attendance" element={<AttendanceControlPage />}></Route>
 
-                <Route path="trainers" element={<TarinerPage/>}></Route>
+                <Route path="trainers" element={<TarinerPage />}></Route>
 
-                <Route path="addtrainer" element={<AddTrainerPage/>}></Route>
+                <Route path="addtrainer" element={<AddTrainerPage />}></Route>
 
-                <Route path="trainerdetails/:id" element={<TarinerDetailsPage/>}></Route>
+                <Route path="trainerdetails/:id" element={<TarinerDetailsPage />}></Route>
 
-                <Route path="membershipplans" element={<MembershipPlansPage/>}></Route>
+                <Route path="membershipplans" element={<MembershipPlansPage />}></Route>
 
-                <Route path="newplan" element={<NewPlan/>}></Route>
+                <Route path="newplan" element={<NewPlan />}></Route>
 
-                <Route path="payments" element={<PaymentsPage/>}></Route>
+                <Route path="payments" element={<PaymentsPage />}></Route>
 
-                <Route path="invoicedetails/:id" element={<InvoiceDetaisPage/>}></Route>
+                <Route path="invoicedetails/:id" element={<InvoiceDetaisPage />}></Route>
+
+                <Route path="recordpayment/:id" element={<RecordPaymentPage />}></Route>
+
+                <Route path="assigntrainer/:id" element={<AssignTrainerPage />}></Route>
 
                 {/* <Route path="progress" element={<ProgressPage/>}></Route> */}
-                
+
 
             </Route>
 

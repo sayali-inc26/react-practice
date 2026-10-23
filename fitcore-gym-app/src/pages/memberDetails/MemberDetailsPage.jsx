@@ -17,7 +17,8 @@ import {
     Gauge,
     Dumbbell,
     BadgeCheck,
-    UserRound
+    UserRound,
+    CreditCard
 } from "lucide-react";
 
 import "./MemberDetailsPage.css";
@@ -203,7 +204,7 @@ export default function MemberDetailsPage() {
                             <h1>{member.fullName}</h1>
 
                             <span className="detailsPlan">
-                                ☆ {member.plan}
+                                ☆ {member.membershipPlanName}
                             </span>
 
                         </div>
@@ -227,6 +228,16 @@ export default function MemberDetailsPage() {
                 </div>
 
                 <div className="detailsActions">
+
+                    <button
+                        className="recordPaymentButton"
+                        onClick={() => {
+                            navigate(`/home/recordpayment/${member.id}`);
+                        }}
+                    >
+                        <CreditCard size={16} />
+                        Record Payment
+                    </button>
 
                     <button
                         className="editButton"
@@ -387,7 +398,7 @@ export default function MemberDetailsPage() {
                         <div className="membershipTop">
 
                             <span className="membershipBadge">
-                                {(member.plan || "No Plan").toUpperCase()} PLAN
+                                {(member.membershipPlanName || "No Plan").toUpperCase()} PLAN
                             </span>
 
                             <BadgeCheck size={25} />

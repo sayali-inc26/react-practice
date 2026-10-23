@@ -167,7 +167,7 @@ export default function TrainerPage() {
                     </div>
 
                     <h2>
-                        {trainers.filter((trainer) => trainer.status === "Available").length}
+                        {trainers.filter((trainer) => trainer.status === "AVAILABLE").length}
                     </h2>
 
                     <p>Currently available trainers</p>
@@ -312,14 +312,16 @@ export default function TrainerPage() {
                             </button>
 
                             <button
-                                disabled={trainer.status === "IN_SESSION"}
+                                disabled={trainer.memberCount >= 3}
                                 onClick={(e) => {
                                     e.stopPropagation();
 
-                                    assignTrainer(trainer);
+                                    navigate(`/home/assigntrainer/${trainer.id}`);
                                 }}
                             >
-                                Assign
+                                {trainer.memberCount >= 3
+                                    ? "Limit Reached"
+                                    : "Assign"}
                             </button>
 
                         </div>

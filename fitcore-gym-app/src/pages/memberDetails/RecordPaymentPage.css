@@ -1,0 +1,102 @@
+
+.recordPage {
+    padding: 30px;
+    min-height: 100vh;
+    background: #080f13;
+    color: white;
+}
+
+.recordCard {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #111c22;
+    border: 1px solid #29383e;
+    border-radius: 14px;
+}
+
+.recordCard h1 {
+    margin-bottom: 10px;
+}
+
+.recordCard p {
+    color: #a5adb0;
+    margin-bottom: 30px;
+}
+
+.recordCard form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.recordCard label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.recordCard input,
+.recordCard select,
+.recordCard textarea {
+    width: 100%;
+    padding: 13px;
+    border-radius: 8px;
+    border: 1px solid #35434a;
+    background: #18252b;
+    color: white;
+    font-size: 14px;
+    outline: none;
+}
+
+.recordCard input:focus,
+.recordCard select:focus,
+.recordCard textarea:focus {
+    border-color: #d7ff00;
+}
+
+.recordActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.recordActions button {
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.recordActions button:last-child {
+    background: #d7ff00;
+    color: #080f13;
+    font-weight: bold;
+}
+
+.recordPaymentButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background: #d7ff00;
+    color: #080f13;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+.paymentSummary {
+    margin-top: 20px;
+    padding: 20px;
+    background: #18252b;
+    border: 1px solid #35434a;
+    border-radius: 10px;
+}
+
+.paymentSummary h2 {
+    color: #d7ff00;
+    margin-top: 12px;
+}

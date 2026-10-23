@@ -1,9 +1,17 @@
 
 import api from "./api";
 
-// Get all payments
-export const getPayments = async () => {
-    const response = await api.get("/payments");
+
+// Get all payments with pagination
+export const getPayments = async (page = 0, size = 20) => {
+
+    const response = await api.get("/payments", {
+        params: {
+            page,
+            size
+        }
+    });
+
     return response.data;
 };
 
@@ -35,6 +43,18 @@ export const downloadInvoice = async (id) => {
 export const emailInvoice = async (id) => {
     const response = await api.post(
         `/payments/${id}/invoice/email`
+    );
+
+    return response.data;
+};
+
+
+// Create Payment
+export const createPayment = async (paymentData) => {
+
+    const response = await api.post(
+        "/payments",
+        paymentData
     );
 
     return response.data;

@@ -35,17 +35,22 @@ export default function RecentPayments() {
 
                 const data = response.data || response;
 
-                setPayments(
-                    Array.isArray(data) ? data : []
-                );
+                const paymentList = Array.isArray(data)
+                    ? data
+                    : data.content || [];
+
+                setPayments(paymentList);
 
             } catch (error) {
 
-                console.error(error);
+                console.error("Payment Error:", error);
+
                 setError("Unable to fetch payments.");
 
             } finally {
+
                 setLoading(false);
+
             }
         };
 
@@ -136,14 +141,31 @@ export default function RecentPayments() {
 
                                                 <div className="recentAvatar">
 
-                                                    {(payment.memberName || "")
-                                                        .trim()
-                                                        .split(/\s+/)
-                                                        .filter(Boolean)
-                                                        .map((word) => word[0])
-                                                        .slice(0, 2)
-                                                        .join("")
-                                                        .toUpperCase()}
+                                                    {payment.memberPhotoUrl ? (
+
+                                                        <img
+                                                            src={payment.memberPhotoUrl}
+                                                            alt={payment.memberName}
+                                                            style={{
+                                                                width: "100%",
+                                                                height: "100%",
+                                                                objectFit: "cover",
+                                                                borderRadius: "50%"
+                                                            }}
+                                                        />
+
+                                                    ) : (
+
+                                                        (payment.memberName || "")
+                                                            .trim()
+                                                            .split(/\s+/)
+                                                            .filter(Boolean)
+                                                            .map(word => word[0])
+                                                            .slice(0, 2)
+                                                            .join("")
+                                                            .toUpperCase()
+
+                                                    )}
 
                                                 </div>
 
@@ -158,14 +180,14 @@ export default function RecentPayments() {
                                         {/* Member ID */}
 
                                         <td>
-                                            {payment.memberCode || payment.memberId || "N/A"}
+                                            {payment.memberId ?? "N/A"}
                                         </td>
 
 
                                         {/* Membership Plan */}
 
                                         <td>
-                                            {payment.membershipPlanName || "N/A"}
+                                            {payment.planType || "N/A"}
                                         </td>
 
 
@@ -185,7 +207,7 @@ export default function RecentPayments() {
                                         <td>
                                             <span
                                                 className={`recentStatus ${(payment.status || "")
-                                                        .toLowerCase()
+                                                    .toLowerCase()
                                                     }`}
                                             >
                                                 {payment.status || "N/A"}
