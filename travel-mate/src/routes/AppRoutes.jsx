@@ -5,6 +5,8 @@ import HomePage from "../pages/homePage/HomePage";
 import MyTripsPage from "../pages/myTrips/MyTripsPage"
 import PlannersPage from "../pages/planners/PlannersPage";
 import ExpensesPage from "../pages/expenses/ExpensesPage";
+import AddExpensesPage from "../pages/addExpenses/AddExpensesPage";
+import TripDetailsPage from "../pages/tripDetails/TripDetailsPage";
 
 
 export default function AppRoutes() {
@@ -17,13 +19,19 @@ export default function AppRoutes() {
 
             <Route path="/signup" element={<SignupPage />} />
 
-            <Route path="/home" element={<HomePage/>}/>
+            <Route path="/home" element={<HomePage />} />
 
-            <Route path="/myTrips" element={<MyTripsPage/>}/>
+            <Route path="/myTrips" element={<MyTripsPage />} />
 
-            <Route path="/planners" element={<PlannersPage/>}/>
+            <Route path="/myTrips/tripDetails/:id" element={<TripDetailsPage />} />
 
-            <Route path="/expenses" element={<ExpensesPage/>}/>
+            <Route path="/planners" element={<PlannersPage />} />
+
+            <Route path="/expenses" element={<ExpensesPage />} />
+
+            <Route path="/expenses/addExpenses" element={<AddExpensesPage />} />
+
+            <Route path="*" element={<Navigate to="/home" replace />} />
 
         </Routes>
     );

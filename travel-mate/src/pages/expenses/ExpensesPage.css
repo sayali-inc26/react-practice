@@ -1,0 +1,624 @@
+.expensesMainArea{
+    justify-self: center;
+    padding-bottom: 50px;
+}
+
+.expensesHeadings{
+    line-height: 0.5;
+}
+
+.expensesHeadings h1{
+    font-size: 56px;
+    font-weight: 700;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.expensesHeadings p{
+    font-size: 18px;
+    font-weight: 400;
+    color: #44474D;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.myTripContentDiv{
+    display: flex;
+    gap: 30px;
+}
+
+.stat{
+    width: 548px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px 0px #1A2B480D;
+}
+
+.expensesStats{
+    height: 178px;  
+    margin-bottom: 30px;
+    padding: 20px;
+    
+}
+.expensesStats > div{
+    display: flex;
+
+    gap: 30px;
+}
+
+.percentUsed{
+    height: 128px;
+    width: 128px;
+    border-radius: 50%;
+    border: 15px solid  #006A62;
+    text-align: center;
+    align-content: center;
+    line-height: 0;
+}
+
+.percentUsed h4{
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    margin: 20px;
+}
+
+.percentUsed p{
+    font-size: 12px;
+    font-weight: 400;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #44474D;
+}
+
+.statsInNumber{
+
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+
+}
+
+.statsInNumber > div{
+    margin-right: 70px;
+}
+
+.statsInNumber h5 {
+    margin: 0;
+    font-size: 10px;
+    font-weight: 400;
+    color: #777;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.statsInNumber p {
+    margin: 5px 0 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #071a35;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.checklistStat{
+    height: 358px;
+}
+
+.expensesList{
+    height: 404px;
+    padding: 20px;
+}
+
+.expensesList > div{
+    display: flex;
+    justify-content: space-evenly;
+    gap:10px;
+    margin-bottom: 20px;
+
+}
+.expenseSearch {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 0 16px;
+    height: 48px;
+    flex: 1;
+    min-width: 180px;
+    color: #454b54;
+}
+
+.expenseSearch input {
+    width: 284px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+    color: #071a35;
+}
+
+.expenseSearch input::placeholder {
+    color: #777f8d;
+}
+
+.sort{
+    display: flex;
+    height: 45px;
+    width: 45px;
+    justify-content: center;
+    align-items: center;
+    background-color: #F4F3F2;
+    border-radius: 8px;
+
+}
+
+.addExpenses{
+    height: 48px;
+    width: 139px;
+    background-color: #006A62;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.expensesTabs button{
+    height: 32px;
+    padding:6px 16px 6px 16px;
+    border: none;
+    border-radius: 16px;
+    background-color: #EEEEED;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0px;
+}
+
+
+/* Main Layout */
+
+.expensesMainArea {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 35px 0 60px;
+}
+
+.expensesHeadings {
+    line-height: normal;
+    margin-bottom: 60px;
+}
+
+.expensesHeadings h1 {
+    margin: 0 0 5px;
+    color: #031632;
+}
+
+.expensesHeadings p {
+    margin: 0;
+}
+
+.myTripContentDiv {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.expenses,
+.packingChecklist {
+    min-width: 0;
+}
+
+.title > h3,
+.travelNotes > h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #031632;
+    margin: 0 0 20px;
+}
+
+.stat {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Budget Card */
+
+.expensesStats {
+    height: 178px;
+    margin-bottom: 24px;
+    padding: 24px;
+}
+
+.expensesStats > div {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.percentUsed {
+    width: 128px;
+    height: 128px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.percentUsed > div {
+    background: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.percentUsed h4 {
+    margin: 0 0 8px;
+    font-size: 24px;
+    color: #031632;
+}
+
+.percentUsed p {
+    margin: 0;
+    line-height: normal;
+}
+
+.statsInNumber {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 35px;
+    row-gap: 24px;
+}
+
+.statsInNumber > div {
+    margin-right: 0;
+}
+
+.statsInNumber .spentAmount {
+    color: #006A62;
+}
+
+/* Expense List */
+
+.expensesList {
+    height: auto;
+    min-height: 404px;
+    padding: 24px;
+}
+
+.expensesList > .expenseTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.expenseSearch {
+    min-width: 0;
+    flex: 1;
+}
+
+.expenseSearch input {
+    width: 100%;
+    min-width: 0;
+}
+
+.sort {
+    flex-shrink: 0;
+    border: none;
+    cursor: pointer;
+    color: #031632;
+}
+
+.addExpenses {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.addExpenses:hover {
+    background: #00574f;
+}
+
+/* Expense Tabs */
+
+.expensesList > .expensesTabs {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-bottom: 28px;
+}
+
+.expensesTabs button {
+    cursor: pointer;
+    color: #44474D;
+}
+
+.expensesTabs .activeExpense {
+    background: #e3f1ee;
+    color: #006A62;
+}
+
+.expensesTabs button:hover {
+    background: #e3f1ee;
+    color: #006A62;
+}
+
+/* Expense Items */
+
+.expenseItems {
+    display: flex;
+    flex-direction: column;
+}
+
+.expenseItem {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.expenseItem:last-child {
+    border-bottom: none;
+}
+
+.expenseIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e6e8ed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #031632;
+    flex-shrink: 0;
+}
+
+.expenseItem:has(.expenseIcon svg.lucide-utensils) .expenseIcon {
+    background: #e3f1ee;
+    color: #006A62;
+}
+
+.expenseInfo {
+    flex: 1;
+}
+
+.expenseInfo h4 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #031632;
+}
+
+.expenseInfo p {
+    margin: 0;
+    font-size: 12px;
+    color: #44474D;
+}
+
+.expenseAmount {
+    font-size: 16px;
+    color: #031632;
+    font-weight: 600;
+    margin: 0;
+}
+
+.emptyExpenses {
+    text-align: center;
+    color: #777;
+    padding: 25px 0;
+}
+
+/* Packing Checklist */
+
+.checklistStat {
+    height: auto;
+    min-height: 358px;
+    padding: 24px;
+}
+
+.packingTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.packingTop h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #031632;
+    margin: 0 0 3px;
+}
+
+.packingTop p {
+    font-size: 12px;
+    color: #44474D;
+    margin: 0;
+}
+
+.packingTop h2 {
+    font-size: 24px;
+    color: #006A62;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Progress Bar */
+
+.packingProgress {
+    width: 100%;
+    height: 8px;
+    border-radius: 10px;
+    background: #e5e5e5;
+    margin: 32px 0 38px;
+    overflow: hidden;
+}
+
+.packingProgress div {
+    height: 100%;
+    background: #006A62;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+/* Packing Items */
+
+.packingItems {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.packingGroup h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #031632;
+    margin: 0 0 12px;
+}
+
+.packingGroup h4 svg {
+    color: #777b83;
+}
+
+.packingItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 10px 0 10px 24px;
+    cursor: pointer;
+    color: #44474D;
+    font-size: 16px;
+}
+
+.packingItem input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #006A62;
+}
+
+.packingItem .packed {
+    text-decoration: line-through;
+    color: #8b8d93;
+}
+
+/* Travel Notes */
+
+.travelNotes {
+    margin-top: 60px;
+}
+
+.notesGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.noteCard {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    min-height: 118px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 20px #1A2B480D;
+}
+
+.noteCard svg {
+    color: #031632;
+    margin-bottom: 8px;
+}
+
+.noteCard .alertIcon {
+    color: #c62828;
+}
+
+.noteCard h4 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #031632;
+}
+
+.noteCard p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #44474D;
+}
+
+@media (max-width: 1150px) {
+
+    .expensesMainArea {
+        padding: 35px 20px 60px;
+        box-sizing: border-box;
+    }
+
+}
+
+@media (max-width: 850px) {
+
+    .myTripContentDiv {
+        grid-template-columns: 1fr;
+    }
+
+    .travelNotes {
+        margin-top: 30px;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .expensesHeadings h1 {
+        font-size: 36px;
+    }
+
+    .expensesStats {
+        height: auto;
+    }
+
+    .expensesStats > div {
+        gap: 20px;
+    }
+
+    .percentUsed {
+        width: 100px;
+        height: 100px;
+    }
+
+    .statsInNumber {
+        column-gap: 12px;
+    }
+
+    .expensesList > .expenseTop {
+        flex-wrap: wrap;
+    }
+
+    .expenseSearch {
+        flex-basis: 100%;
+    }
+
+    .notesGrid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+

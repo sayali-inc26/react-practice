@@ -24,8 +24,6 @@ export default function HomePage() {
 
     const navigate = useNavigate();
 
-    
-
     const features = [
         {
             id: 1,
@@ -128,8 +126,6 @@ export default function HomePage() {
                 </div>
 
             </section>
-
-            {/* FEATURES */}
 
             <section className="features">
 

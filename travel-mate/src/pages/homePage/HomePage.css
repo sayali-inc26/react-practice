@@ -77,14 +77,14 @@
 }
 
 .startBtn:hover {
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
 .exploreBtn:hover {
     background: rgba(255, 255, 255, 0.3);
 }
 
-/* FEATURES */
+
 
 .features {
     padding: 50px 6% 30px;

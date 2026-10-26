@@ -1,7 +1,18 @@
+import Header from "../../layout/header/Header"
+import Footer from "../../layout/footer/Footer"
+
+
 export default function PlannersPage(){
-    return(
+     return(
         <>
-            <h1>Planners Page</h1>
+            <div className="myTripMainArea">
+
+                <Header/>
+
+                <Footer/>
+                
+
+            </div>
         </>
     )
 }

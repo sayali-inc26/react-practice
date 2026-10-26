@@ -1,0 +1,309 @@
+/* Itinerary */
+
+.itineraryLayout {
+    display: grid;
+    grid-template-columns: 225px 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* Day Sidebar */
+
+.daysList {
+    background: #FAF9F8;
+    padding: 24px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.daysList button {
+    border: none;
+    background: transparent;
+    padding: 16px;
+    border-radius: 8px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: #222;
+}
+
+.daysList button span:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.daysList strong {
+    font-size: 14px;
+}
+
+.daysList small {
+    font-size: 12px;
+}
+
+.daysList .selectedDay {
+    background: #031632;
+    color: white;
+}
+
+/* Day Heading */
+
+.dayHeading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.dayHeading h2 {
+    font-size: 24px;
+    color: #031632;
+    margin: 0;
+}
+
+.addActivity {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #006A62;
+    color: white;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Timeline */
+
+.timeline {
+    position: relative;
+    padding: 0 0 30px;
+    min-height: 300px;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: #c5c5c5;
+    transform: translateX(-50%);
+}
+
+.timelineItem {
+    width: 50%;
+    position: relative;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    min-height: 150px;
+}
+
+.rightItem {
+    margin-left: 50%;
+    padding-left: 32px;
+}
+
+.leftItem {
+    margin-right: 50%;
+    padding-right: 32px;
+}
+
+/* Timeline Dot */
+
+.timelineDot {
+    position: absolute;
+    top: 50px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #75f1df;
+    color: #031632;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid #e6e8ed;
+    z-index: 2;
+    box-sizing: border-box;
+}
+
+.rightItem .timelineDot {
+    left: -17px;
+}
+
+.leftItem .timelineDot {
+    right: -17px;
+    background: #e6e8ed;
+}
+
+/* Activity Card */
+
+.activityCard {
+    background: #FAF9F8;
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    box-shadow: 0 4px 20px #1A2B480D;
+}
+
+.activityCard h4 {
+    margin: 0 0 12px;
+    font-size: 14px;
+    color: #031632;
+}
+
+.activityCard h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #222;
+}
+
+.activityCard p {
+    color: #555;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+.editActivity {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #44474D;
+}
+
+.activityTags {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.activityTags span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #555;
+}
+
+
+/* Activity Popup */
+
+.activityOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.activityForm {
+    width: 400px;
+    max-width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.activityForm h2 {
+    margin-top: 0;
+    color: #031632;
+}
+
+.activityForm label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.activityForm input,
+.activityForm select,
+.activityForm textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font: inherit;
+}
+
+.activityButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.activityButtons button {
+    padding: 12px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+
+.activityButtons button:last-child {
+    background: #006A62;
+    color: white;
+    border: none;
+}
+
+@media (max-width: 900px) {
+    .tripDetailsMain {
+        margin: 25px 20px;
+    }
+
+    .itineraryLayout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .daysList {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .daysList button {
+        min-width: 110px;
+    }
+
+
+    .timeline::before {
+        left: 17px;
+    }
+
+    .timelineItem,
+    .rightItem,
+    .leftItem {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 45px;
+        padding-right: 0;
+    }
+
+    .rightItem .timelineDot,
+    .leftItem .timelineDot {
+        left: 0;
+        right: auto;
+    }
+
+    .dayHeading {
+        flex-wrap: wrap;
+    }
+}
