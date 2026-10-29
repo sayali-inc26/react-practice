@@ -7,6 +7,9 @@ import PlannersPage from "../pages/planners/PlannersPage";
 import ExpensesPage from "../pages/expenses/ExpensesPage";
 import AddExpensesPage from "../pages/addExpenses/AddExpensesPage";
 import TripDetailsPage from "../pages/tripDetails/TripDetailsPage";
+import WhereNextPage from "../pages/whereNext/WhereNextPage";
+
+import TripConfiguration from "../pages/tripCongiguration/TripConfiguration";
 
 
 export default function AppRoutes() {
@@ -20,6 +23,10 @@ export default function AppRoutes() {
             <Route path="/signup" element={<SignupPage />} />
 
             <Route path="/home" element={<HomePage />} />
+
+            <Route path="/home/whereNext/:id" element={<WhereNextPage />} />
+
+            <Route path="/home/whereNext/tripConfiguration/:id" element={<TripConfiguration />}/>
 
             <Route path="/myTrips" element={<MyTripsPage />} />
 

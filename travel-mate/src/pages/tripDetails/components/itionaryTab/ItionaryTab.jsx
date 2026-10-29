@@ -1,14 +1,25 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { Plus, GripVertical, Pencil, Utensils, Camera, Wallet } from "lucide-react";
-import { addActivity, updateActivity } from "../../../../redux/slices/tripDetails";
+// import { addActivity, updateActivity } from "../../../../redux/slices/tripDetails";
+import useTripStore from "../../../../store/tripStore";
+
+
 import "./ItionaryTab.css";
 
 export default function ItionaryTab({ trip }) {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
+
+    const addActivity = useTripStore((state) => state.addActivity);
+
+    const updateActivity = useTripStore((state) => state.updateActivity);
+
     const [selectedDay, setSelectedDay] = useState(1);
+
     const [showForm, setShowForm] = useState(false);
+
     const [editId, setEditId] = useState(null);
+
     const [activity, setActivity] = useState(
         {
             title: "",
@@ -48,26 +59,32 @@ export default function ItionaryTab({ trip }) {
 
     function saveActivity(e) {
         e.preventDefault();
+
         const data = {
             ...activity,
-            id: editId || Date.now(),
+            id: editId ?? Date.now(),
             amount: Number(activity.amount)
-        }; dispatch(
-            editId ? updateActivity(
-                {
-                    tripId: trip.id,
-                    day: selectedDay,
-                    activity: data
-                }
-            ) : addActivity(
-                {
-                    tripId: trip.id,
-                    day: selectedDay,
-                    activity: data
-                }
-            )
-        );
-        setShowForm(false)
+        };
+
+        if (editId !== null) {
+
+            updateActivity({
+                tripId: trip.id,
+                day: selectedDay,
+                activity: data
+            });
+
+        } else {
+
+            addActivity({
+                tripId: trip.id,
+                day: selectedDay,
+                activity: data
+            });
+
+        }
+
+        setShowForm(false);
     }
     return (
         <>
@@ -194,5 +211,7 @@ export default function ItionaryTab({ trip }) {
                 </div>
 
             </div>
-            {showForm && <div className="activityOverlay"><form className="activityForm" onSubmit={saveActivity}><h2>{editId ? "Edit Activity" : "Add Activity"}</h2><label>Activity Name</label><input value={activity.title} onChange={e => setActivity({ ...activity, title: e.target.value })} required /><label>Time</label><input type="time" value={activity.time} onChange={e => setActivity({ ...activity, time: e.target.value })} required /><label>Category</label><select value={activity.category} onChange={e => setActivity({ ...activity, category: e.target.value })}>{["Food", "Sightseeing", "Activities", "Shopping", "Stay"].map(x => <option key={x}>{x}</option>)}</select><label>Amount</label><input type="number" min="0" value={activity.amount} onChange={e => setActivity({ ...activity, amount: e.target.value })} required /><label>Notes</label><textarea value={activity.notes} onChange={e => setActivity({ ...activity, notes: e.target.value })} /><div className="activityButtons"><button type="button" onClick={() => setShowForm(false)}>Cancel</button><button type="submit">Save Activity</button></div></form></div>}</>);
+            {showForm && <div className="activityOverlay"><form className="activityForm" onSubmit={saveActivity}><h2>{editId ? "Edit Activity" : "Add Activity"}</h2><label>Activity Name</label><input value={activity.title} onChange={e => setActivity({ ...activity, title: e.target.value })} required /><label>Time</label><input type="time" value={activity.time} onChange={e => setActivity({ ...activity, time: e.target.value })} required /><label>Category</label><select value={activity.category} onChange={e => setActivity({ ...activity, category: e.target.value })}>{["Food", "Sightseeing", "Activities", "Shopping", "Stay"].map(x => <option key={x}>{x}</option>)}</select><label>Amount</label><input type="number" min="0" value={activity.amount} onChange={e => setActivity({ ...activity, amount: e.target.value })} required /><label>Notes</label><textarea value={activity.notes} onChange={e => setActivity({ ...activity, notes: e.target.value })} /><div className="activityButtons"><button type="button" onClick={() => setShowForm(false)}>Cancel</button><button type="submit">Save Activity</button></div></form></div>}
+        </>
+    );
 }

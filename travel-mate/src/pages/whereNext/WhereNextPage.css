@@ -1,0 +1,265 @@
+
+.whereNext {
+    max-width: 1120px;
+    margin: 60px auto;
+    padding: 0 20px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #031632;
+}
+
+/* Heading */
+
+.whereHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.whereHead h1 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 52px;
+    font-weight: 700;
+    margin: 0;
+    color: #031632;
+}
+
+.whereHead h1 svg {
+    color: #031632;
+    flex-shrink: 0;
+}
+
+.whereHead p {
+    font-size: 18px;
+    color: #44474D;
+    margin: 8px 0 0;
+}
+
+.planBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #00A99D;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 16px 30px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.planBtn:hover {
+    background: #006A62;
+}
+
+/* Statistics */
+
+.whereStats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 60px;
+}
+
+.whereStat {
+    background: #FAF9F8;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 20px #1A2B480D;
+}
+
+.whereStat h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #44474D;
+    letter-spacing: 0.5px;
+    margin: 0 0 20px;
+}
+
+.whereStat h2 {
+    font-size: 34px;
+    font-weight: 700;
+    color: #031632;
+    margin: 0;
+}
+
+/* Upcoming Trips */
+
+.whereTrips > h2 {
+    font-size: 24px;
+    color: #031632;
+    margin-bottom: 35px;
+}
+
+.whereTripGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+/* Trip Card */
+
+.whereTripCard {
+    background: #FAF9F8;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px #1A2B480D;
+}
+
+/* Image */
+
+.whereTripImage {
+    height: 192px;
+    position: relative;
+}
+
+.whereTripImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.whereDate {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: #F4F3F2;
+    color: #031632;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+}
+
+/* Trip Information */
+
+.whereTripInfo {
+    padding: 24px;
+}
+
+.whereTripTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.whereTripTitle h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #031632;
+    margin: 0;
+}
+
+.whereTravelers {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: #F4F3F2;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 12px;
+    color: #44474D;
+}
+
+.whereTripInfo > p {
+    font-size: 16px;
+    color: #44474D;
+    margin: 18px 0 28px;
+}
+
+/* Budget */
+
+.whereBudget {
+    margin-bottom: 24px;
+}
+
+.whereBudgetText {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 12px;
+    color: #44474D;
+    margin-bottom: 10px;
+}
+
+.whereProgress {
+    width: 100%;
+    height: 8px;
+    background: #E5E5E5;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.whereProgress > div {
+    height: 100%;
+    background: #00A99D;
+    border-radius: 10px;
+}
+
+/* View Trip Button */
+
+.viewTripBtn {
+    width: 100%;
+    height: 56px;
+    border: 2px solid #031632;
+    border-radius: 8px;
+    background: transparent;
+    color: #031632;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.viewTripBtn:hover {
+    background: #031632;
+    color: white;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+
+    .whereHead h1 {
+        font-size: 36px;
+    }
+
+    .whereStats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .whereHead {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .whereHead h1 {
+        font-size: 30px;
+    }
+
+    .whereStats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .whereTripGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .whereStat {
+        padding: 18px;
+    }
+
+    .whereStat h2 {
+        font-size: 28px;
+    }
+
+}

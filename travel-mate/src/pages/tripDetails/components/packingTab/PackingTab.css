@@ -1,0 +1,282 @@
+/* Expenses Tab */
+
+.detailsExpenseBox {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 20px #1A2B480D;
+}
+
+.detailsExpenseTop {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.detailsExpenseSearch {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #F4F3F2;
+    border-radius: 8px;
+    height: 48px;
+    padding: 0 15px;
+    color: #777;
+}
+
+.detailsExpenseSearch input {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+}
+
+.detailsSort {
+    height: 45px;
+    width: 45px;
+    border: none;
+    border-radius: 8px;
+    background: #F4F3F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Expense Category Tabs */
+
+.detailsExpenseTabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+}
+
+.detailsExpenseTabs button {
+    border: none;
+    border-radius: 20px;
+    padding: 8px 17px;
+    background: #EEEEED;
+    color: #44474D;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.detailsExpenseTabs .selectedExpenseTab {
+    background: #E3F1EE;
+    color: #006A62;
+}
+
+/* Expense Items */
+
+.detailsExpenseItem {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.detailsExpenseItem:last-child {
+    border-bottom: none;
+}
+
+.detailsExpenseIcon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #E6E8ED;
+    color: #031632;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.detailsExpenseInfo {
+    flex: 1;
+}
+
+.detailsExpenseInfo h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #031632;
+    margin: 0 0 5px;
+}
+
+.detailsExpenseInfo p {
+    font-size: 12px;
+    color: #44474D;
+    margin: 0;
+}
+
+.detailsExpenseAmount {
+    font-size: 16px;
+    color: #031632;
+}
+
+.detailsEmpty {
+    padding: 30px;
+    text-align: center;
+    color: #777;
+}
+
+/* Common Layout */
+
+.detailsTwoColumn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.detailsAddBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #006A62;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.detailsAddBtn:hover {
+    background: #00574f;
+}
+
+.detailsSideBtn {
+    justify-self: end;
+}
+
+/* Popup Forms */
+
+.detailsOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.detailsForm {
+    width: 420px;
+    max-width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-sizing: border-box;
+}
+
+.detailsFormHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.detailsFormHead h2 {
+    font-size: 22px;
+    color: #031632;
+    margin: 0;
+}
+
+.detailsFormHead button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.detailsForm label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #031632;
+}
+
+.detailsForm input,
+.detailsForm select,
+.detailsForm textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #c5c5ce;
+    border-radius: 8px;
+    font: inherit;
+    box-sizing: border-box;
+}
+
+.detailsForm input:focus,
+.detailsForm select:focus,
+.detailsForm textarea:focus {
+    outline: none;
+    border-color: #006A62;
+}
+
+.detailsFormBottom {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.detailsFormBottom button {
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.detailsFormBottom button:last-child {
+    background: #006A62;
+    border-color: #006A62;
+    color: white;
+}
+
+@media (max-width: 768px) {
+
+    .detailsTwoColumn {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .detailsSideBtn {
+        justify-self: start;
+        grid-row: 1;
+    }
+
+    .detailsExpenseTop {
+        flex-wrap: wrap;
+    }
+
+    .detailsExpenseSearch {
+        flex-basis: 100%;
+    }
+
+    .detailsGalleryGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .detailsGalleryHead {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+}

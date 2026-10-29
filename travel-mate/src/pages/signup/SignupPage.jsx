@@ -1,5 +1,9 @@
 
 import { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
+import { register } from "../../services/auth";
+
 import {
     Compass,
     CircleHelp,
@@ -20,40 +24,82 @@ import "./SignupPage.css";
 
 export default function SignupPage() {
 
+    const navigate = useNavigate();
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const [showPassword, setShowPassword] = useState(false);
-    const [style, setStyle] = useState("Solo Exploring");
+    const [style, setStyle] = useState("SOLO_EXPLORING");
     const [agree, setAgree] = useState(false);
 
-    const styles = [
-        { name: "Solo Exploring", icon: <User size={12} /> },
-        { name: "Couple Getaways", icon: <Heart size={12} /> },
-        { name: "Family Vacation", icon: <Users size={12} /> },
-        { name: "Group Expeditions", icon: <Mountain size={12} /> }
-    ];
+    
+const styles = [
+    {
+        name: "Solo Exploring",
+        value: "SOLO_EXPLORING",
+        icon: <User size={12} />
+    },
+    {
+        name: "Couple Getaways",
+        value: "COUPLE_GETAWAYS",
+        icon: <Heart size={12} />
+    },
+    {
+        name: "Family Vacation",
+        value: "FAMILY_VACATION",
+        icon: <Users size={12} />
+    },
+    {
+        name: "Group Expeditions",
+        value: "GROUP_EXPEDITIONS",
+        icon: <Mountain size={12} />
+    }
+];
 
-    const handleSignup = (e) => {
+
+
+    const handleSignup = async (e) => {
+
         e.preventDefault();
 
         if (!agree) {
-            alert("Please accept the Terms and Privacy Policy");
+            setError("Please accept the Terms and Privacy Policy");
             return;
         }
 
-        const data = {
-            fullName: name,
-            email: email,
-            password: password,
-            travelStyle: style
-        };
+        setLoading(true);
+        setError("");
 
-        // Connect signup API here.
-        // Avoid logging passwords to the console.
-        console.log("Signup form submitted");
+        try {
+
+            await register(
+                name,
+                email,
+                password,
+                style,
+                agree
+            );
+
+            alert("Account created successfully!");
+
+            navigate("/login");
+
+        } catch (error) {
+
+            setError(error.message);
+
+        } finally {
+
+            setLoading(false);
+
+        }
     };
+
 
     return (
         <div className="signupPage">
@@ -187,15 +233,10 @@ export default function SignupPage() {
                                 {styles.map((item) => (
 
                                     <button
-                                        key={item.name}
+                                        key={item.value}
                                         type="button"
-                                        className={
-                                            style === item.name
-                                                ? "travelBtn active"
-                                                : "travelBtn"
-                                        }
-                                        onClick={() => setStyle(item.name)}
-                                        aria-pressed={style === item.name}
+                                        className={style === item.value ? "travelBtn active" : "travelBtn"}
+                                        onClick={() => setStyle(item.value)}
                                     >
                                         {item.icon}
                                         {item.name}
@@ -225,8 +266,19 @@ export default function SignupPage() {
 
                         </label>
 
-                        <button type="submit" className="createBtn">
-                            Create Account
+                        {error && (
+                            <p style={{ color: "red" }}>
+                                {error}
+                            </p>
+                        )}
+
+                        <button
+                            type="submit"
+                            className="createBtn"
+                            disabled={loading}
+                        >
+                            {loading ? "Creating Account..." : "Create Account"}
+
                             <ArrowRight size={16} />
                         </button>
 

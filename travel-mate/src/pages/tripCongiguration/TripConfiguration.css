@@ -1,0 +1,434 @@
+
+.configPage {
+    min-height: 100vh;
+    background: #f7f8fb;
+    padding: 45px 20px 110px;
+    color: #102343;
+    font-family: Arial, sans-serif;
+}
+
+.configContainer {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.configBreadcrumb {
+    color: #8791a0;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.configContainer h1 {
+    font-size: 30px;
+    margin: 0 0 12px;
+    color: #071d3c;
+}
+
+.editingTag {
+    display: inline-block;
+    background: #91eee0;
+    color: #006c63;
+    padding: 7px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.configCard {
+    background: white;
+    padding: 38px;
+    border: 1px solid #e4e9f0;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.035);
+}
+
+.configHeading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.headingLeft {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.step {
+    background: #dbe5ff;
+    color: #102343;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.configHeading h2 {
+    font-size: 22px;
+    margin: 0 0 4px;
+}
+
+.configHeading p {
+    font-size: 12px;
+    color: #777f8b;
+    margin: 0;
+}
+
+.sectionTag {
+    color: #008d7c;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.configField {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+    min-width: 0;
+}
+
+.configCard label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.fieldHeading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.fieldHeading span {
+    font-size: 11px;
+    color: #858585;
+}
+
+.configField input,
+.configField select,
+.configField textarea,
+.destinationBox,
+.dateBox {
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #aab4c3;
+    background: #f5f5f5;
+    border-radius: 6px;
+    color: #142747;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.configField > input,
+.configField select {
+    height: 52px;
+    padding: 0 15px;
+}
+
+.configField textarea {
+    padding: 16px;
+    resize: vertical;
+    line-height: 1.7;
+}
+
+.configField input:focus,
+.configField select:focus,
+.configField textarea:focus {
+    outline: 2px solid #75dacc;
+    border-color: #008d7c;
+}
+
+.destinationBox,
+.dateBox {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 15px;
+    min-height: 52px;
+}
+
+.destinationBox svg {
+    color: #008e80;
+    flex-shrink: 0;
+}
+
+.destinationBox input,
+.dateBox input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    outline: none;
+    height: 48px;
+    font-size: 14px;
+    color: #142747;
+}
+
+.validated {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 9px;
+    border-radius: 5px;
+    color: #008d7c;
+    background: #a5f2e6;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.vibes {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 11px;
+    color: #777;
+}
+
+.vibe {
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #eef0f2;
+    color: #354357;
+}
+
+.activeVibe {
+    background: #a5f2e6;
+    color: #00796d;
+}
+
+.dateRow {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.dateRow .configField {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.daysTag {
+    background: #071d3c;
+    color: white;
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 11px;
+    white-space: nowrap;
+    margin-top: 20px;
+}
+
+.groupOptions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 12px 0 40px;
+}
+
+.groupBtn {
+    width: 145px;
+    min-height: 90px;
+    background: #f3f3f3;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    color: #333;
+}
+
+.groupBtn strong {
+    font-size: 13px;
+}
+
+.groupBtn span {
+    font-size: 11px;
+    color: #777;
+}
+
+.selectedGroup {
+    background: #dce5ff;
+    border-color: #c5d4ff;
+    color: #102343;
+}
+
+.counterRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.counterBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 23px;
+    gap: 15px;
+}
+
+.counterBox strong {
+    font-size: 14px;
+}
+
+.counterBox p {
+    font-size: 11px;
+    color: #858585;
+    margin: 7px 0 0;
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    background: white;
+    padding: 7px;
+    border-radius: 7px;
+}
+
+.counter button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #102343;
+}
+
+.counter strong {
+    font-size: 22px;
+}
+
+.budgetRow {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+.budgetRow .configField {
+    margin-bottom: 0;
+}
+
+.fieldHeading .budgetHint {
+    color: #008e80;
+}
+
+.configBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    background: white;
+    border: 1px solid #e5e9f0;
+    padding: 20px 35px;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.configBottom p {
+    font-size: 12px;
+    color: #777;
+}
+
+.greenDot {
+    color: #008e80;
+    margin-right: 8px;
+}
+
+.configActions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.configActions button {
+    border: none;
+    border-radius: 6px;
+    padding: 14px 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.discardBtn,
+.draftBtn {
+    background: transparent;
+    color: #253650;
+}
+
+.saveBtn {
+    background: #00a99a;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 10px #00a99a35;
+}
+
+.saveBtn:hover {
+    background: #008c80;
+}
+
+@media (max-width: 700px) {
+    .configPage {
+        padding: 25px 12px 60px;
+    }
+
+    .configCard {
+        padding: 22px 17px;
+    }
+
+    .configHeading h2 {
+        font-size: 18px;
+    }
+
+    .configHeading {
+        align-items: flex-start;
+    }
+
+    .dateRow,
+    .configBottom {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .daysTag {
+        align-self: center;
+        margin: 0;
+    }
+
+    .dateRow .configField {
+        width: 100%;
+    }
+
+    .counterRow,
+    .budgetRow {
+        grid-template-columns: 1fr;
+    }
+
+    .groupBtn {
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .configActions {
+        flex-wrap: wrap;
+    }
+
+    .configActions button {
+        flex: 1;
+    }
+}

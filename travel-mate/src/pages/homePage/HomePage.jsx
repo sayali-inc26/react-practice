@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import WhereNextPage from "../whereNext/WhereNextPage";
 
 import {
     CalendarDays,
@@ -7,7 +8,7 @@ import {
     Luggage,
     ArrowRight,
     Star,
-    
+
 } from "lucide-react";
 
 import beach from "../../assets/homePage/background.avif";
@@ -85,7 +86,7 @@ export default function HomePage() {
     return (
         <div className={"homePage"}>
 
-            <Header/>
+            <Header />
 
             <section
                 className="hero"
@@ -160,7 +161,6 @@ export default function HomePage() {
 
             </section>
 
-            {/* DESTINATIONS */}
 
             <section className="destinations">
 
@@ -174,7 +174,10 @@ export default function HomePage() {
                         </p>
                     </div>
 
-                    <Link to="/destinations" className="viewAll">
+                    <Link
+                        to={`/home/whereNext/${places.id}`}
+                        className="viewAll"
+                    >
                         View All Destinations
                         <ArrowRight size={16} />
                     </Link>
@@ -185,7 +188,7 @@ export default function HomePage() {
 
                     {places.map((place) => (
 
-                        <div className="placeCard" key={place.id}>
+                        <div className="placeCard" key={place.id} onClick={() => {}}>
 
                             <img src={place.image} alt={place.name} />
 
@@ -222,7 +225,7 @@ export default function HomePage() {
 
             </section>
 
-            <Footer/>
+            <Footer />
 
         </div>
     );

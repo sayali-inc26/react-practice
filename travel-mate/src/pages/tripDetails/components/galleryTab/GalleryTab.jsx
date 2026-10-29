@@ -1,10 +1,19 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { Camera } from "lucide-react";
-import { addPhoto } from "../../../../redux/slices/tripDetails";
+// import { addPhoto } from "../../../../redux/slices/tripDetails";
+
+import useTripStore from "../../../../store/tripStore";
+
 import "./GalleryTab.css";
-export default function GalleryTab({trip}){
-const dispatch=useDispatch();
+
+export default function GalleryTab({ trip }) {
+
+    // const dispatch = useDispatch();
+
+    const addPhoto = useTripStore((state) => state.addPhoto);
+
+    
     function uploadPhotos(e) {
 
         const files = Array.from(e.target.files);
@@ -16,10 +25,10 @@ const dispatch=useDispatch();
             const reader = new FileReader();
 
             reader.onload = () => {
-                dispatch(addPhoto({
+                addPhoto({
                     tripId: trip.id,
                     photo: reader.result
-                }));
+                });
             };
 
             reader.readAsDataURL(file);
@@ -28,50 +37,51 @@ const dispatch=useDispatch();
         e.target.value = "";
     }
 
-return (<>{/* GALLERY */}
+    return (
+    <>
 
 
-                <div className="detailsGallerySection">
+        <div className="detailsGallerySection">
 
-                        <div className="detailsGalleryHead">
+            <div className="detailsGalleryHead">
 
-                            <h3>Moments Captured</h3>
+                <h3>Moments Captured</h3>
 
-                            <label className="uploadBtn">
+                <label className="uploadBtn">
 
-                                <Camera size={18} />
-                                Upload Photos
+                    <Camera size={18} />
+                    Upload Photos
 
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    multiple
-                                    onChange={uploadPhotos}
-                                    hidden
-                                />
+                    <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        onChange={uploadPhotos}
+                        hidden
+                    />
 
-                            </label>
+                </label>
 
-                        </div>
+            </div>
 
-                        <div className="detailsGalleryGrid">
+            <div className="detailsGalleryGrid">
 
-                            {trip.gallery.map((photo, index) => (
+                {trip.gallery.map((photo, index) => (
 
-                                <img
-                                    key={index}
-                                    src={photo}
-                                    alt={`${trip.name} photo ${index + 1}`}
-                                />
+                    <img
+                        key={index}
+                        src={photo}
+                        alt={`${trip.name} photo ${index + 1}`}
+                    />
 
-                            ))}
+                ))}
 
-                        </div>
+            </div>
 
-                        {trip.gallery.length === 0 && (
-                            <p>No photos uploaded yet.</p>
-                        )}
+            {trip.gallery.length === 0 && (
+                <p>No photos uploaded yet.</p>
+            )}
 
-                    </div>
-</>);
+        </div>
+    </>);
 }

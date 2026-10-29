@@ -157,6 +157,7 @@
 .detailsSideBtn {
     justify-self: end;
 }
+
 /* Popup Forms */
 
 .detailsOverlay {
@@ -248,6 +249,7 @@
     border-color: #006A62;
     color: white;
 }
+
 /* Responsive */
 
 @media (max-width: 768px) {
@@ -280,4 +282,3 @@
     }
 
 }
-

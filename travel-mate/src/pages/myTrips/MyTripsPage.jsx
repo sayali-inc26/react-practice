@@ -2,8 +2,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useSelector, useDispatch } from "react-redux";
-import { selectTrip } from "../../redux/slices/tripDetails";
+import useTripStore from "../../store/tripStore";
+// import { useSelector, useDispatch } from "react-redux";
+// import { selectTrip } from "../../redux/slices/tripDetails";
 
 import {
     Search,
@@ -25,12 +26,12 @@ import "./MyTripsPage.css";
 export default function MyTripsPage() {
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const trips = useTripStore((state) => state.plans);
 
-    const trips = useSelector((state) => state.tripDetails.plans);
+    const selectTrip = useTripStore((state) => state.selectTrip);
 
     function openTrip(id) {
-        dispatch(selectTrip(id));
+        selectTrip(id);
         navigate(`/myTrips/tripDetails/${id}`);
     }
 

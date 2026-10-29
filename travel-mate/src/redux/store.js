@@ -1,10 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit";
-import tripDetailsReducer from "./slices/tripDetails";
+// import { configureStore } from "@reduxjs/toolkit";
+// import tripDetailsReducer from "./slices/tripDetails";
 
-const store = configureStore({
-    reducer: {
-        tripDetails: tripDetailsReducer
-    }
-});
+// const store = configureStore({
+//     reducer: {
+//         tripDetails: tripDetailsReducer
+//     }
+// });
 
-export default store;
+// export default store;
