@@ -1,0 +1,66 @@
+section{
+    display: flex;
+    margin: 30px;
+}
+
+.book-appointment-card{
+    border: 1px solid rgba(128, 128, 128, 0.379);
+    border-radius: 15px;
+    margin: 50px;
+    height: 350px;
+    width:450px;
+    padding: 15px;
+    background-color:white;
+
+}
+
+.book-appointment-card > p{
+    color:#E53089;
+    font-size: xx-large;
+    font-weight: 700;
+}
+
+.book-appointment-card > button{
+    width: 100%;
+    background-color: #e33c8f16;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid purple;
+    margin-bottom: 10px;
+    font-size: medium;
+
+}
+#callBack{
+    background-color: white;
+}
+.book-appointment-card > img{
+    height: 50px;
+    width: auto;
+} 
+.branch{
+    /* height: fit-content; */
+    border-radius: 15px;
+    border:  1px solid rgba(128, 128, 128, 0.314);
+
+    
+}
+
+.branch > img{
+    height: 250px;
+    width: 470px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.branch figcaption{
+    padding: 15px;
+    font-size:large;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.branches-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+        gap: 22px;
+}

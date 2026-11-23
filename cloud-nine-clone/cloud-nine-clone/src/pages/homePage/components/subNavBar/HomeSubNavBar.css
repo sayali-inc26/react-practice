@@ -1,0 +1,13 @@
+.navbarItems {
+    display: flex;
+    color: rgb(195, 193, 193);
+    background-color: #964488;
+    gap:20px;
+    padding-left: 100px;
+    font-size: larger;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 0px;
+    position:static;
+    
+}
