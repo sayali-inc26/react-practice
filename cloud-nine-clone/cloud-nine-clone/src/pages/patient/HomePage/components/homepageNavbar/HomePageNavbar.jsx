@@ -1,6 +1,6 @@
 
 import "./HomePageNavbar.css"
-import logo from "../../../../assets/homepage/logo.svg";
+import logo from "../../../../../assets/homepage/logo.svg";
 import { useState } from "react";
 
 export default function HomePageNavbar() {

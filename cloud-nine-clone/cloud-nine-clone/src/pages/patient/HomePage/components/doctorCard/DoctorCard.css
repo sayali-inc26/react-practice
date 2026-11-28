@@ -1,0 +1,102 @@
+.doctorCard {
+    background-color: white;
+    padding: 24px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.06);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    gap: 22px;
+    min-height: 250px;
+    box-sizing: border-box;
+}
+
+
+.doctorInfo {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+
+.doctorImage {
+    width: 110px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 7px;
+}
+
+
+.doctorDetails {
+    flex: 1;
+}
+
+
+.doctorDetails h3 {
+    color: #e8328a;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 8px;
+}
+
+
+.doctorSpeciality {
+    color: #171717;
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+
+
+.doctorDetails p {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+
+    color: #8996aa;
+    font-size: 14px;
+
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+
+.doctorDetails svg {
+    flex-shrink: 0;
+}
+
+
+.doctorButtons {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+
+.doctorButtons button {
+    padding: 7px 16px;
+    border: 1px solid #c13a9d;
+    border-radius: 6px;
+
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+.profileBtn {
+    background-color: white;
+    color: #071c3c;
+}
+
+
+.appointmentBtn {
+    background-color: #fce5f5;
+    color: #071c3c;
+}
+
+
+.doctorButtons button:hover {
+    background-color: #c13a9d;
+    color: white;
+}

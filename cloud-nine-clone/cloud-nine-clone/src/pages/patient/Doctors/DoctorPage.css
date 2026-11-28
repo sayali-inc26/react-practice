@@ -1,0 +1,318 @@
+/* Main Page */
+
+.doctorsPage {
+    width: 100%;
+    background-color: #ffffff;
+}
+
+
+/* Doctors Banner */
+
+.doctorsBanner {
+    width: 100%;
+    height: 200px;
+
+    background-color: #e8edf1ae;
+    /* border-radius: 0 0 25px 25px; */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.doctorsBanner img {
+    position: absolute;
+    left: 35px;
+    bottom: 0;
+
+    width: 280px;
+    height: 195px;
+
+    object-fit: contain;
+    object-position: bottom;
+}
+
+.doctorsBanner h1 {
+    font-size: 35px;
+    font-weight: 800;
+    color: #e83291;
+}
+
+
+/* Main Section */
+
+.doctorsMain {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+
+    gap: 32px;
+
+    padding: 65px 2%;
+    align-items: start;
+}
+
+
+/* Filter Sidebar */
+
+.doctorFilters {
+    width: 100%;
+
+    border: 1px solid #c5ccd6;
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+
+/* Filter Header */
+
+.filterHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 22px;
+    border-bottom: 1px solid #c5ccd6;
+    gap: 10px;
+}
+
+.filterHeader p {
+    margin: 0;
+    font-size: 15px;
+    color: #444;
+}
+
+.filterHeader span {
+    color: #e83291;
+}
+
+.filterHeader button,
+.filterTitle button {
+    background: none;
+    border: none;
+
+    color: #a44b9d;
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+
+/* Search */
+
+.doctorSearch {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+    padding: 12px 18px;
+
+    border-bottom: 1px solid #c5ccd6;
+    background-color: #fafbfc;
+}
+
+.doctorSearch input {
+    width: 100%;
+    border: none;
+    outline: none;
+
+    font-size: 16px;
+    background: transparent;
+}
+
+.doctorSearch svg {
+    color: #333;
+    flex-shrink: 0;
+}
+
+
+/* Filter Groups */
+
+.filterGroup {
+    padding: 15px 22px;
+    border-bottom: 1px solid #c5ccd6;
+}
+
+.filterTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 12px;
+}
+
+.filterTitle h3 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 500;
+    color: #333;
+}
+
+.filterTitle button {
+    color: #9aa6b8;
+    text-decoration: underline;
+}
+
+
+/* Filter Options */
+
+.filterOption {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+    margin: 12px 0;
+
+    color: #8795aa;
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.filterOption input {
+    width: 18px;
+    height: 18px;
+
+    accent-color: #a3469b;
+    cursor: pointer;
+}
+
+.filterHint {
+    font-size: 13px;
+    font-style: italic;
+    color: #8c9bb0;
+    margin: 0;
+}
+
+
+/* Gender */
+
+.genderOptions {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+/* Doctor List Section */
+
+.doctorsListSection {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* Active Filters */
+
+.activeFilters {
+    min-height: 47px;
+
+    border: 1px solid #c5ccd6;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 12px;
+    padding: 10px 18px;
+
+    margin-bottom: 35px;
+    font-size: 15px;
+}
+
+.activeFilters span:not(:first-child) {
+    color: #a3469b;
+    background-color: #fceaf5;
+
+    padding: 5px 12px;
+    border-radius: 15px;
+}
+
+
+/* Doctor Cards List */
+
+.doctorsList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* No Doctors */
+
+.noDoctors {
+    text-align: center;
+    padding: 50px 20px;
+    color: #65748a;
+}
+
+.noDoctors button {
+    background-color: #a3469b;
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+
+/* Responsive */
+
+@media (max-width: 900px) {
+
+    .doctorsMain {
+        grid-template-columns: 1fr;
+        padding: 35px 3%;
+    }
+
+    .doctorFilters {
+        max-height: 500px;
+        overflow-y: auto;
+    }
+
+    .doctorsBanner img {
+        width: 200px;
+        opacity: 0.7;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .doctorsBanner {
+        height: 150px;
+    }
+
+    .doctorsBanner img {
+        width: 130px;
+        left: 0;
+    }
+
+    .doctorsBanner h1 {
+        font-size: 24px;
+        margin-left: 90px;
+    }
+
+    .doctorsMain {
+        padding: 25px 15px;
+    }
+
+    .filterHeader {
+        padding: 13px;
+    }
+
+    .filterHeader p {
+        font-size: 12px;
+    }
+
+    .activeFilters {
+        margin-bottom: 20px;
+    }
+
+}

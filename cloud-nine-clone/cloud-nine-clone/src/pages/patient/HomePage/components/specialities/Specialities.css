@@ -1,0 +1,45 @@
+.specialities-section{
+   background-color: rgba(245, 245, 245, 0.5);
+   padding: 30px;
+}
+
+.specialities-section> h2{
+    text-align: center;
+    color: #E53089;;
+}
+
+.speciality-type{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+        gap: 50px;
+    /* gap:50px; */
+    justify-items: center;
+}
+
+
+.speciality-type img{
+    height: 60px;
+    width: fit-content;
+}
+
+figcaption{
+    font-size: 15px;
+    font-weight: 500;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.type{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.type>img{
+height: 90px;
+    width: 90px;
+    border: 3px solid #E53089;
+    border-radius: 50%;
+    padding: 7px;
+    margin-bottom: 20px;
+}

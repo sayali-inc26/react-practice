@@ -1,0 +1,153 @@
+.footer {
+    background-color: #0c2044;
+    color: white;
+    padding: 55px 4% 0;
+}
+
+
+/* Main Footer */
+
+.footerContainer {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 50px;
+
+    padding-bottom: 45px;
+}
+
+
+/* Footer Columns */
+
+.footerColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.footerColumn> img{
+    height: 50px;
+    
+}
+
+
+.footerColumn h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 8px;
+}
+
+
+.footerColumn a,
+.footerColumn p {
+    color: #b9c5d9;
+    font-size: 16px;
+    text-decoration: none;
+    margin: 0;
+}
+
+
+/* Company */
+
+.footerCompany h2 {
+    font-size: 36px;
+    font-weight: 500;
+    margin: 0;
+    color: white;
+}
+
+
+.footerCompany .footerTagline {
+    color: white;
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+
+
+.footerCompany p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* Links */
+
+.footerColumn a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+
+.footerColumn a:hover {
+    color: white;
+    padding-left: 5px;
+}
+
+
+/* Bottom Footer */
+
+.footerBottom {
+    border-top: 1px solid #53627a;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px 0;
+    gap: 20px;
+}
+
+
+.footerBottom p,
+.footerBottom a {
+    color: #b9c5d9;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 0;
+}
+
+
+.footerBottom div {
+    display: flex;
+    gap: 25px;
+}
+
+
+/* Tablet */
+
+@media (max-width: 900px) {
+
+    .footerContainer {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 550px) {
+
+    .footer {
+        padding: 35px 6% 0;
+    }
+
+    .footerContainer {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .footerBottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footerBottom div {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+}
